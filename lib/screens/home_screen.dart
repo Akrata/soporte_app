@@ -9,14 +9,37 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthWithPass>(context);
     return Scaffold(
-      body: Center(
-        child: TextButton(
-            onPressed: () {
-              auth.logOut();
-              Navigator.pushNamedAndRemoveUntil(
-                  context, 'login', (route) => false);
-            },
-            child: Text("LogOut")),
+      appBar: AppBar(
+        actions: [
+          Container(
+            child: IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    content: Column(),
+                  ),
+                );
+              },
+              icon: Icon(Icons.settings),
+            ),
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          Container(
+            child: IconButton(
+                onPressed: () {
+                  auth.logOut();
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, 'login', (route) => false);
+                },
+                icon: Icon(Icons.logout_outlined)),
+          ),
+          SizedBox(
+            width: 30,
+          )
+        ],
       ),
     );
   }
