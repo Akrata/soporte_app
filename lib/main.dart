@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pocketbase/pocketbase.dart';
+
 import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
+import 'package:soporte_app/providers/menu/menu_provider.dart';
 import 'package:soporte_app/screens/screens.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -29,7 +30,10 @@ class StateApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AuthWithPass(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MenuProvider(),
+        ),
       ],
       child: MainApp(),
     );
