@@ -6,6 +6,7 @@ class AuthWithPass extends ChangeNotifier {
   final pb = PocketBase("http://${DB.dbIp}");
   bool isAuth = false;
   bool isSuperUser = false;
+  String actualUser = '';
 
   bool mostrarAlerta = false;
 
@@ -15,6 +16,8 @@ class AuthWithPass extends ChangeNotifier {
           .collection('users')
           .authWithPassword(usernameOrEmail, password);
       isAuth = pb.authStore.isValid;
+      actualUser = pb.authStore.model.username;
+      print(actualUser);
       notifyListeners();
     } catch (e) {
       print(e);
@@ -23,6 +26,7 @@ class AuthWithPass extends ChangeNotifier {
 
   logOut() {
     pb.authStore.clear();
+    actualUser = '';
     isAuth = pb.authStore.isValid;
   }
 }

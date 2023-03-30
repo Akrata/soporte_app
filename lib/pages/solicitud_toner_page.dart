@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
+import 'package:soporte_app/utils/fecha_formater.dart';
 
 class SolicitudTonerPage extends StatelessWidget {
   const SolicitudTonerPage({Key? key}) : super(key: key);
@@ -10,6 +12,7 @@ class SolicitudTonerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final solicitudToner = Provider.of<SolicitudTonerRequest>(context);
     final listaSucursales = Provider.of<SucursalesRequest>(context);
+    final user = Provider.of<AuthWithPass>(context);
 
     final _data = solicitudToner.listaSolicitudToner;
 
@@ -35,14 +38,30 @@ class SolicitudTonerPage extends StatelessWidget {
                     (data) => DataRow(
                       cells: [
                         DataCell(
-                            Text(data.created.toString().split(' ').first)),
+                          Text(FechaFormater.formatearFecha(
+                              data.created.toString())),
+                        ),
                         DataCell(Text(data.expand.sector.nombre)),
                         DataCell(
                             Text(data.expand.sector.expand.sucursal.nombre)),
                         DataCell(Text(data.expand.toner.modelo)),
-                        DataCell(Switch(
-                          onChanged: (value) => null,
-                          value: data.entregado,
+                        DataCell(Row(
+                          children: [
+                            Checkbox(
+                              onChanged: (value) {
+                                print(user.pb.authStore.model.toString());
+                                if (value == true) {
+                                  solicitudToner.entregarToner(
+                                      data, value!, user.pb.authStore.model.id);
+                                } else {
+                                  solicitudToner.entregarToner(
+                                      data, value!, "");
+                                }
+                              },
+                              value: data.entregado,
+                            ),
+                            Text(data.responsable)
+                          ],
                         )),
                       ],
                     ),

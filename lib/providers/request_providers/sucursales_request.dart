@@ -10,7 +10,6 @@ class SucursalesRequest extends ChangeNotifier {
   final pb = PocketBase('http://${DB.dbIp}');
 
   List<Sucursal> listaSucursales = [];
-  String naombreSucursal = '';
 
   SucursalesRequest() {}
 
