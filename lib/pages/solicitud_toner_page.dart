@@ -37,7 +37,8 @@ class SolicitudTonerPage extends StatelessWidget {
                         DataCell(
                             Text(data.created.toString().split(' ').first)),
                         DataCell(Text(data.expand.sector.nombre)),
-                        DataCell(Text(data.expand.sector.sucursal)),
+                        DataCell(
+                            Text(data.expand.sector.expand.sucursal.nombre)),
                         DataCell(Text(data.expand.toner.modelo)),
                         DataCell(Switch(
                           onChanged: (value) => null,

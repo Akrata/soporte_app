@@ -6,7 +6,7 @@ import 'package:soporte_app/models/solicitud_toner.dart';
 
 class SolicitudTonerRequest extends ChangeNotifier {
   final url = Uri.http(DB.dbIp, '/api/collections/solicitud_toner/records', {
-    'expand': 'sector, toner',
+    'expand': 'sector.sucursal, toner',
     'perPage': '50',
     'sort': 'entregado,-created'
   });

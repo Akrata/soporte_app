@@ -11,7 +11,7 @@ class Sector {
       required this.updated,
       required this.nombre,
       required this.sucursal,
-      this.expand});
+      required this.expand});
 
   String id;
   String collectionId;
@@ -19,7 +19,7 @@ class Sector {
   DateTime created;
   DateTime updated;
   String nombre;
-  Expand? expand;
+  Expand expand;
   String sucursal;
 
   factory Sector.fromJson(String str) => Sector.fromMap(json.decode(str));
@@ -34,7 +34,7 @@ class Sector {
         updated: DateTime.parse(json["updated"]),
         nombre: json["nombre"],
         sucursal: json["sucursal"],
-        expand: json["expand"] == null ? null : Expand.fromMap(json["expand"]),
+        expand: Expand.fromMap(json["expand"]),
       );
 
   Map<String, dynamic> toMap() => {
