@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
+import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 
 class SolicitudTonerPage extends StatelessWidget {
   const SolicitudTonerPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> _data = [
-      {'id': 1, 'sector': 'Recepcion', 'sucursal': 'Policlinico'},
-      {'id': 2, 'sector': 'Admision Interna', 'sucursal': 'Sanatorio'},
-      {'id': 3, 'sector': 'Admision', 'sucursal': 'La paz'},
-    ];
+    final solicitudToner = Provider.of<SolicitudTonerRequest>(context);
+    final listaSucursales = Provider.of<SucursalesRequest>(context);
+
+    final _data = solicitudToner.listaSolicitudToner;
 
     return Scaffold(
       body: Column(
@@ -22,40 +24,25 @@ class SolicitudTonerPage extends StatelessWidget {
             child: SingleChildScrollView(
                 child: DataTable(
               columns: [
-                DataColumn(label: Text('ID')),
+                DataColumn(label: Text('Fecha')),
                 DataColumn(label: Text('Sector')),
-                DataColumn(label: Text('sucursal')),
-                DataColumn(label: Text('Acciones')),
+                DataColumn(label: Text('Sucursal')),
+                DataColumn(label: Text('Toner')),
+                DataColumn(label: Text('Entregado')),
               ],
               rows: _data
                   .map(
                     (data) => DataRow(
                       cells: [
-                        DataCell(Text(data['id'].toString())),
-                        DataCell(Text(data['sector'])),
-                        DataCell(Text(data['sucursal'])),
                         DataCell(
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.edit,
-                                    color: Colors.amber.shade300),
-                                onPressed: () {
-                                  // _showEditPopup(data);
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(
-                                  Icons.delete,
-                                  color: Colors.red.shade300,
-                                ),
-                                onPressed: () {
-                                  // _showDeletePopup(data);
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
+                            Text(data.created.toString().split(' ').first)),
+                        DataCell(Text(data.expand.sector.nombre)),
+                        DataCell(Text(data.expand.sector.sucursal)),
+                        DataCell(Text(data.expand.toner.modelo)),
+                        DataCell(Switch(
+                          onChanged: (value) => null,
+                          value: data.entregado,
+                        )),
                       ],
                     ),
                   )
