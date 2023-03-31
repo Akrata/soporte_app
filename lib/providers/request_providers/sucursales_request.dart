@@ -11,20 +11,14 @@ class SucursalesRequest extends ChangeNotifier {
 
   List<Sucursal> listaSucursales = [];
 
-  SucursalesRequest() {}
+  SucursalesRequest() {
+    getSucursales();
+  }
 
   getSucursales() async {
     final response = await http.get(url);
     final data = SucursalResponse.fromJson(response.body);
     listaSucursales = data.items;
     notifyListeners();
-  }
-
-  getSucursal(filtro) async {
-    final record = await pb.collection('sucursal').getFirstListItem(
-          'id=${filtro}',
-        );
-    @override
-    String toString() => record.data['nombre'];
   }
 }

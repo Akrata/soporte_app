@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/menu/menu_provider.dart';
+import 'package:soporte_app/providers/request_providers/impresoras_request.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 import 'package:soporte_app/screens/screens.dart';
@@ -41,6 +42,9 @@ class StateApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => SucursalesRequest(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ImpresorasRequest(),
         ),
       ],
       child: MainApp(),

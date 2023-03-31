@@ -4,6 +4,7 @@ import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 import 'package:soporte_app/utils/fecha_formater.dart';
+import 'package:soporte_app/widgets/widgets.dart';
 
 class SolicitudTonerPage extends StatelessWidget {
   const SolicitudTonerPage({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class SolicitudTonerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final solicitudToner = Provider.of<SolicitudTonerRequest>(context);
-    final listaSucursales = Provider.of<SucursalesRequest>(context);
+
     final user = Provider.of<AuthWithPass>(context);
 
     final _data = solicitudToner.listaSolicitudToner;
@@ -49,7 +50,7 @@ class SolicitudTonerPage extends StatelessWidget {
                           children: [
                             Checkbox(
                               onChanged: (value) {
-                                print(user.pb.authStore.model.toString());
+                                // print(user.pb.authStore.model.toString());
                                 if (value == true) {
                                   solicitudToner.entregarToner(
                                       data, value!, user.pb.authStore.model.id);
@@ -72,7 +73,12 @@ class SolicitudTonerPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => FormAgregarSolicitud(),
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
