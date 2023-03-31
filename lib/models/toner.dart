@@ -22,8 +22,8 @@ class Toner {
   String modelo;
   int stockMovilPoliclinico;
   int stockFijoPoliclinico;
-  String stockMovilSanatorio;
-  String stockFijoSanatorio;
+  int stockMovilSanatorio;
+  int stockFijoSanatorio;
 
   factory Toner.fromJson(String str) => Toner.fromMap(json.decode(str));
 

@@ -102,7 +102,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
     final response = await http.get(Uri.http(
         DB.dbIp,
         '/api/collections/impresora/records',
-        {'expand': 'sector', 'filter': "sector.id='$filtro'"}));
+        {'expand': 'sector.sucursal,toner', 'filter': "sector.id='$filtro'"}));
     // print(response.body);
     final data = ImpresoraResponse.fromJson(response.body);
     listaImpresorasValue = data.items;
@@ -113,7 +113,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
     final response = await http.get(Uri.http(
         DB.dbIp,
         '/api/collections/impresora/records',
-        {'expand': 'toner', 'filter': "impresora.id='$filtro'"}));
+        {'expand': 'toner', 'filter': "id='$filtro'"}));
     // print(response.body);
     final data = TonerResponse.fromJson(response.body);
     listaTonerValue = data.items;
