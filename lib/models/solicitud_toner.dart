@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:soporte_app/models/sector.dart';
 import 'package:soporte_app/models/toner.dart';
+import 'package:soporte_app/models/users.dart';
 
 class SolicitudToner {
   SolicitudToner({
@@ -14,7 +15,7 @@ class SolicitudToner {
     required this.toner,
     required this.entregado,
     required this.expand,
-    required this.responsable,
+    required this.users,
   });
 
   String id;
@@ -26,7 +27,7 @@ class SolicitudToner {
   String toner;
   bool entregado;
   Expand expand;
-  String responsable;
+  String users;
 
   factory SolicitudToner.fromJson(String str) =>
       SolicitudToner.fromMap(json.decode(str));
@@ -43,7 +44,7 @@ class SolicitudToner {
         toner: json["toner"],
         entregado: json["entregado"],
         expand: Expand.fromMap(json["expand"]),
-        responsable: json["responsable"],
+        users: json["users"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -56,7 +57,7 @@ class SolicitudToner {
         "toner": toner,
         "entregado": entregado,
         "expand": expand.toMap(),
-        "responsable": responsable,
+        "users": users,
       };
 }
 
@@ -64,10 +65,12 @@ class Expand {
   Expand({
     required this.sector,
     required this.toner,
+    this.users,
   });
 
-  Sector sector;
-  Toner toner;
+  final Sector sector;
+  final Toner toner;
+  final Users? users;
 
   factory Expand.fromJson(String str) => Expand.fromMap(json.decode(str));
 
@@ -76,10 +79,12 @@ class Expand {
   factory Expand.fromMap(Map<String, dynamic> json) => Expand(
         sector: Sector.fromMap(json["sector"]),
         toner: Toner.fromMap(json["toner"]),
+        users: json["users"] == null ? null : Users.fromMap(json["users"]),
       );
 
   Map<String, dynamic> toMap() => {
         "sector": sector.toMap(),
         "toner": toner.toMap(),
+        "users": users?.toMap(),
       };
 }

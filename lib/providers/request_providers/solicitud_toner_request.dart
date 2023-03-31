@@ -13,7 +13,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
   final pb = PocketBase('http:${DB.dbIp}');
 
   final urlGet = Uri.http(DB.dbIp, '/api/collections/solicitud_toner/records', {
-    'expand': 'sector.sucursal, toner',
+    'expand': 'sector.sucursal, toner,users',
     'perPage': '50',
     'sort': 'entregado,-created'
   });
@@ -39,7 +39,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
 
   entregarToner(SolicitudToner solTnr, bool value, String user) async {
     solTnr.entregado = value;
-    solTnr.responsable = user;
+    solTnr.users = user;
     print(user);
     final data = solTnr.toJson();
 

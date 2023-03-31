@@ -19,14 +19,14 @@ class SolicitudTonerPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Container(
             width: double.infinity,
             child: SingleChildScrollView(
                 child: DataTable(
-              columns: [
+              columns: const [
                 DataColumn(label: Text('Fecha')),
                 DataColumn(label: Text('Sector')),
                 DataColumn(label: Text('Sucursal')),
@@ -60,7 +60,7 @@ class SolicitudTonerPage extends StatelessWidget {
                               },
                               value: data.entregado,
                             ),
-                            Text(data.responsable)
+                            Text(data.expand.users?.username ?? "")
                           ],
                         )),
                       ],
@@ -73,7 +73,7 @@ class SolicitudTonerPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
