@@ -4,57 +4,58 @@ import 'package:soporte_app/models/sector.dart';
 import 'package:soporte_app/models/toner.dart';
 
 class Impresora {
-  Impresora(
-      {required this.id,
-      required this.collectionId,
-      required this.collectionName,
-      required this.created,
-      required this.updated,
-      required this.marca,
-      required this.modelo,
-      required this.sector,
-      required this.toner,
-      required this.expand});
+  Impresora({
+    required this.collectionId,
+    required this.collectionName,
+    required this.created,
+    required this.expand,
+    required this.id,
+    required this.marca,
+    required this.modelo,
+    required this.sector,
+    required this.toner,
+    this.updated,
+  });
 
-  String id;
-  String collectionId;
-  String collectionName;
-  DateTime created;
-  DateTime updated;
-  String marca;
-  String modelo;
-  String sector;
-  String toner;
-  Expand expand;
+  final String collectionId;
+  final String collectionName;
+  final DateTime created;
+  final Expand expand;
+  final String id;
+  final String marca;
+  final String modelo;
+  final String sector;
+  final String toner;
+  DateTime? updated;
 
   factory Impresora.fromJson(String str) => Impresora.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory Impresora.fromMap(Map<String, dynamic> json) => Impresora(
-        id: json["id"],
         collectionId: json["collectionId"],
         collectionName: json["collectionName"],
         created: DateTime.parse(json["created"]),
-        updated: DateTime.parse(json["updated"]),
+        expand: Expand.fromMap(json["expand"]),
+        id: json["id"],
         marca: json["marca"],
         modelo: json["modelo"],
         sector: json["sector"],
         toner: json["toner"],
-        expand: Expand.fromMap(json["expand"]),
+        updated: DateTime.parse(json["updated"]),
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
         "collectionId": collectionId,
         "collectionName": collectionName,
         "created": created.toIso8601String(),
-        "updated": updated.toIso8601String(),
+        "expand": expand.toMap(),
+        "id": id,
         "marca": marca,
         "modelo": modelo,
         "sector": sector,
         "toner": toner,
-        "expand": expand.toMap(),
+        "updated": updated?.toIso8601String(),
       };
 }
 

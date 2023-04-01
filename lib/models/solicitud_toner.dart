@@ -6,28 +6,28 @@ import 'package:soporte_app/models/users.dart';
 
 class SolicitudToner {
   SolicitudToner({
-    required this.id,
-    required this.collectionId,
-    required this.collectionName,
-    required this.created,
-    required this.updated,
+    this.id,
+    this.collectionId,
+    this.collectionName,
+    this.created,
+    this.updated,
     required this.sector,
     required this.toner,
-    required this.entregado,
-    required this.expand,
-    required this.users,
+    this.entregado,
+    this.expand,
+    this.users,
   });
 
-  String id;
-  String collectionId;
-  String collectionName;
-  DateTime created;
-  DateTime updated;
+  String? id;
+  String? collectionId;
+  String? collectionName;
+  DateTime? created;
+  DateTime? updated;
   String sector;
   String toner;
-  bool entregado;
-  Expand expand;
-  String users;
+  bool? entregado;
+  Expand? expand;
+  String? users;
 
   factory SolicitudToner.fromJson(String str) =>
       SolicitudToner.fromMap(json.decode(str));
@@ -51,12 +51,12 @@ class SolicitudToner {
         "id": id,
         "collectionId": collectionId,
         "collectionName": collectionName,
-        "created": created.toIso8601String(),
-        "updated": updated.toIso8601String(),
+        "created": created?.toIso8601String(),
+        "updated": updated?.toIso8601String(),
         "sector": sector,
         "toner": toner,
         "entregado": entregado,
-        "expand": expand.toMap(),
+        "expand": expand?.toMap(),
         "users": users,
       };
 }

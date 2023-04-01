@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/sector.dart';
-import 'package:soporte_app/models/sucursal.dart';
+import 'package:soporte_app/models/solicitud_toner.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 
-import '../models/toner.dart';
-
 class FormAgregarSolicitud extends StatelessWidget {
-  FormAgregarSolicitud({
+  const FormAgregarSolicitud({
     super.key,
   });
 
@@ -17,15 +14,10 @@ class FormAgregarSolicitud extends StatelessWidget {
     final suc = Provider.of<SucursalesRequest>(context);
     final secYTon = Provider.of<SolicitudTonerRequest>(context);
 
-    String _sucursal = '';
-    String _sector = '';
-    String _impresora = '';
-    String _toner = '';
-
-    return AlertDialog(
-      title: Text("Agregar Solicitud"),
-      content: Form(
-        child: Column(
+    return Form(
+      child: AlertDialog(
+        title: Text("Agregar Solicitud"),
+        content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             DropdownButtonFormField(
@@ -36,10 +28,10 @@ class FormAgregarSolicitud extends StatelessWidget {
                         value: e,
                       ))
                   .toList(),
-              onChanged: (value) {
-                print(value!.nombre);
-                _sucursal = value!.nombre;
-                secYTon.getSectorSegunSucursal(value.id);
+              onChanged: (value) async {
+                secYTon.sucursal = value!.id;
+                // print(secYTon.sucursal);
+                await secYTon.getSectorSegunSucursal(value!.id);
               },
             ),
             SizedBox(
@@ -53,9 +45,10 @@ class FormAgregarSolicitud extends StatelessWidget {
                         value: e,
                       ))
                   .toList(),
-              onChanged: (value) {
-                _sector = value!.nombre;
-                secYTon.getImpresoraSegunSector(value.id);
+              onChanged: (value) async {
+                secYTon.sector = "${value!.id}";
+                // print(value.id);
+                await secYTon.getImpresoraSegunSector(value!.id);
               },
             ),
             SizedBox(
@@ -69,9 +62,10 @@ class FormAgregarSolicitud extends StatelessWidget {
                         value: e,
                       ))
                   .toList(),
-              onChanged: (value) {
-                _sector = "${value!.marca} ${value.modelo}";
-                secYTon.getTonerSegunImpresora(value.id);
+              onChanged: (value) async {
+                secYTon.impresora = "${value!.marca} ${value.modelo}";
+                await secYTon.getTonerSegunImpresora(value!.id);
+                // print(secYTon.impresora);
               },
             ),
             SizedBox(
@@ -86,39 +80,50 @@ class FormAgregarSolicitud extends StatelessWidget {
                       ))
                   .toList(),
               onChanged: (value) {
-                _toner = value!.modelo;
+                // print(value!.toner);
+                secYTon.toner = value!.toner;
               },
             ),
             SizedBox(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text("Entregado"),
-                Checkbox(value: false, onChanged: (value) {})
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //   children: [
+            //     Text("Entregado"),
+            //     Checkbox(
+            //         value: secYTon.entregado,
+            //         onChanged: (value) {
+            //           secYTon.entrega(value!);
+            //         })
+            //   ],
+            // ),
+            // SizedBox(
+            //   height: 20,
+            // ),
           ],
         ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              secYTon.limpiarForm();
+              Navigator.pop(context);
+            },
+            child: Text("Cancelar"),
+          ),
+          TextButton(
+            onPressed: () async {
+              await secYTon.realizarSolicitud(SolicitudToner(
+                sector: secYTon.sector,
+                toner: secYTon.toner,
+              ));
+              await secYTon.limpiarForm();
+              Navigator.pop(context);
+            },
+            child: Text("Guardar"),
+          ),
+        ],
       ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text("Cancelar"),
-        ),
-        TextButton(
-          onPressed: () {
-            print("${_sucursal}${_sector}${_toner}");
-          },
-          child: Text("Guardar"),
-        ),
-      ],
     );
   }
 }

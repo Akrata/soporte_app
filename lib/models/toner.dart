@@ -14,16 +14,16 @@ class Toner {
     required this.stockFijoSanatorio,
   });
 
-  String id;
-  String collectionId;
-  String collectionName;
-  DateTime created;
-  DateTime updated;
-  String modelo;
-  int stockMovilPoliclinico;
-  int stockFijoPoliclinico;
-  int stockMovilSanatorio;
-  int stockFijoSanatorio;
+  final String id;
+  final String collectionId;
+  final String collectionName;
+  final DateTime created;
+  final DateTime updated;
+  final String modelo;
+  final int stockMovilPoliclinico;
+  final int stockFijoPoliclinico;
+  final int stockMovilSanatorio;
+  final int stockFijoSanatorio;
 
   factory Toner.fromJson(String str) => Toner.fromMap(json.decode(str));
 

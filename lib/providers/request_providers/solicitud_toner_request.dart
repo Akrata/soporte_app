@@ -11,6 +11,7 @@ import 'package:soporte_app/models/sector.dart';
 import 'package:soporte_app/models/solicitud_toner.dart';
 import 'package:soporte_app/models/sucursal.dart';
 import 'package:soporte_app/models/toner.dart';
+import 'package:soporte_app/models/users.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:pocketbase/pocketbase.dart';
 
@@ -28,11 +29,31 @@ class SolicitudTonerRequest extends ChangeNotifier {
   List<SolicitudToner> listaSolicitudToner = [];
   List<Sector> listaSectoresValue = [];
   List<Impresora> listaImpresorasValue = [];
-  List<Toner> listaTonerValue = [];
+  List<Impresora> listaTonerValue = [];
+
+  String sucursal = '';
+  String sector = '';
+  String impresora = '';
+  String toner = '';
+  bool entregado = false;
 
   SolicitudTonerRequest() {
     getSolicitudToner();
     realTime();
+  }
+
+  limpiarForm() {
+    String sucursal = '';
+    String sector = '';
+    String impresora = '';
+    String toner = '';
+    bool entregado = false;
+    notifyListeners();
+  }
+
+  entrega(bool value) {
+    entregado = value;
+    notifyListeners();
   }
 
   realTime() {
@@ -85,7 +106,19 @@ class SolicitudTonerRequest extends ChangeNotifier {
     }
   }
 
-  agregarSolicitud(SolicitudToner toner) {}
+  realizarSolicitud(SolicitudToner toner) async {
+    try {
+      final response = await http.post(
+          Uri.http(DB.dbIp, "/api/collections/solicitud_toner/records"),
+          body: toner.toJson(),
+          encoding: utf8,
+          headers: {"Content-Type": "application/json"});
+      final decodedData = response.body;
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
 
   getSectorSegunSucursal(filtro) async {
     final response = await http.get(Uri.http(
@@ -106,6 +139,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
     // print(response.body);
     final data = ImpresoraResponse.fromJson(response.body);
     listaImpresorasValue = data.items;
+
     notifyListeners();
   }
 
@@ -113,9 +147,9 @@ class SolicitudTonerRequest extends ChangeNotifier {
     final response = await http.get(Uri.http(
         DB.dbIp,
         '/api/collections/impresora/records',
-        {'expand': 'toner', 'filter': "id='$filtro'"}));
+        {'expand': 'sector.sucursal,toner', 'filter': "id='$filtro'"}));
     // print(response.body);
-    final data = TonerResponse.fromJson(response.body);
+    final data = ImpresoraResponse.fromJson(response.body);
     listaTonerValue = data.items;
     notifyListeners();
   }

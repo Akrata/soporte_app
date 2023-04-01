@@ -42,10 +42,10 @@ class SolicitudTonerPage extends StatelessWidget {
                           Text(FechaFormater.formatearFecha(
                               data.created.toString())),
                         ),
-                        DataCell(Text(data.expand.sector.nombre)),
+                        DataCell(Text(data.expand!.sector.nombre)),
                         DataCell(
-                            Text(data.expand.sector.expand.sucursal.nombre)),
-                        DataCell(Text(data.expand.toner.modelo)),
+                            Text(data.expand!.sector.expand.sucursal.nombre)),
+                        DataCell(Text(data.expand!.toner.modelo)),
                         DataCell(Row(
                           children: [
                             Checkbox(
@@ -61,7 +61,7 @@ class SolicitudTonerPage extends StatelessWidget {
                               },
                               value: data.entregado,
                             ),
-                            Text(data.expand.users?.username ?? "")
+                            Text(data.expand?.users?.username ?? "")
                           ],
                         )),
                       ],
