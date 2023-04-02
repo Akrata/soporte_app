@@ -20,9 +20,9 @@ class Toner {
   final DateTime created;
   final DateTime updated;
   final String modelo;
-  final int stockMovilPoliclinico;
+  int stockMovilPoliclinico;
   final int stockFijoPoliclinico;
-  final int stockMovilSanatorio;
+  int stockMovilSanatorio;
   final int stockFijoSanatorio;
 
   factory Toner.fromJson(String str) => Toner.fromMap(json.decode(str));

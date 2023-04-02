@@ -54,6 +54,22 @@ class SolicitudTonerPage extends StatelessWidget {
                                 if (value == true) {
                                   solicitudToner.entregarToner(
                                       data, value!, user.pb.authStore.model.id);
+                                  if (user.usuario.lugarTrabajo ==
+                                      "Policlinico") {
+                                    solicitudToner.entregaTonerSegunLugar(
+                                        data.toner,
+                                        "stock_movil_policlinico",
+                                        data.expand!.toner
+                                                .stockMovilPoliclinico -
+                                            1);
+                                  } else if (user.usuario.lugarTrabajo ==
+                                      "Sanatorio") {
+                                    solicitudToner.entregaTonerSegunLugar(
+                                        data.toner,
+                                        "stock_movil_sanatorio",
+                                        data.expand!.toner.stockMovilSanatorio -
+                                            1);
+                                  }
                                 } else {
                                   solicitudToner.entregarToner(
                                       data, value!, "");

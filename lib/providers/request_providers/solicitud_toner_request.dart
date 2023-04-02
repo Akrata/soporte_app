@@ -153,4 +153,17 @@ class SolicitudTonerRequest extends ChangeNotifier {
     listaTonerValue = data.items;
     notifyListeners();
   }
+
+  entregaTonerSegunLugar(String id, String lugar, int cantidad) async {
+    try {
+      final reponse = await http.patch(
+        Uri.http(DB.dbIp, '/api/collections/toner/records/$id'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({lugar: cantidad}),
+      );
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
 }

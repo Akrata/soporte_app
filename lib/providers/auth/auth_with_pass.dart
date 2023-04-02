@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:soporte_app/DB/db.dart';
@@ -13,6 +15,8 @@ class AuthWithPass extends ChangeNotifier {
   bool mostrarAlerta = false;
 
   late Users usuario;
+
+  AuthWithPass() {}
 
   authUser(String usernameOrEmail, String password) async {
     try {
@@ -42,6 +46,21 @@ class AuthWithPass extends ChangeNotifier {
       // print(response.body);
       final data = Users.fromJson(response.body);
       usuario = data;
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  cambiarSector(String id, String sector) async {
+    try {
+      final reponse = await http.patch(
+        Uri.http(DB.dbIp, '/api/collections/users/records/$id'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"lugarTrabajo": sector}),
+      );
+      obtenerUsuario(id);
+      notifyListeners();
     } catch (e) {
       print(e);
     }

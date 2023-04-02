@@ -15,10 +15,33 @@ class HomeScreen extends StatelessWidget {
     final menuP = Provider.of<MenuProvider>(context);
     Duration duration = Duration(milliseconds: 500);
     Curve curve = Curves.ease;
+    String lugarSeleccionado = auth.usuario.lugarTrabajo;
+    List lugaresTrabajo = ['Policlinico', 'Sanatorio'];
 
     return Scaffold(
       appBar: AppBar(
         actions: [
+          Row(
+            children: [
+              Text("Sector de trabajo: "),
+              DropdownButton(
+                iconEnabledColor: Colors.white,
+                focusColor: ThemeData.light().primaryColor,
+                dropdownColor: ThemeData.light().primaryColor,
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                value: lugarSeleccionado,
+                items: lugaresTrabajo
+                    .map((e) => DropdownMenuItem<String>(
+                          child: Text(e, style: TextStyle(color: Colors.white)),
+                          value: e,
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  auth.cambiarSector(auth.usuario.id, value!);
+                },
+              ),
+            ],
+          ),
           Container(
             child: IconButton(
               onPressed: () {
