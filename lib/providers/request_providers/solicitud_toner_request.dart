@@ -76,7 +76,6 @@ class SolicitudTonerRequest extends ChangeNotifier {
   getSolicitudToner() async {
     try {
       final response = await http.get(urlGet);
-
       // print(response.body);
       final data = SolicitudTonerResponse.fromJson(response.body);
       listaSolicitudToner = data.items;
@@ -114,6 +113,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
           encoding: utf8,
           headers: {"Content-Type": "application/json"});
       final decodedData = response.body;
+      limpiarForm();
       notifyListeners();
     } catch (e) {
       print(e);

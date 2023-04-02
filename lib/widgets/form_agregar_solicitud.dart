@@ -37,53 +37,56 @@ class FormAgregarSolicitud extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            DropdownButtonFormField(
-              decoration: InputDecoration(hintText: 'Sector'),
-              items: secYTon.listaSectoresValue
-                  .map((e) => DropdownMenuItem(
-                        child: Text(e.nombre),
-                        value: e,
-                      ))
-                  .toList(),
-              onChanged: (value) async {
-                secYTon.sector = "${value!.id}";
-                // print(value.id);
-                await secYTon.getImpresoraSegunSector(value!.id);
-              },
-            ),
+            if (secYTon.sucursal != "")
+              DropdownButtonFormField(
+                decoration: InputDecoration(hintText: 'Sector'),
+                items: secYTon.listaSectoresValue
+                    .map((e) => DropdownMenuItem(
+                          child: Text(e.nombre),
+                          value: e,
+                        ))
+                    .toList(),
+                onChanged: (value) async {
+                  secYTon.sector = "${value!.id}";
+                  // print(value.id);
+                  await secYTon.getImpresoraSegunSector(value!.id);
+                },
+              ),
             SizedBox(
               height: 20,
             ),
-            DropdownButtonFormField(
-              decoration: InputDecoration(hintText: 'Impresora'),
-              items: secYTon.listaImpresorasValue
-                  .map((e) => DropdownMenuItem(
-                        child: Text("${e.marca} ${e.modelo}"),
-                        value: e,
-                      ))
-                  .toList(),
-              onChanged: (value) async {
-                secYTon.impresora = "${value!.marca} ${value.modelo}";
-                await secYTon.getTonerSegunImpresora(value!.id);
-                // print(secYTon.impresora);
-              },
-            ),
+            if (secYTon.sector != "")
+              DropdownButtonFormField(
+                decoration: InputDecoration(hintText: 'Impresora'),
+                items: secYTon.listaImpresorasValue
+                    .map((e) => DropdownMenuItem(
+                          child: Text("${e.marca} ${e.modelo}"),
+                          value: e,
+                        ))
+                    .toList(),
+                onChanged: (value) async {
+                  secYTon.impresora = "${value!.marca} ${value.modelo}";
+                  await secYTon.getTonerSegunImpresora(value!.id);
+                  // print(secYTon.impresora);
+                },
+              ),
             SizedBox(
               height: 20,
             ),
-            DropdownButtonFormField(
-              decoration: InputDecoration(hintText: 'Toner'),
-              items: secYTon.listaTonerValue
-                  .map((e) => DropdownMenuItem(
-                        child: Text(e.modelo),
-                        value: e,
-                      ))
-                  .toList(),
-              onChanged: (value) {
-                // print(value!.toner);
-                secYTon.toner = value!.toner;
-              },
-            ),
+            if (secYTon.impresora != "")
+              DropdownButtonFormField(
+                decoration: InputDecoration(hintText: 'Toner'),
+                items: secYTon.listaTonerValue
+                    .map((e) => DropdownMenuItem(
+                          child: Text(e.modelo),
+                          value: e,
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  // print(value!.toner);
+                  secYTon.toner = value!.toner;
+                },
+              ),
             SizedBox(
               height: 20,
             ),
@@ -117,7 +120,7 @@ class FormAgregarSolicitud extends StatelessWidget {
                 sector: secYTon.sector,
                 toner: secYTon.toner,
               ));
-              await secYTon.limpiarForm();
+
               Navigator.pop(context);
             },
             child: Text("Guardar"),

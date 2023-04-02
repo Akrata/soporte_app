@@ -12,6 +12,7 @@ class Users {
     required this.updated,
     required this.username,
     required this.verified,
+    required this.lugarTrabajo,
   });
 
   final String avatar;
@@ -24,23 +25,24 @@ class Users {
   final DateTime updated;
   final String username;
   final bool verified;
+  final String lugarTrabajo;
 
   factory Users.fromJson(String str) => Users.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory Users.fromMap(Map<String, dynamic> json) => Users(
-        avatar: json["avatar"],
-        collectionId: json["collectionId"],
-        collectionName: json["collectionName"],
-        created: DateTime.parse(json["created"]),
-        emailVisibility: json["emailVisibility"],
-        id: json["id"],
-        name: json["name"],
-        updated: DateTime.parse(json["updated"]),
-        username: json["username"],
-        verified: json["verified"],
-      );
+      avatar: json["avatar"],
+      collectionId: json["collectionId"],
+      collectionName: json["collectionName"],
+      created: DateTime.parse(json["created"]),
+      emailVisibility: json["emailVisibility"],
+      id: json["id"],
+      name: json["name"],
+      updated: DateTime.parse(json["updated"]),
+      username: json["username"],
+      verified: json["verified"],
+      lugarTrabajo: json["lugarTrabajo"]);
 
   Map<String, dynamic> toMap() => {
         "avatar": avatar,
@@ -53,5 +55,6 @@ class Users {
         "updated": updated.toIso8601String(),
         "username": username,
         "verified": verified,
+        "lugarTrabajo": lugarTrabajo,
       };
 }
