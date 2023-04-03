@@ -60,12 +60,9 @@ class SolicitudTonerRequest extends ChangeNotifier {
     try {
       final real = pb.collection('solicitud_toner').subscribe('*', (e) {
         print(e);
-        Future.delayed(
-          Duration(milliseconds: 500),
-          () {
-            getSolicitudToner();
-          },
-        );
+
+        getSolicitudToner();
+
         notifyListeners();
       });
     } catch (e) {
@@ -98,6 +95,19 @@ class SolicitudTonerRequest extends ChangeNotifier {
         headers: {"Content-Type": "application/json"},
         body: data,
         encoding: utf8,
+      );
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  entregaTonerSegunLugar(String id, String lugar, int cantidad) async {
+    try {
+      final reponse = await http.patch(
+        Uri.http(DB.dbIp, '/api/collections/toner/records/$id'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({lugar: cantidad}),
       );
       notifyListeners();
     } catch (e) {
@@ -152,18 +162,5 @@ class SolicitudTonerRequest extends ChangeNotifier {
     final data = ImpresoraResponse.fromJson(response.body);
     listaTonerValue = data.items;
     notifyListeners();
-  }
-
-  entregaTonerSegunLugar(String id, String lugar, int cantidad) async {
-    try {
-      final reponse = await http.patch(
-        Uri.http(DB.dbIp, '/api/collections/toner/records/$id'),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode({lugar: cantidad}),
-      );
-      notifyListeners();
-    } catch (e) {
-      print(e);
-    }
   }
 }

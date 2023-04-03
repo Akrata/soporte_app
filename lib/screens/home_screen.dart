@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/pages/dashboard_page.dart';
 import 'package:soporte_app/pages/solicitud_toner_page.dart';
+import 'package:soporte_app/pages/toner_page.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/menu/menu_provider.dart';
 import 'package:soporte_app/widgets/widgets.dart';
@@ -95,6 +96,15 @@ class HomeScreen extends StatelessWidget {
                   },
                   icon: Icon(Icons.add_card_sharp),
                   index: menuP.selectedPage),
+              SideMenuItems(
+                  title: 'Stock Toners',
+                  onTap: () {
+                    menuP.page
+                        .animateToPage(2, duration: duration, curve: curve);
+                    menuP.selectedPage = 2;
+                  },
+                  icon: Icon(Icons.inventory_sharp),
+                  index: menuP.selectedPage),
             ],
           ),
           Container(
@@ -108,6 +118,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 DashboardPage(),
                 SolicitudTonerPage(),
+                TonerPage(),
               ],
             ),
           )

@@ -26,7 +26,7 @@ class AuthWithPass extends ChangeNotifier {
       isAuth = pb.authStore.isValid;
 
       // actualUser = pb.authStore.model.username;
-      obtenerUsuario(pb.authStore.model.id);
+      await obtenerUsuario(pb.authStore.model.id);
       notifyListeners();
     } catch (e) {
       print(e);
