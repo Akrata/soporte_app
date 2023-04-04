@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
+import 'package:soporte_app/widgets/form_realizar_pedido.dart';
 
 class TonerPage extends StatelessWidget {
   const TonerPage({Key? key}) : super(key: key);
@@ -14,7 +15,16 @@ class TonerPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const SizedBox(
+          SizedBox(
+            child: TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => FormRealizarPedido(),
+                );
+              },
+              child: Text("Realizar Pedido"),
+            ),
             height: 50,
           ),
           Container(
