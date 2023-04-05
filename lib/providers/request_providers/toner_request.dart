@@ -30,15 +30,15 @@ class TonerRequest extends ChangeNotifier {
     final response = await http.get(
       Uri.http(DB.dbIp, '/api/collections/toner/records'),
     );
-    print(response.body);
+
     final data = TonerResponse.fromJson(response.body);
-    print(data.items);
+
     listaToners = data.items;
 
     notifyListeners();
   }
 
-  realTime() {
+  realTime() async {
     try {
       final real = pb.collection('toner').subscribe('*', (e) {
         print(e);
@@ -57,6 +57,7 @@ class TonerRequest extends ChangeNotifier {
       final response = http.delete(
         Uri.http(DB.dbIp, 'api/collections/toner/records/$id'),
       );
+      notifyListeners();
     } catch (e) {
       print(e);
     }

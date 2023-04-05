@@ -56,7 +56,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
     notifyListeners();
   }
 
-  realTime() {
+  realTime() async {
     try {
       final real = pb.collection('solicitud_toner').subscribe('*', (e) {
         print(e);
