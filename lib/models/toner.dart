@@ -3,10 +3,10 @@ import 'dart:convert';
 class Toner {
   Toner({
     required this.id,
-    required this.collectionId,
-    required this.collectionName,
-    required this.created,
-    required this.updated,
+    this.collectionId,
+    this.collectionName,
+    this.created,
+    this.updated,
     required this.modelo,
     required this.stockMovilPoliclinico,
     required this.stockFijoPoliclinico,
@@ -14,16 +14,16 @@ class Toner {
     required this.stockFijoSanatorio,
   });
 
-  final String id;
-  final String collectionId;
-  final String collectionName;
-  final DateTime created;
-  final DateTime updated;
-  final String modelo;
+  String id;
+  String? collectionId;
+  String? collectionName;
+  DateTime? created;
+  DateTime? updated;
+  String modelo;
   int stockMovilPoliclinico;
-  final int stockFijoPoliclinico;
+  int stockFijoPoliclinico;
   int stockMovilSanatorio;
-  final int stockFijoSanatorio;
+  int stockFijoSanatorio;
 
   factory Toner.fromJson(String str) => Toner.fromMap(json.decode(str));
 
@@ -46,8 +46,8 @@ class Toner {
         "id": id,
         "collectionId": collectionId,
         "collectionName": collectionName,
-        "created": created.toIso8601String(),
-        "updated": updated.toIso8601String(),
+        "created": created?.toIso8601String(),
+        "updated": updated?.toIso8601String(),
         "modelo": modelo,
         "stock_movil_policlinico": stockMovilPoliclinico,
         "stock_fijo_policlinico": stockFijoPoliclinico,
