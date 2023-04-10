@@ -20,8 +20,14 @@ class SolicitudTonerPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const SizedBox(
-            height: 50,
+          ListTile(
+            leading: Icon(Icons.search),
+            title: TextField(
+              onChanged: (value) {
+                solicitudToner.searchResult = value;
+                solicitudToner.busqueda();
+              },
+            ),
           ),
           Container(
             width: double.infinity,
@@ -34,7 +40,7 @@ class SolicitudTonerPage extends StatelessWidget {
                 DataColumn(label: Text('Toner')),
                 DataColumn(label: Text('Entregado')),
               ],
-              rows: _data
+              rows: solicitudToner.listaSolicitudTonerFiltrada
                   .map(
                     (data) => DataRow(
                       cells: [

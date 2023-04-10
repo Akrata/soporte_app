@@ -27,15 +27,32 @@ class SolicitudTonerRequest extends ChangeNotifier {
   });
 
   List<SolicitudToner> listaSolicitudToner = [];
+  //Listas para rellenar dropdown
   List<Sector> listaSectoresValue = [];
   List<Impresora> listaImpresorasValue = [];
   List<Impresora> listaTonerValue = [];
 
+// Propiedades para agregar una solicitud
   String sucursal = '';
   String sector = '';
   String impresora = '';
   String toner = '';
   bool entregado = false;
+
+  //SEARCH_BAR
+  List<SolicitudToner> listaSolicitudTonerFiltrada = [];
+  String searchResult = '';
+
+  busqueda() {
+    if (searchResult != '') {
+      listaSolicitudTonerFiltrada = listaSolicitudToner
+          .where((element) =>
+              element.expand!.sector.nombre.contains(searchResult) ||
+              element.expand!.toner.modelo.contains(searchResult))
+          .toList();
+    }
+    notifyListeners();
+  }
 
   SolicitudTonerRequest() {
     getSolicitudToner();
