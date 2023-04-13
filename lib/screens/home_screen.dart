@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:soporte_app/pages/dashboard_page.dart';
 import 'package:soporte_app/pages/sector_page.dart';
 import 'package:soporte_app/pages/solicitud_toner_page.dart';
+import 'package:soporte_app/pages/sucursal_page.dart';
 import 'package:soporte_app/pages/toner_page.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/menu/menu_provider.dart';
@@ -115,6 +116,15 @@ class HomeScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.insert_drive_file),
                   index: menuP.selectedPage),
+              SideMenuItems(
+                  title: 'Sucursal',
+                  onTap: () {
+                    menuP.page
+                        .animateToPage(4, duration: duration, curve: curve);
+                    menuP.selectedPage = 4;
+                  },
+                  icon: const Icon(Icons.insert_drive_file),
+                  index: menuP.selectedPage),
             ],
           ),
           Container(
@@ -130,6 +140,7 @@ class HomeScreen extends StatelessWidget {
                 SolicitudTonerPage(),
                 TonerPage(),
                 SectorPage(),
+                SucursalPage()
               ],
             ),
           )
