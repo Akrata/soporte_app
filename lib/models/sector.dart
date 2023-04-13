@@ -5,21 +5,21 @@ import 'package:soporte_app/models/sucursal.dart';
 class Sector {
   Sector(
       {required this.id,
-      required this.collectionId,
-      required this.collectionName,
-      required this.created,
-      required this.updated,
+      this.collectionId,
+      this.collectionName,
+      this.created,
+      this.updated,
       required this.nombre,
       required this.sucursal,
-      required this.expand});
+      this.expand});
 
   String id;
-  String collectionId;
-  String collectionName;
-  DateTime created;
-  DateTime updated;
+  String? collectionId;
+  String? collectionName;
+  DateTime? created;
+  DateTime? updated;
   String nombre;
-  Expand expand;
+  Expand? expand;
   String sucursal;
 
   factory Sector.fromJson(String str) => Sector.fromMap(json.decode(str));
@@ -41,8 +41,8 @@ class Sector {
         "id": id,
         "collectionId": collectionId,
         "collectionName": collectionName,
-        "created": created.toIso8601String(),
-        "updated": updated.toIso8601String(),
+        "created": created?.toIso8601String(),
+        "updated": updated?.toIso8601String(),
         "nombre": nombre,
         "sucursal": sucursal,
       };

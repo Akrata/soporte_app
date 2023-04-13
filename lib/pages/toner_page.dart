@@ -11,7 +11,7 @@ import '../widgets/form_agregar_toner.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TonerPage extends StatelessWidget {
-  TonerPage({Key? key}) : super(key: key);
+  const TonerPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

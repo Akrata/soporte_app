@@ -24,8 +24,9 @@ class SolicitudTonerPage extends StatelessWidget {
             leading: Icon(Icons.search),
             title: TextField(
               onChanged: (value) {
-                solicitudToner.searchResult = value;
-                solicitudToner.busqueda();
+                //TODO: implementar la busqueda
+                // solicitudToner.searchResult = value;
+                // solicitudToner.busqueda();
               },
             ),
           ),
@@ -40,7 +41,7 @@ class SolicitudTonerPage extends StatelessWidget {
                 DataColumn(label: Text('Toner')),
                 DataColumn(label: Text('Entregado')),
               ],
-              rows: solicitudToner.listaSolicitudTonerFiltrada
+              rows: _data
                   .map(
                     (data) => DataRow(
                       cells: [
@@ -50,7 +51,7 @@ class SolicitudTonerPage extends StatelessWidget {
                         ),
                         DataCell(Text(data.expand!.sector.nombre)),
                         DataCell(
-                            Text(data.expand!.sector.expand.sucursal.nombre)),
+                            Text(data.expand!.sector.expand!.sucursal.nombre)),
                         DataCell(Text(data.expand!.toner.modelo)),
                         DataCell(Row(
                           children: [
