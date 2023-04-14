@@ -2,20 +2,20 @@ import 'dart:convert';
 
 class Pinpad {
   Pinpad({
-    required this.id,
-    required this.collectionId,
-    required this.collectionName,
-    required this.created,
-    required this.updated,
+    this.id,
+    this.collectionId,
+    this.collectionName,
+    this.created,
+    this.updated,
     required this.ip,
     required this.equipo,
   });
 
-  String id;
-  String collectionId;
-  String collectionName;
-  DateTime created;
-  DateTime updated;
+  String? id;
+  String? collectionId;
+  String? collectionName;
+  DateTime? created;
+  DateTime? updated;
   String ip;
   String equipo;
 
@@ -37,8 +37,8 @@ class Pinpad {
         "id": id,
         "collectionId": collectionId,
         "collectionName": collectionName,
-        "created": created.toIso8601String(),
-        "updated": updated.toIso8601String(),
+        "created": created?.toIso8601String(),
+        "updated": updated?.toIso8601String(),
         "ip": ip,
         "equipo": equipo,
       };

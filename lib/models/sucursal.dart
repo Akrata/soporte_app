@@ -3,18 +3,18 @@ import 'dart:convert';
 class Sucursal {
   Sucursal({
     required this.id,
-    required this.collectionId,
-    required this.collectionName,
-    required this.created,
-    required this.updated,
+    this.collectionId,
+    this.collectionName,
+    this.created,
+    this.updated,
     required this.nombre,
   });
 
   String id;
-  String collectionId;
-  String collectionName;
-  DateTime created;
-  DateTime updated;
+  String? collectionId;
+  String? collectionName;
+  DateTime? created;
+  DateTime? updated;
   String nombre;
 
   factory Sucursal.fromJson(String str) => Sucursal.fromMap(json.decode(str));
@@ -34,8 +34,8 @@ class Sucursal {
         "id": id,
         "collectionId": collectionId,
         "collectionName": collectionName,
-        "created": created.toIso8601String(),
-        "updated": updated.toIso8601String(),
+        "created": created?.toIso8601String(),
+        "updated": updated?.toIso8601String(),
         "nombre": nombre,
       };
 }

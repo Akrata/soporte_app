@@ -3,27 +3,27 @@ import 'dart:convert';
 class Ups {
   Ups({
     required this.id,
-    required this.collectionId,
-    required this.collectionName,
-    required this.created,
-    required this.updated,
+    this.collectionId,
+    this.collectionName,
+    this.created,
+    this.updated,
     required this.marca,
     required this.modelo,
-    required this.descripcion,
+    this.descripcion,
     required this.sector,
-    required this.ultimoMantenimiento,
+    this.ultimoMantenimiento,
   });
 
   String id;
-  String collectionId;
-  String collectionName;
-  DateTime created;
-  DateTime updated;
+  String? collectionId;
+  String? collectionName;
+  DateTime? created;
+  DateTime? updated;
   String marca;
   String modelo;
-  String descripcion;
+  String? descripcion;
   String sector;
-  DateTime ultimoMantenimiento;
+  DateTime? ultimoMantenimiento;
 
   factory Ups.fromJson(String str) => Ups.fromMap(json.decode(str));
 
@@ -46,12 +46,12 @@ class Ups {
         "id": id,
         "collectionId": collectionId,
         "collectionName": collectionName,
-        "created": created.toIso8601String(),
-        "updated": updated.toIso8601String(),
+        "created": created?.toIso8601String(),
+        "updated": updated?.toIso8601String(),
         "marca": marca,
         "modelo": modelo,
         "descripcion": descripcion,
         "sector": sector,
-        "ultimo_mantenimiento": ultimoMantenimiento.toIso8601String(),
+        "ultimo_mantenimiento": ultimoMantenimiento?.toIso8601String(),
       };
 }

@@ -5,10 +5,10 @@ import 'package:soporte_app/models/toner.dart';
 
 class Impresora {
   Impresora({
-    required this.collectionId,
-    required this.collectionName,
-    required this.created,
-    required this.expand,
+    this.collectionId,
+    this.collectionName,
+    this.created,
+    this.expand,
     required this.id,
     required this.marca,
     required this.modelo,
@@ -17,15 +17,15 @@ class Impresora {
     this.updated,
   });
 
-  final String collectionId;
-  final String collectionName;
-  final DateTime created;
-  final Expand expand;
-  final String id;
-  final String marca;
-  final String modelo;
-  final String sector;
-  final String toner;
+  String? collectionId;
+  String? collectionName;
+  DateTime? created;
+  Expand? expand;
+  String id;
+  String marca;
+  String modelo;
+  String sector;
+  String toner;
   DateTime? updated;
 
   factory Impresora.fromJson(String str) => Impresora.fromMap(json.decode(str));
@@ -48,8 +48,8 @@ class Impresora {
   Map<String, dynamic> toMap() => {
         "collectionId": collectionId,
         "collectionName": collectionName,
-        "created": created.toIso8601String(),
-        "expand": expand.toMap(),
+        "created": created?.toIso8601String(),
+        "expand": expand?.toMap(),
         "id": id,
         "marca": marca,
         "modelo": modelo,

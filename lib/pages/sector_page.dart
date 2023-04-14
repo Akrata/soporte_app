@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/request_providers/sector_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
+import 'package:soporte_app/screens/sector_screen.dart';
 import 'package:soporte_app/widgets/form_agregar_sector.dart';
 
 import '../models/sector.dart';
@@ -138,6 +139,19 @@ class SectorPage extends StatelessWidget {
                                 _showDeletePopup(data);
                               },
                             ),
+                            SizedBox(
+                              width: 40,
+                            ),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            SectorScreen(idSector: data.id),
+                                      ));
+                                },
+                                child: Text("Visualizar Sector"))
                           ],
                         )),
                       ],
