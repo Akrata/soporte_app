@@ -114,16 +114,16 @@ class HomeScreen extends StatelessWidget {
                         .animateToPage(3, duration: duration, curve: curve);
                     menuP.selectedPage = 3;
                   },
-                  icon: const Icon(Icons.insert_drive_file),
+                  icon: const Icon(Icons.insert_drive_file_outlined),
                   index: menuP.selectedPage),
               SideMenuItems(
-                  title: 'Sucursal',
+                  title: 'Sucursales',
                   onTap: () {
                     menuP.page
                         .animateToPage(4, duration: duration, curve: curve);
                     menuP.selectedPage = 4;
                   },
-                  icon: const Icon(Icons.insert_drive_file),
+                  icon: const Icon(Icons.insert_page_break_outlined),
                   index: menuP.selectedPage),
             ],
           ),

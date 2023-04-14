@@ -16,8 +16,8 @@ class SectorRequest extends ChangeNotifier {
   );
 
   SectorRequest() {
-    obtenerSectores();
     realTime();
+    obtenerSectores();
   }
 
   obtenerSectores() async {
@@ -30,13 +30,14 @@ class SectorRequest extends ChangeNotifier {
       }));
       final data = SectorResponse.fromJson(response.body);
       listaSectores = data.items;
+      print("ejecutado0");
       notifyListeners();
     } catch (e) {
       print(e);
     }
   }
 
-  realTime() async {
+  realTime() {
     try {
       final real = pb.collection('sector').subscribe('*', (e) {
         print(e);
@@ -63,9 +64,9 @@ class SectorRequest extends ChangeNotifier {
     }
   }
 
-  deleteSector(id) {
+  deleteSector(id) async {
     try {
-      final response = http.delete(
+      final response = await http.delete(
         Uri.http(DB.dbIp, '/api/collections/sector/records/$id'),
       );
       notifyListeners();
