@@ -18,7 +18,7 @@ class FormAgregarSucursal extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Sector'),
+                decoration: InputDecoration(labelText: 'Nombre de sucursal'),
                 // onChanged: (value) =>
                 //     sucursal.sucursalParaAgregar.nombre = value,
               ),

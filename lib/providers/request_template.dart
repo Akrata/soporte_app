@@ -6,8 +6,9 @@ import '../DB/db.dart';
 
 class RequestTemplate extends ChangeNotifier {
   final pb = PocketBase('http://${DB.dbIp}');
+  List listaGlobal = [];
 
-  realTime(String collection, Function func) async {
+  realTime(String collection, func) async {
     try {
       final real = pb.collection(collection).subscribe('*', (e) {
         print(e);
@@ -21,12 +22,13 @@ class RequestTemplate extends ChangeNotifier {
     }
   }
 
-  get(model, List lista, String collection, String? expand) async {
+  get(Function(String) desdeJson, List lista, String collection,
+      Map<String, dynamic> expand) async {
     try {
       final response = await http.get(Uri.http(DB.dbIp,
           '/api/collections/$collection/records', {'expand': '$expand'}));
-      final data = model.fromJson(response.body);
-      lista = data.items;
+      final data = desdeJson(response.body);
+      listaGlobal = data.items;
       notifyListeners();
     } catch (e) {
       print(e);
