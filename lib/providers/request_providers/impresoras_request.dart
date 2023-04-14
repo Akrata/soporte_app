@@ -15,6 +15,7 @@ class ImpresorasRequest extends ChangeNotifier {
 
   ImpresorasRequest() {
     getImpresoras();
+    notifyListeners();
   }
 
   getImpresoras() async {

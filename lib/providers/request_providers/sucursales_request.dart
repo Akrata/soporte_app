@@ -13,6 +13,7 @@ class SucursalesRequest extends ChangeNotifier {
 
   SucursalesRequest() {
     getSucursales();
+    notifyListeners();
   }
 
   getSucursales() async {

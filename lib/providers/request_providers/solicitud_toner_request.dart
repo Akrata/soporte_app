@@ -57,6 +57,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
   SolicitudTonerRequest() {
     getSolicitudToner();
     realTime();
+    notifyListeners();
   }
 
   limpiarForm() {

@@ -24,6 +24,7 @@ class TonerRequest extends ChangeNotifier {
   TonerRequest() {
     getToners();
     realTime();
+    notifyListeners();
   }
 
   getToners() async {
