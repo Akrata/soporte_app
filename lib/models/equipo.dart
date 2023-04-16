@@ -44,7 +44,9 @@ class Equipo {
         nombre: json["nombre"],
         ip: json["ip"],
         sector: json["sector"],
-        ultimoMantenimiento: DateTime.parse(json["ultimo_mantenimiento"]),
+        ultimoMantenimiento: json["ultimo_mantenimiento"] == ""
+            ? null
+            : DateTime.parse(json["ultimo_mantenimiento"]),
         licenciaWindows: json["licencia_windows"],
         licenciaOffice: json["licencia_office"],
         expand: ItemExpand.fromMap(json["expand"]),

@@ -55,9 +55,7 @@ class StateApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => SectorRequest(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => SectorIndividualRequest(),
-        ),
+        ChangeNotifierProvider(create: (context) => SectorIndividualRequest()),
       ],
       child: MainApp(),
     );

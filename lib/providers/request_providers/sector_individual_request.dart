@@ -28,9 +28,10 @@ class SectorIndividualRequest extends ChangeNotifier {
       final response = await http.get(Uri.http(
           DB.dbIp,
           '/api/collections/equipo/records',
-          {'expand': 'sector.sucursal', 'filter': 'sector.id~"$idSector"'}));
+          {'expand': 'sector.sucursal', 'filter': 'sector.id="$idSector"'}));
       print('data---->>> ${response.body}');
       final data = EquipoResponse.fromJson(response.body);
+      print("ok");
       listaEquipos = data.items;
       print('listaEquipos $listaEquipos');
       notifyListeners();

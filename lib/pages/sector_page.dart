@@ -144,12 +144,18 @@ class SectorPage extends StatelessWidget {
                             ),
                             TextButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            SectorScreen(idSector: data.id),
-                                      ));
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => SectorScreen(
+                                          idSector: data.id,
+                                          nombre: data.nombre));
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //       builder: (context) => SectorScreen(
+                                  //           idSector: data.id,
+                                  //           nombre: data.nombre),
+                                  //     ));
                                 },
                                 child: Text("Visualizar Sector"))
                           ],

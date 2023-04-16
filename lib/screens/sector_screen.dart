@@ -6,29 +6,28 @@ import '../widgets/custom_card_individual.dart';
 
 class SectorScreen extends StatelessWidget {
   String idSector;
-  SectorScreen({Key? key, required this.idSector}) : super(key: key);
+  String nombre;
+  SectorScreen({Key? key, required this.idSector, required this.nombre})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final sectorIndividual = Provider.of<SectorIndividualRequest>(context);
+    final sectorIndividual =
+        Provider.of<SectorIndividualRequest>(context, listen: false);
     sectorIndividual.obtenerEquipos(idSector);
-    sectorIndividual.obtenerImpresoras(idSector);
-    sectorIndividual.obtenerPinpad(idSector);
-    sectorIndividual.obtenerTelefonos(idSector);
-    sectorIndividual.obtenerUps(idSector);
-    return Scaffold(
-      appBar: AppBar(leading: BackButton()),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Text("Equipos"),
-            Divider(),
-            CustomCardIndividual(
-                icono: Icons.laptop,
-                ip: sectorIndividual.listaEquipos[0].ip,
-                nombre: sectorIndividual.listaEquipos[0].nombre)
-          ],
+    // sectorIndividual.obtenerImpresoras(idSector);
+    // sectorIndividual.obtenerPinpad(idSector);
+    // sectorIndividual.obtenerTelefonos(idSector);
+    // sectorIndividual.obtenerUps(idSector);
+    return AlertDialog(
+      content: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: ListView.builder(
+          itemCount: sectorIndividual.listaEquipos.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Text("data");
+          },
         ),
       ),
     );
