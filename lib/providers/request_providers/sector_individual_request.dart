@@ -29,12 +29,11 @@ class SectorIndividualRequest extends ChangeNotifier {
           DB.dbIp,
           '/api/collections/equipo/records',
           {'expand': 'sector.sucursal', 'filter': 'sector.id="$idSector"'}));
-      print('data---->>> ${response.body}');
+      // print('data---->>> ${response.body}');
       final data = EquipoResponse.fromJson(response.body);
-      print("ok");
+      // print("ok");
       listaEquipos = data.items;
-      print('listaEquipos $listaEquipos');
-      notifyListeners();
+      // print('listaEquipos $listaEquipos');
     } catch (e) {
       print(e);
     }
@@ -43,11 +42,15 @@ class SectorIndividualRequest extends ChangeNotifier {
   obtenerImpresoras(String idSector) async {
     try {
       final response = await http.get(Uri.http(
-          DB.dbIp,
-          '/api/collections/impresora/records',
-          {'expand': 'sector.sucursal', 'filter': 'sector.id~"$idSector"'}));
+          DB.dbIp, '/api/collections/impresora/records', {
+        'expand': 'sector.sucursal toner',
+        'filter': 'sector.id~"$idSector"'
+      }));
+      print('data---->>> ${response.body}');
       final data = ImpresoraResponse.fromJson(response.body);
+      print("ok");
       listaImpresoras = data.items;
+      print('listaEquipos $listaImpresoras');
       notifyListeners();
     } catch (e) {
       print(e);

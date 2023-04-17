@@ -61,12 +61,12 @@ class Impresora {
 
 class Expand {
   Expand({
-    required this.sector,
-    required this.toner,
+    this.sector,
+    this.toner,
   });
 
-  final Sector sector;
-  final Toner toner;
+  Sector? sector;
+  Toner? toner;
 
   factory Expand.fromJson(String str) => Expand.fromMap(json.decode(str));
 
@@ -78,7 +78,7 @@ class Expand {
       );
 
   Map<String, dynamic> toMap() => {
-        "sector": sector.toMap(),
-        "toner": toner.toMap(),
+        "sector": sector?.toMap(),
+        "toner": toner?.toMap(),
       };
 }
