@@ -38,9 +38,9 @@ class SectorRequest extends ChangeNotifier {
     }
   }
 
-  realTime() async {
+  realTime() {
     try {
-      final real = await pb.collection('sector').subscribe('*', (e) {
+      final real = pb.collection('sector').subscribe('*', (e) {
         print(e);
 
         obtenerSectores();

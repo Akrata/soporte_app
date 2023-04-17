@@ -43,7 +43,7 @@ class SectorIndividualRequest extends ChangeNotifier {
     try {
       final response = await http.get(Uri.http(
           DB.dbIp, '/api/collections/impresora/records', {
-        'expand': 'sector.sucursal toner',
+        'expand': 'sector.sucursal,toner',
         'filter': 'sector.id~"$idSector"'
       }));
       print('data---->>> ${response.body}');

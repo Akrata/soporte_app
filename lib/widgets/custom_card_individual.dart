@@ -6,14 +6,15 @@ class CustomCardIndividual extends StatelessWidget {
   String ip;
   String nombre;
   void Function()? onTap;
+  String? toner;
 
-  CustomCardIndividual({
-    super.key,
-    required this.icono,
-    required this.ip,
-    required this.nombre,
-    this.onTap,
-  });
+  CustomCardIndividual(
+      {super.key,
+      required this.icono,
+      required this.ip,
+      required this.nombre,
+      this.onTap,
+      this.toner});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +24,12 @@ class CustomCardIndividual extends StatelessWidget {
         child: Card(
           child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(icono),
                 Text(nombre),
                 Text(ip),
+                Text(toner ?? '')
               ],
             ),
           ),

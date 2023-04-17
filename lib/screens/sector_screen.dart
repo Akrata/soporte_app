@@ -28,73 +28,85 @@ class SectorScreen extends StatelessWidget {
         title: Text(nombre),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Text("Equipos"),
-          FutureBuilder(
-            future: sectorIndividual.obtenerEquipos(idSector),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Expanded(
-                  // height: MediaQuery.of(context).size.height,
-                  // width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisExtent: 100,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+        child: Column(
+          children: [
+            Text("Equipos"),
+            Container(
+              height: 200,
+              child: FutureBuilder(
+                future: sectorIndividual.obtenerEquipos(idSector),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Expanded(
+                      // height: MediaQuery.of(context).size.height,
+                      // width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 5,
+                            mainAxisExtent: 150,
+                          ),
+                          itemCount: sectorIndividual.listaEquipos.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomCardIndividual(
+                                icono: Icons.laptop,
+                                ip: sectorIndividual.listaEquipos[index].ip,
+                                nombre: sectorIndividual
+                                    .listaEquipos[index].nombre);
+                          },
+                        ),
                       ),
-                      itemCount: sectorIndividual.listaEquipos.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CustomCardIndividual(
-                            icono: Icons.laptop,
-                            ip: sectorIndividual.listaEquipos[index].ip,
-                            nombre:
-                                sectorIndividual.listaEquipos[index].nombre);
-                      },
-                    ),
-                  ),
-                );
-              } else {
-                return CircularProgressIndicator();
-              }
-            },
-          ),
-          Text("Impresoras"),
-          FutureBuilder(
-            future: sectorIndividual.obtenerImpresoras(idSector),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                return Expanded(
-                  // height: MediaQuery.of(context).size.height,
-                  // width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        mainAxisExtent: 100,
+                    );
+                  } else {
+                    return CircularProgressIndicator();
+                  }
+                },
+              ),
+            ),
+            Text("Impresoras"),
+            Container(
+              height: 200,
+              child: FutureBuilder(
+                future: sectorIndividual.obtenerImpresoras(idSector),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Expanded(
+                      // height: MediaQuery.of(context).size.height,
+                      // width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 5,
+                            mainAxisExtent: 150,
+                          ),
+                          itemCount: sectorIndividual.listaImpresoras.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CustomCardIndividual(
+                              icono: Icons.print,
+                              ip: sectorIndividual.listaImpresoras[index].marca,
+                              nombre: sectorIndividual
+                                  .listaImpresoras[index].modelo,
+                              toner: sectorIndividual
+                                  .listaImpresoras[index].expand!.toner!.modelo,
+                            );
+                          },
+                        ),
                       ),
-                      itemCount: sectorIndividual.listaImpresoras.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CustomCardIndividual(
-                            icono: Icons.print,
-                            ip: sectorIndividual.listaImpresoras[index].marca,
-                            nombre:
-                                sectorIndividual.listaImpresoras[index].modelo);
-                      },
-                    ),
-                  ),
-                );
-              } else {
-                return CircularProgressIndicator();
-              }
-            },
-          ),
-        ],
+                    );
+                  } else {
+                    return CircularProgressIndicator();
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
       ),
       // child: SingleChildScrollView(
       //   scrollDirection: Axis.vertical,
