@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 
 class CustomCardIndividual extends StatelessWidget {
   IconData icono;
-  String ip;
-  String nombre;
+  String? ip;
+  String? nombre;
+  String? modelo;
+  String? marca;
   void Function()? onTap;
   String? toner;
 
   CustomCardIndividual(
       {super.key,
       required this.icono,
-      required this.ip,
-      required this.nombre,
+      this.ip,
+      this.nombre,
+      this.marca,
+      this.modelo,
       this.onTap,
       this.toner});
 
@@ -26,10 +30,26 @@ class CustomCardIndividual extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icono),
-                Text(nombre),
-                Text(ip),
-                Text(toner ?? '')
+                Text(
+                  nombre == null ? '$modelo' : '$nombre',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  icono,
+                  size: 40,
+                ),
+                Text(
+                  ip == null ? '' : '$ip',
+                  style: TextStyle(fontSize: 15),
+                ),
+                Text(
+                  marca == null ? '' : 'Marca:$marca',
+                  style: TextStyle(fontSize: 15),
+                ),
+                Text(
+                  toner == null ? '' : 'Toner:$toner',
+                  style: TextStyle(fontSize: 15),
+                )
               ],
             ),
           ),
