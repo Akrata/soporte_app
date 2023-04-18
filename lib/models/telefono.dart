@@ -20,7 +20,7 @@ class Telefono {
   DateTime? updated;
   String nombre;
   int interno;
-  int ip;
+  String ip;
   String sector;
 
   factory Telefono.fromJson(String str) => Telefono.fromMap(json.decode(str));

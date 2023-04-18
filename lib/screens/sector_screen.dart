@@ -16,9 +16,8 @@ class SectorScreen extends StatelessWidget {
     final sectorIndividual =
         Provider.of<SectorIndividualRequest>(context, listen: false);
 
-    // sectorIndividual.obtenerImpresoras(idSector);
     // sectorIndividual.obtenerPinpad(idSector);
-    // sectorIndividual.obtenerTelefonos(idSector);
+
     // sectorIndividual.obtenerUps(idSector);
     return Scaffold(
       appBar: AppBar(
@@ -36,7 +35,7 @@ class SectorScreen extends StatelessWidget {
               Text(
                 "Equipos",
                 style: TextStyle(
-                    fontSize: 40, decoration: TextDecoration.underline),
+                    fontSize: 25, decoration: TextDecoration.underline),
               ),
               Container(
                 height: 200,
@@ -75,7 +74,7 @@ class SectorScreen extends StatelessWidget {
               Text(
                 "Impresoras",
                 style: TextStyle(
-                    fontSize: 40, decoration: TextDecoration.underline),
+                    fontSize: 25, decoration: TextDecoration.underline),
               ),
               Container(
                 height: 200,
@@ -116,9 +115,9 @@ class SectorScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                "Impresoras",
+                "Telefono",
                 style: TextStyle(
-                    fontSize: 40, decoration: TextDecoration.underline),
+                    fontSize: 25, decoration: TextDecoration.underline),
               ),
               Container(
                 height: 200,
@@ -137,16 +136,92 @@ class SectorScreen extends StatelessWidget {
                               crossAxisCount: 5,
                               mainAxisExtent: 150,
                             ),
-                            itemCount: sectorIndividual.listaImpresoras.length,
+                            itemCount: sectorIndividual.listaTelefonos.length,
                             itemBuilder: (BuildContext context, int index) {
                               return CustomCardIndividual(
-                                icono: Icons.phone,
-                                ip: sectorIndividual.listaTelefonos[index].ip
+                                nombre: sectorIndividual
+                                    .listaTelefonos[index].interno
                                     .toString(),
-                                modelo: sectorIndividual
-                                    .listaImpresoras[index].modelo,
-                                toner: sectorIndividual.listaImpresoras[index]
-                                    .expand!.toner!.modelo,
+                                icono: Icons.phone,
+                                ip: sectorIndividual.listaTelefonos[index].ip,
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  },
+                ),
+              ),
+              Text(
+                "Ups",
+                style: TextStyle(
+                    fontSize: 25, decoration: TextDecoration.underline),
+              ),
+              Container(
+                height: 200,
+                child: FutureBuilder(
+                  future: sectorIndividual.obtenerUps(idSector),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return Expanded(
+                        // height: MediaQuery.of(context).size.height,
+                        // width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 5,
+                              mainAxisExtent: 150,
+                            ),
+                            itemCount: sectorIndividual.listaUps.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CustomCardIndividual(
+                                icono: Icons.battery_charging_full_outlined,
+                                modelo: sectorIndividual.listaUps[index].modelo,
+                                marca: sectorIndividual.listaUps[index].marca,
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  },
+                ),
+              ),
+              Text(
+                "Pinpad",
+                style: TextStyle(
+                    fontSize: 25, decoration: TextDecoration.underline),
+              ),
+              Container(
+                height: 200,
+                child: FutureBuilder(
+                  future: sectorIndividual.obtenerPinpad(idSector),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return Expanded(
+                        // height: MediaQuery.of(context).size.height,
+                        // width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 5,
+                              mainAxisExtent: 150,
+                            ),
+                            itemCount: sectorIndividual.listaPinpad.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CustomCardIndividual(
+                                nombre: sectorIndividual.listaPinpad[index].ip
+                                    .toString(),
+                                icono: Icons.credit_card,
                               );
                             },
                           ),

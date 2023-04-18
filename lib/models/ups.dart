@@ -39,7 +39,9 @@ class Ups {
         modelo: json["modelo"],
         descripcion: json["descripcion"],
         sector: json["sector"],
-        ultimoMantenimiento: DateTime.parse(json["ultimo_mantenimiento"]),
+        ultimoMantenimiento: json["ultimo_mantenimiento"] == ''
+            ? null
+            : DateTime.parse(json["ultimo_mantenimiento"]),
       );
 
   Map<String, dynamic> toMap() => {
