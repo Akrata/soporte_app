@@ -46,11 +46,11 @@ class SectorIndividualRequest extends ChangeNotifier {
         'expand': 'sector.sucursal,toner',
         'filter': 'sector.id~"$idSector"'
       }));
-      print('data---->>> ${response.body}');
+      // print('data---->>> ${response.body}');
       final data = ImpresoraResponse.fromJson(response.body);
-      print("ok");
+      // print("ok");
       listaImpresoras = data.items;
-      print('listaEquipos $listaImpresoras');
+      // print('listaEquipos $listaImpresoras');
       notifyListeners();
     } catch (e) {
       print(e);
@@ -90,9 +90,14 @@ class SectorIndividualRequest extends ChangeNotifier {
       final response = await http.get(Uri.http(
           DB.dbIp,
           '/api/collections/pinpad/records',
-          {'expand': 'equipo.sector', 'filter': 'sector.id~"$idSector"'}));
+          {'expand': 'sector.sucursal', 'filter': 'sector.id~"$idSector"'}));
+      // print('data---->>> ${response.body}');
       final data = PinpadResponse.fromJson(response.body);
+
+      // print("ok");
       listaPinpad = data.items;
+
+      // print(listaPinpad);
       notifyListeners();
     } catch (e) {
       print(e);

@@ -38,7 +38,7 @@ class SectorScreen extends StatelessWidget {
                     fontSize: 25, decoration: TextDecoration.underline),
               ),
               Container(
-                height: 200,
+                height: 320,
                 child: FutureBuilder(
                   future: sectorIndividual.obtenerEquipos(idSector),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -77,7 +77,7 @@ class SectorScreen extends StatelessWidget {
                     fontSize: 25, decoration: TextDecoration.underline),
               ),
               Container(
-                height: 200,
+                height: 320,
                 child: FutureBuilder(
                   future: sectorIndividual.obtenerImpresoras(idSector),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -120,7 +120,7 @@ class SectorScreen extends StatelessWidget {
                     fontSize: 25, decoration: TextDecoration.underline),
               ),
               Container(
-                height: 200,
+                height: 320,
                 child: FutureBuilder(
                   future: sectorIndividual.obtenerTelefonos(idSector),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -161,7 +161,7 @@ class SectorScreen extends StatelessWidget {
                     fontSize: 25, decoration: TextDecoration.underline),
               ),
               Container(
-                height: 200,
+                height: 320,
                 child: FutureBuilder(
                   future: sectorIndividual.obtenerUps(idSector),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -200,7 +200,7 @@ class SectorScreen extends StatelessWidget {
                     fontSize: 25, decoration: TextDecoration.underline),
               ),
               Container(
-                height: 200,
+                height: 320,
                 child: FutureBuilder(
                   future: sectorIndividual.obtenerPinpad(idSector),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {

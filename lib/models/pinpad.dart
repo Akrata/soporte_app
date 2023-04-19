@@ -8,7 +8,7 @@ class Pinpad {
     this.created,
     this.updated,
     required this.ip,
-    required this.equipo,
+    required this.sector,
   });
 
   String? id;
@@ -17,7 +17,7 @@ class Pinpad {
   DateTime? created;
   DateTime? updated;
   String ip;
-  String equipo;
+  String sector;
 
   factory Pinpad.fromJson(String str) => Pinpad.fromMap(json.decode(str));
 
@@ -30,7 +30,7 @@ class Pinpad {
         created: DateTime.parse(json["created"]),
         updated: DateTime.parse(json["updated"]),
         ip: json["ip"],
-        equipo: json["equipo"],
+        sector: json["sector"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -40,6 +40,6 @@ class Pinpad {
         "created": created?.toIso8601String(),
         "updated": updated?.toIso8601String(),
         "ip": ip,
-        "equipo": equipo,
+        "sector": sector,
       };
 }
