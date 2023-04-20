@@ -15,7 +15,7 @@ class EquiposRequest extends ChangeNotifier {
 
   List<Equipo> listaEquipos = [];
 
-  TonerRequest() {
+  EquiposRequest() {
     getEquipos();
     realTime();
     notifyListeners();
@@ -23,20 +23,22 @@ class EquiposRequest extends ChangeNotifier {
 
   getEquipos() async {
     final response = await http.get(
-      Uri.http(DB.dbIp, '/api/collections/equipos/records',
+      Uri.http(DB.dbIp, '/api/collections/equipo/records',
           {'expand': 'sector.sucursal'}),
     );
+    print(response.body);
 
     final data = EquipoResponse.fromJson(response.body);
 
     listaEquipos = data.items;
+    print(listaEquipos);
 
     notifyListeners();
   }
 
   realTime() async {
     try {
-      final real = pb.collection('toner').subscribe('*', (e) {
+      final real = pb.collection('equipo').subscribe('*', (e) {
         print(e);
 
         getEquipos();

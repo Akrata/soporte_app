@@ -145,7 +145,7 @@ class EquiposPage extends StatelessWidget {
                           Text(data.ip),
                         ),
                         DataCell(
-                          Text(data.sector),
+                          Text(data.expand!.sector.nombre),
                         ),
                         DataCell(
                           Text(data.expand!.sector.expand!.sucursal.nombre),

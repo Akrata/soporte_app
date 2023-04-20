@@ -18,7 +18,7 @@ void main() async {
   await windowManager.ensureInitialized();
   WindowOptions windowOptions = const WindowOptions(
     center: true,
-    size: Size(1200, 800),
+    size: Size(1400, 800),
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.setResizable(false);
