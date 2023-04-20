@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/menu/menu_provider.dart';
+import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/impresoras_request.dart';
 import 'package:soporte_app/providers/request_providers/sector_individual_request.dart';
 import 'package:soporte_app/providers/request_providers/sector_request.dart';
@@ -55,7 +56,12 @@ class StateApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => SectorRequest(),
         ),
-        ChangeNotifierProvider(create: (context) => SectorIndividualRequest()),
+        ChangeNotifierProvider(
+          create: (context) => SectorIndividualRequest(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => EquiposRequest(),
+        ),
       ],
       child: MainApp(),
     );

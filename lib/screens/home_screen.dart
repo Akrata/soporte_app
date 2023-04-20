@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/pages/dashboard_page.dart';
+import 'package:soporte_app/pages/equipos_page.dart';
 import 'package:soporte_app/pages/sector_page.dart';
 import 'package:soporte_app/pages/solicitud_toner_page.dart';
 import 'package:soporte_app/pages/sucursal_page.dart';
@@ -125,6 +126,15 @@ class HomeScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.insert_page_break_outlined),
                   index: menuP.selectedPage),
+              SideMenuItems(
+                  title: 'Equipos',
+                  onTap: () {
+                    menuP.page
+                        .animateToPage(5, duration: duration, curve: curve);
+                    menuP.selectedPage = 5;
+                  },
+                  icon: const Icon(Icons.laptop),
+                  index: menuP.selectedPage),
             ],
           ),
           Container(
@@ -140,7 +150,8 @@ class HomeScreen extends StatelessWidget {
                 SolicitudTonerPage(),
                 TonerPage(),
                 SectorPage(),
-                SucursalPage()
+                SucursalPage(),
+                EquiposPage(),
               ],
             ),
           )
