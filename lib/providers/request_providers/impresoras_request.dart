@@ -12,16 +12,85 @@ class ImpresorasRequest extends ChangeNotifier {
   final pb = PocketBase('http://${DB.dbIp}');
 
   List<Impresora> listaImpresoras = [];
+  Impresora impresoraParaAgregar =
+      Impresora(id: '', marca: '', modelo: '', sector: '', toner: '');
+  String sucursal = '';
 
   ImpresorasRequest() {
     getImpresoras();
     notifyListeners();
   }
 
+  // getImpresoras() async {
+  //   final response = await http.get(url);
+  //   final data = ImpresoraResponse.fromJson(response.body);
+  //   listaImpresoras = data.items;
+  //   notifyListeners();
+  // }
   getImpresoras() async {
-    final response = await http.get(url);
+    final response = await http.get(
+      Uri.http(DB.dbIp, '/api/collections/impresora/records',
+          {'expand': 'sector.sucursal, toner'}),
+    );
     final data = ImpresoraResponse.fromJson(response.body);
     listaImpresoras = data.items;
     notifyListeners();
+  }
+
+  realTime() async {
+    try {
+      final real = pb.collection('impresora').subscribe('*', (e) {
+        print(e);
+
+        getImpresoras();
+
+        notifyListeners();
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  deleteImpresora(String id) async {
+    try {
+      final response = http.delete(
+        Uri.http(DB.dbIp, 'api/collections/impresora/records/$id'),
+      );
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  editImpresora(Impresora impresora) async {
+    try {
+      final reponse = await http.patch(
+        Uri.http(DB.dbIp, '/api/collections/impresora/records/${impresora.id}'),
+        headers: {"Content-Type": "application/json"},
+        body: impresora.toJson(),
+      );
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  agregarImpresora(Impresora impresora) async {
+    try {
+      final response = await http.post(
+          Uri.http(DB.dbIp, "/api/collections/impresora/records"),
+          body: impresora.toJson(),
+          headers: {"Content-Type": "application/json"});
+      limpiarImpresora();
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  limpiarImpresora() {
+    impresoraParaAgregar =
+        Impresora(id: '', marca: '', modelo: '', sector: '', toner: '');
+    sucursal = '';
   }
 }

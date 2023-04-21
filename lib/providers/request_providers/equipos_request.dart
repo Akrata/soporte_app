@@ -14,6 +14,7 @@ class EquiposRequest extends ChangeNotifier {
   final pb = PocketBase('http://${DB.dbIp}');
 
   List<Equipo> listaEquipos = [];
+  String sucursal = '';
 
   EquiposRequest() {
     getEquipos();
@@ -26,12 +27,8 @@ class EquiposRequest extends ChangeNotifier {
       Uri.http(DB.dbIp, '/api/collections/equipo/records',
           {'expand': 'sector.sucursal'}),
     );
-    print(response.body);
-
     final data = EquipoResponse.fromJson(response.body);
-
     listaEquipos = data.items;
-    print(listaEquipos);
 
     notifyListeners();
   }
@@ -90,5 +87,6 @@ class EquiposRequest extends ChangeNotifier {
 
   limpiarEquipo() {
     equipoParaAgregar = Equipo(id: '', nombre: '', ip: '', sector: '');
+    sucursal = '';
   }
 }
