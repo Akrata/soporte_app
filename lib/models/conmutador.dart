@@ -1,17 +1,18 @@
 import 'dart:convert';
 
-import 'item_expand.dart';
+import 'package:soporte_app/models/sucursal.dart';
 
-class Pinpad {
-  Pinpad(
+class Conmutador {
+  Conmutador(
       {required this.id,
       this.collectionId,
       this.collectionName,
       this.created,
       this.updated,
+      required this.nombre,
       required this.ip,
       this.descripcion,
-      required this.sector,
+      required this.sucursal,
       this.expand});
 
   String id;
@@ -19,25 +20,28 @@ class Pinpad {
   String? collectionName;
   DateTime? created;
   DateTime? updated;
+  String nombre;
   String ip;
   String? descripcion;
-  String sector;
-  ItemExpand? expand;
+  Expand? expand;
+  String sucursal;
 
-  factory Pinpad.fromJson(String str) => Pinpad.fromMap(json.decode(str));
+  factory Conmutador.fromJson(String str) =>
+      Conmutador.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Pinpad.fromMap(Map<String, dynamic> json) => Pinpad(
+  factory Conmutador.fromMap(Map<String, dynamic> json) => Conmutador(
         id: json["id"],
         collectionId: json["collectionId"],
         collectionName: json["collectionName"],
         created: DateTime.parse(json["created"]),
         updated: DateTime.parse(json["updated"]),
+        nombre: json["nombre"],
         ip: json["ip"],
         descripcion: json["descripcion"],
-        sector: json["sector"],
-        expand: ItemExpand.fromMap(json["expand"]),
+        sucursal: json["sucursal"],
+        expand: Expand.fromMap(json["expand"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -46,9 +50,29 @@ class Pinpad {
         "collectionName": collectionName,
         "created": created?.toIso8601String(),
         "updated": updated?.toIso8601String(),
+        "nombre": nombre,
         "ip": ip,
         "descripcion": descripcion,
-        "sector": sector,
-        "expand": expand?.toMap(),
+        "sucursal": sucursal,
+      };
+}
+
+class Expand {
+  Expand({
+    required this.sucursal,
+  });
+
+  Sucursal sucursal;
+
+  factory Expand.fromJson(String str) => Expand.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Expand.fromMap(Map<String, dynamic> json) => Expand(
+        sucursal: Sucursal.fromMap(json["sucursal"]),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "sucursal": sucursal.toMap(),
       };
 }

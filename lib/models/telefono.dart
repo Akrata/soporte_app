@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:soporte_app/models/item_expand.dart';
+
 class Telefono {
   Telefono({
     required this.id,
@@ -11,6 +13,7 @@ class Telefono {
     required this.interno,
     required this.ip,
     required this.sector,
+    this.expand,
   });
 
   String id;
@@ -19,9 +22,10 @@ class Telefono {
   DateTime? created;
   DateTime? updated;
   String nombre;
-  int interno;
+  String interno;
   String ip;
   String sector;
+  ItemExpand? expand;
 
   factory Telefono.fromJson(String str) => Telefono.fromMap(json.decode(str));
 
@@ -37,6 +41,7 @@ class Telefono {
         interno: json["interno"],
         ip: json["ip"],
         sector: json["sector"],
+        expand: ItemExpand.fromMap(json["expand"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -49,5 +54,6 @@ class Telefono {
         "interno": interno,
         "ip": ip,
         "sector": sector,
+        "expand": expand?.toMap(),
       };
 }

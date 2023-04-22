@@ -13,11 +13,12 @@ class ImpresorasRequest extends ChangeNotifier {
 
   List<Impresora> listaImpresoras = [];
   Impresora impresoraParaAgregar =
-      Impresora(id: '', marca: '', modelo: '', sector: '', toner: '');
+      Impresora(id: '', marca: '', modelo: '', sector: '', toner: '', ip: '');
   String sucursal = '';
 
   ImpresorasRequest() {
     getImpresoras();
+    realTime();
     notifyListeners();
   }
 
@@ -90,7 +91,7 @@ class ImpresorasRequest extends ChangeNotifier {
 
   limpiarImpresora() {
     impresoraParaAgregar =
-        Impresora(id: '', marca: '', modelo: '', sector: '', toner: '');
+        Impresora(id: '', marca: '', modelo: '', sector: '', toner: '', ip: '');
     sucursal = '';
   }
 }

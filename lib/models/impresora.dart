@@ -12,6 +12,7 @@ class Impresora {
     required this.id,
     required this.marca,
     required this.modelo,
+    required this.ip,
     required this.sector,
     required this.toner,
     this.updated,
@@ -24,6 +25,7 @@ class Impresora {
   String id;
   String marca;
   String modelo;
+  String ip;
   String sector;
   String toner;
   DateTime? updated;
@@ -39,6 +41,7 @@ class Impresora {
         expand: Expand.fromMap(json["expand"]),
         id: json["id"],
         marca: json["marca"],
+        ip: json["ip"],
         modelo: json["modelo"],
         sector: json["sector"],
         toner: json["toner"],
@@ -52,6 +55,7 @@ class Impresora {
         "expand": expand?.toMap(),
         "id": id,
         "marca": marca,
+        "ip": ip,
         "modelo": modelo,
         "sector": sector,
         "toner": toner,

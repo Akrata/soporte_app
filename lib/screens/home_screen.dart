@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:soporte_app/pages/conmutador_page.dart';
 import 'package:soporte_app/pages/dashboard_page.dart';
 import 'package:soporte_app/pages/equipos_page.dart';
+import 'package:soporte_app/pages/impresoras_page.dart';
+import 'package:soporte_app/pages/pinpad_page.dart';
 import 'package:soporte_app/pages/sector_page.dart';
 import 'package:soporte_app/pages/solicitud_toner_page.dart';
 import 'package:soporte_app/pages/sucursal_page.dart';
+import 'package:soporte_app/pages/telefonos_page.dart';
 import 'package:soporte_app/pages/toner_page.dart';
+import 'package:soporte_app/pages/ups_page.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/menu/menu_provider.dart';
 import 'package:soporte_app/widgets/widgets.dart';
@@ -135,6 +140,51 @@ class HomeScreen extends StatelessWidget {
                   },
                   icon: const Icon(Icons.laptop),
                   index: menuP.selectedPage),
+              SideMenuItems(
+                  title: 'Impresoras',
+                  onTap: () {
+                    menuP.page
+                        .animateToPage(6, duration: duration, curve: curve);
+                    menuP.selectedPage = 6;
+                  },
+                  icon: const Icon(Icons.print_outlined),
+                  index: menuP.selectedPage),
+              SideMenuItems(
+                  title: 'Ups',
+                  onTap: () {
+                    menuP.page
+                        .animateToPage(7, duration: duration, curve: curve);
+                    menuP.selectedPage = 7;
+                  },
+                  icon: const Icon(Icons.battery_1_bar),
+                  index: menuP.selectedPage),
+              SideMenuItems(
+                  title: 'Telefonos',
+                  onTap: () {
+                    menuP.page
+                        .animateToPage(8, duration: duration, curve: curve);
+                    menuP.selectedPage = 8;
+                  },
+                  icon: const Icon(Icons.phone_forwarded_outlined),
+                  index: menuP.selectedPage),
+              SideMenuItems(
+                  title: 'Pinpads',
+                  onTap: () {
+                    menuP.page
+                        .animateToPage(9, duration: duration, curve: curve);
+                    menuP.selectedPage = 9;
+                  },
+                  icon: const Icon(Icons.credit_card_outlined),
+                  index: menuP.selectedPage),
+              SideMenuItems(
+                  title: 'Conmutadores',
+                  onTap: () {
+                    menuP.page
+                        .animateToPage(10, duration: duration, curve: curve);
+                    menuP.selectedPage = 10;
+                  },
+                  icon: const Icon(Icons.link),
+                  index: menuP.selectedPage),
             ],
           ),
           Container(
@@ -152,6 +202,11 @@ class HomeScreen extends StatelessWidget {
                 SectorPage(),
                 SucursalPage(),
                 EquiposPage(),
+                ImpresorasPage(),
+                UpsPage(),
+                TelefonosPage(),
+                PinpadPage(),
+                ConmutadorPage(),
               ],
             ),
           )

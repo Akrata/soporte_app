@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/menu/menu_provider.dart';
+import 'package:soporte_app/providers/request_providers/conmutador_request.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/impresoras_request.dart';
+import 'package:soporte_app/providers/request_providers/pinpad_request.dart';
 import 'package:soporte_app/providers/request_providers/sector_individual_request.dart';
 import 'package:soporte_app/providers/request_providers/sector_request.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
+import 'package:soporte_app/providers/request_providers/telefono_request.dart';
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
+import 'package:soporte_app/providers/request_providers/ups_request.dart';
 import 'package:soporte_app/screens/screens.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -61,6 +65,18 @@ class StateApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => EquiposRequest(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UpsRequest(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TelefonoRequest(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => PinpadRequest(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ConmutadorRequest(),
         ),
       ],
       child: MainApp(),

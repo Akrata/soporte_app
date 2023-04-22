@@ -31,7 +31,7 @@ class SectorRequest extends ChangeNotifier {
       }));
       final data = SectorResponse.fromJson(response.body);
       listaSectores = data.items;
-      print("ejecutado0");
+      // print("ejecutado0");
       notifyListeners();
     } catch (e) {
       print(e);

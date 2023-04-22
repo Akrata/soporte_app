@@ -1,18 +1,20 @@
 import 'dart:convert';
 
+import 'item_expand.dart';
+
 class Ups {
-  Ups({
-    required this.id,
-    this.collectionId,
-    this.collectionName,
-    this.created,
-    this.updated,
-    required this.marca,
-    required this.modelo,
-    this.descripcion,
-    required this.sector,
-    this.ultimoMantenimiento,
-  });
+  Ups(
+      {required this.id,
+      this.collectionId,
+      this.collectionName,
+      this.created,
+      this.updated,
+      required this.marca,
+      required this.modelo,
+      this.descripcion,
+      required this.sector,
+      this.ultimoMantenimiento,
+      this.expand});
 
   String id;
   String? collectionId;
@@ -24,6 +26,7 @@ class Ups {
   String? descripcion;
   String sector;
   DateTime? ultimoMantenimiento;
+  ItemExpand? expand;
 
   factory Ups.fromJson(String str) => Ups.fromMap(json.decode(str));
 
@@ -42,6 +45,7 @@ class Ups {
         ultimoMantenimiento: json["ultimo_mantenimiento"] == ''
             ? null
             : DateTime.parse(json["ultimo_mantenimiento"]),
+        expand: ItemExpand.fromMap(json["expand"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -55,5 +59,6 @@ class Ups {
         "descripcion": descripcion,
         "sector": sector,
         "ultimo_mantenimiento": ultimoMantenimiento?.toIso8601String(),
+        "expand": expand?.toMap(),
       };
 }
