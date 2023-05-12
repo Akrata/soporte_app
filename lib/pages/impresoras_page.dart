@@ -76,6 +76,11 @@ class ImpresorasPage extends StatelessWidget {
                   decoration: InputDecoration(labelText: 'ip'),
                   onChanged: (value) => impresoraActual.ip = value,
                 ),
+                TextFormField(
+                  initialValue: data.observaciones,
+                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  onChanged: (value) => impresoraActual.observaciones = value,
+                ),
                 //TODO:AGREGAR LO QUE FALTA
               ],
             ),
@@ -139,6 +144,7 @@ class ImpresorasPage extends StatelessWidget {
                 DataColumn(label: Text('Sector')),
                 DataColumn(label: Text('Sucursal')),
                 DataColumn(label: Text('Toner')),
+                DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Acciones')),
               ],
               rows: _data
@@ -162,6 +168,9 @@ class ImpresorasPage extends StatelessWidget {
                         ),
                         DataCell(
                           Text(data.expand!.toner!.modelo),
+                        ),
+                        DataCell(
+                          Text(data.observaciones ?? ''),
                         ),
                         DataCell(Row(
                           children: [

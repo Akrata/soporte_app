@@ -41,17 +41,17 @@ class SolicitudTonerRequest extends ChangeNotifier {
 
   //SEARCH_BAR
   List<SolicitudToner> listaSolicitudTonerFiltrada = [];
-  String searchResult = '';
+  String searchText = '';
+  bool enBusqueda = false;
 
-  busqueda() {
-    if (searchResult != '') {
-      listaSolicitudTonerFiltrada = listaSolicitudToner
-          .where((element) =>
-              element.expand!.sector.nombre.contains(searchResult) ||
-              element.expand!.toner.modelo.contains(searchResult))
-          .toList();
-    }
-    notifyListeners();
+  busqueda(String texto) {
+    listaSolicitudToner = listaSolicitudToner
+        .where((element) =>
+            element.expand!.sector.nombre.contains(texto) ||
+            element.expand!.toner.modelo.contains(texto))
+        .toList();
+    searchText = '';
+    print(listaSolicitudToner);
   }
 
   SolicitudTonerRequest() {
@@ -91,6 +91,24 @@ class SolicitudTonerRequest extends ChangeNotifier {
   getSolicitudToner() async {
     try {
       final response = await http.get(urlGet);
+      // print(response.body);
+      final data = SolicitudTonerResponse.fromJson(response.body);
+      listaSolicitudToner = data.items;
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  buscarSolicitudToner(String texto) async {
+    try {
+      final response = await http
+          .get(Uri.http(DB.dbIp, '/api/collections/solicitud_toner/records', {
+        'expand': 'sector.sucursal, toner,users',
+        'perPage': '50',
+        'filter': '',
+        'sort': 'entregado,-created'
+      }));
       // print(response.body);
       final data = SolicitudTonerResponse.fromJson(response.body);
       listaSolicitudToner = data.items;

@@ -72,6 +72,16 @@ class FormAgregarEquipo extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(labelText: 'Observaciones'),
+                onChanged: (value) =>
+                    equipo.equipoParaAgregar.observaciones = value,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextFormField(
                 decoration: InputDecoration(labelText: 'Licencia Windows'),
                 onChanged: (value) =>
                     equipo.equipoParaAgregar.licenciaWindows = value,

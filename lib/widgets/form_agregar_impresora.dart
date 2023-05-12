@@ -82,6 +82,16 @@ class FormAgregarImpresora extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+              TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(labelText: 'Observaciones'),
+                onChanged: (value) =>
+                    impresora.impresoraParaAgregar.observaciones = value,
+              ),
+              SizedBox(
+                height: 20,
+              ),
               DropdownButtonFormField(
                 decoration: InputDecoration(hintText: 'Toner'),
                 items: toner.listaToners

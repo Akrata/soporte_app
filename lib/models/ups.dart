@@ -11,7 +11,7 @@ class Ups {
       this.updated,
       required this.marca,
       required this.modelo,
-      this.descripcion,
+      this.observaciones,
       required this.sector,
       this.ultimoMantenimiento,
       this.expand});
@@ -23,7 +23,7 @@ class Ups {
   DateTime? updated;
   String marca;
   String modelo;
-  String? descripcion;
+  String? observaciones;
   String sector;
   DateTime? ultimoMantenimiento;
   ItemExpand? expand;
@@ -40,7 +40,7 @@ class Ups {
         updated: DateTime.parse(json["updated"]),
         marca: json["marca"],
         modelo: json["modelo"],
-        descripcion: json["descripcion"],
+        observaciones: json["observaciones"],
         sector: json["sector"],
         ultimoMantenimiento: json["ultimo_mantenimiento"] == ''
             ? null
@@ -56,7 +56,7 @@ class Ups {
         "updated": updated?.toIso8601String(),
         "marca": marca,
         "modelo": modelo,
-        "descripcion": descripcion,
+        "observaciones": observaciones,
         "sector": sector,
         "ultimo_mantenimiento": ultimoMantenimiento?.toIso8601String(),
         "expand": expand?.toMap(),

@@ -15,6 +15,9 @@ class EquiposRequest extends ChangeNotifier {
 
   List<Equipo> listaEquipos = [];
   String sucursal = '';
+  // String searchText = '';
+  List<Equipo> listaBusquedaEquipos = [];
+  bool inSearch = false;
 
   EquiposRequest() {
     getEquipos();
@@ -31,6 +34,37 @@ class EquiposRequest extends ChangeNotifier {
     listaEquipos = data.items;
 
     notifyListeners();
+  }
+
+  // buscarEquipos() async {
+  //   print('jhas');
+  //   final response = await http.get(
+  //     Uri.http(DB.dbIp, '/api/collections/equipo/records', {
+  //       'expand': 'sector.sucursal',
+  //       'filter': 'nombre~"$searchText"|| ip~"$searchText"'
+  //     }),
+  //   );
+  //   final data = EquipoResponse.fromJson(response.body);
+  //   listaEquipos = data.items;
+
+  //   notifyListeners();
+  // }
+
+  enBusqueda(bool dato) {
+    inSearch = dato;
+    notifyListeners();
+  }
+
+  busquedaEnLista(texto) {
+    listaBusquedaEquipos = listaEquipos
+        .where((element) =>
+            element.nombre.toLowerCase().contains(texto) ||
+            element.ip.toLowerCase().contains(texto) ||
+            element.expand!.sector.nombre.toLowerCase().contains(texto) ||
+            element.expand!.sector.expand!.sucursal.nombre
+                .toLowerCase()
+                .contains(texto))
+        .toList();
   }
 
   realTime() async {

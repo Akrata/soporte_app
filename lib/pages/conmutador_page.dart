@@ -79,9 +79,9 @@ class ConmutadorPage extends StatelessWidget {
                   onChanged: (value) => conmutadorActual.ip = value,
                 ),
                 TextFormField(
-                  initialValue: data.descripcion,
-                  decoration: InputDecoration(labelText: 'desc'),
-                  onChanged: (value) => conmutadorActual.descripcion = value,
+                  initialValue: data.observaciones,
+                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  onChanged: (value) => conmutadorActual.observaciones = value,
                 ),
                 DropdownButtonFormField(
                   items: listaSucursales
@@ -124,7 +124,7 @@ class ConmutadorPage extends StatelessWidget {
               columns: const [
                 DataColumn(label: Text('Nombre')),
                 DataColumn(label: Text('Ip')),
-                DataColumn(label: Text('Desc')),
+                DataColumn(label: Text('Obs')),
                 DataColumn(label: Text('Sucursal')),
                 DataColumn(label: Text('Acciones')),
               ],
@@ -139,7 +139,7 @@ class ConmutadorPage extends StatelessWidget {
                           Text(data.ip),
                         ),
                         DataCell(
-                          Text(data.descripcion ?? ''),
+                          Text(data.observaciones ?? ''),
                         ),
                         DataCell(
                           Text(data.expand!.sucursal.nombre),

@@ -4,6 +4,7 @@ import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 import 'package:soporte_app/utils/fecha_formater.dart';
+import 'package:soporte_app/widgets/searchbar.dart';
 import 'package:soporte_app/widgets/widgets.dart';
 
 class SolicitudTonerPage extends StatelessWidget {
@@ -20,15 +21,13 @@ class SolicitudTonerPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          ListTile(
-            leading: Icon(Icons.search),
-            title: TextField(
-              onChanged: (value) {
-                //TODO: implementar la busqueda
-                // solicitudToner.searchResult = value;
-                // solicitudToner.busqueda();
-              },
-            ),
+          // SearchBarCustom(
+          //   searchText: solicitudToner.searchText,
+          //   actualizar: solicitudToner.getSolicitudToner(),
+          //   buscar: solicitudToner.busqueda,
+          // ),
+          SizedBox(
+            height: 20,
           ),
           Container(
             width: double.infinity,

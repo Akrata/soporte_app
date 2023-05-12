@@ -74,6 +74,16 @@ class FormAgregarTelefono extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+              TextFormField(
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(labelText: 'Observaciones'),
+                onChanged: (value) =>
+                    telefono.telefonoParaAgregar.observaciones = value,
+              ),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),

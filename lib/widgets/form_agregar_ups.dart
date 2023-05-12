@@ -73,8 +73,10 @@ class FormAgregarUps extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Desc'),
-                onChanged: (value) => ups.upsParaAgregar.descripcion = value,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(labelText: 'Observaciones'),
+                onChanged: (value) => ups.upsParaAgregar.observaciones = value,
               ),
               SizedBox(
                 height: 20,

@@ -15,6 +15,7 @@ class Impresora {
     required this.ip,
     required this.sector,
     required this.toner,
+    this.observaciones,
     this.updated,
   });
 
@@ -28,6 +29,7 @@ class Impresora {
   String ip;
   String sector;
   String toner;
+  String? observaciones;
   DateTime? updated;
 
   factory Impresora.fromJson(String str) => Impresora.fromMap(json.decode(str));
@@ -43,6 +45,7 @@ class Impresora {
         marca: json["marca"],
         ip: json["ip"],
         modelo: json["modelo"],
+        observaciones: json["observaciones"],
         sector: json["sector"],
         toner: json["toner"],
         updated: DateTime.parse(json["updated"]),
@@ -57,6 +60,7 @@ class Impresora {
         "marca": marca,
         "ip": ip,
         "modelo": modelo,
+        "observaciones": observaciones,
         "sector": sector,
         "toner": toner,
         "updated": updated?.toIso8601String(),

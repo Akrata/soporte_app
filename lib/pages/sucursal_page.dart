@@ -6,6 +6,7 @@ import 'package:soporte_app/providers/request_providers/sucursales_request.dart'
 import 'package:soporte_app/widgets/form_agregar_sucursal.dart';
 
 import '../providers/auth/auth_with_pass.dart';
+import '../widgets/searchbar.dart';
 
 class SucursalPage extends StatelessWidget {
   const SucursalPage({Key? key}) : super(key: key);

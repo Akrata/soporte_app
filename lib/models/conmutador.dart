@@ -11,7 +11,7 @@ class Conmutador {
       this.updated,
       required this.nombre,
       required this.ip,
-      this.descripcion,
+      this.observaciones,
       required this.sucursal,
       this.expand});
 
@@ -22,7 +22,7 @@ class Conmutador {
   DateTime? updated;
   String nombre;
   String ip;
-  String? descripcion;
+  String? observaciones;
   Expand? expand;
   String sucursal;
 
@@ -39,7 +39,7 @@ class Conmutador {
         updated: DateTime.parse(json["updated"]),
         nombre: json["nombre"],
         ip: json["ip"],
-        descripcion: json["descripcion"],
+        observaciones: json["observaciones"],
         sucursal: json["sucursal"],
         expand: Expand.fromMap(json["expand"]),
       );
@@ -52,7 +52,7 @@ class Conmutador {
         "updated": updated?.toIso8601String(),
         "nombre": nombre,
         "ip": ip,
-        "descripcion": descripcion,
+        "observaciones": observaciones,
         "sucursal": sucursal,
       };
 }

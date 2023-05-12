@@ -67,9 +67,11 @@ class FormAgregarPinpad extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Descripcion'),
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(labelText: 'Observaciones'),
                 onChanged: (value) =>
-                    pinpad.pinpadParaAgregar.descripcion = value,
+                    pinpad.pinpadParaAgregar.observaciones = value,
               ),
               SizedBox(
                 height: 20,

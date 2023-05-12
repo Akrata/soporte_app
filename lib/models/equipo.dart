@@ -17,6 +17,7 @@ class Equipo {
     this.ultimoMantenimiento,
     this.licenciaWindows,
     this.licenciaOffice,
+    this.observaciones,
     this.expand,
   });
 
@@ -31,6 +32,7 @@ class Equipo {
   DateTime? ultimoMantenimiento;
   String? licenciaWindows;
   String? licenciaOffice;
+  String? observaciones;
   ItemExpand? expand;
 
   factory Equipo.fromJson(String str) => Equipo.fromMap(json.decode(str));
@@ -51,6 +53,7 @@ class Equipo {
             : DateTime.parse(json["ultimo_mantenimiento"]),
         licenciaWindows: json["licencia_windows"],
         licenciaOffice: json["licencia_office"],
+        observaciones: json["observaciones"],
         expand: ItemExpand.fromMap(json["expand"]),
       );
 
@@ -66,6 +69,7 @@ class Equipo {
         "ultimo_mantenimiento": ultimoMantenimiento?.toIso8601String(),
         "licencia_windows": licenciaWindows,
         "licencia_office": licenciaOffice,
+        "observaciones": observaciones,
         "expand": expand?.toMap(),
       };
 }

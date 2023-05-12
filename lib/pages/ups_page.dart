@@ -72,9 +72,9 @@ class UpsPage extends StatelessWidget {
                   onChanged: (value) => upsActual.modelo = value,
                 ),
                 TextFormField(
-                  initialValue: data.descripcion,
-                  decoration: InputDecoration(labelText: 'Desc'),
-                  onChanged: (value) => upsActual.descripcion = value,
+                  initialValue: data.observaciones,
+                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  onChanged: (value) => upsActual.observaciones = value,
                 ),
                 //TODO:AGREGAR LO QUE FALTA
               ],
@@ -135,7 +135,7 @@ class UpsPage extends StatelessWidget {
               columns: const [
                 DataColumn(label: Text('Marca')),
                 DataColumn(label: Text('Modelo')),
-                DataColumn(label: Text('Descripcion')),
+                DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Sector')),
                 DataColumn(label: Text('Sucursal')),
                 DataColumn(label: Text('Ultimo Mant.')),
@@ -152,7 +152,7 @@ class UpsPage extends StatelessWidget {
                           Text(data.modelo),
                         ),
                         DataCell(
-                          Text(data.descripcion ?? ""),
+                          Text(data.observaciones ?? ""),
                         ),
                         DataCell(
                           Text(data.expand!.sector.nombre),

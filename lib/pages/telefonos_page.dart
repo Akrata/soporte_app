@@ -28,8 +28,8 @@ class TelefonosPage extends StatelessWidget {
             children: [
               Text(
                   "Esta intentando eliminar por completo el Telefono ${data.interno} de ${data.expand!.sector.nombre}"),
-              Text(
-                  "Al eliminar impresora, tambien eliminará todas las solicitudes asociadas."),
+              // Text(
+              //     "Al eliminar impresora, tambien eliminará todas las solicitudes asociadas."),
               Text("Desea continuar?"),
             ],
           ),
@@ -73,6 +73,11 @@ class TelefonosPage extends StatelessWidget {
                   initialValue: data.ip,
                   decoration: InputDecoration(labelText: 'ip'),
                   onChanged: (value) => telefonoActual.ip = value,
+                ),
+                TextFormField(
+                  initialValue: data.observaciones,
+                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  onChanged: (value) => telefonoActual.observaciones = value,
                 ),
 
                 //TODO:AGREGAR LO QUE FALTA
@@ -136,6 +141,7 @@ class TelefonosPage extends StatelessWidget {
                 DataColumn(label: Text('IP')),
                 DataColumn(label: Text('Sector')),
                 DataColumn(label: Text('Sucursal')),
+                DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Acciones')),
               ],
               rows: _data
@@ -153,6 +159,9 @@ class TelefonosPage extends StatelessWidget {
                         ),
                         DataCell(
                           Text(data.expand!.sector!.expand!.sucursal.nombre),
+                        ),
+                        DataCell(
+                          Text(data.observaciones ?? ''),
                         ),
                         DataCell(Row(
                           children: [

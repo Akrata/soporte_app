@@ -30,7 +30,7 @@ class PinpadPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                  "Esta intentando eliminar por completo el Pinpad ${data.ip} (${data.descripcion} ) de ${data.expand!.sector.nombre}"),
+                  "Esta intentando eliminar por completo el Pinpad ${data.ip} (${data.observaciones} ) de ${data.expand!.sector.nombre}"),
               // Text(
               //     "Al eliminar impresora, tambien eliminará todas las solicitudes asociadas."),
               Text("Desea continuar?"),
@@ -73,9 +73,9 @@ class PinpadPage extends StatelessWidget {
                   onChanged: (value) => pinpadActual.ip = value,
                 ),
                 TextFormField(
-                  initialValue: data.descripcion,
-                  decoration: InputDecoration(labelText: 'Desc'),
-                  onChanged: (value) => pinpadActual.ip = value,
+                  initialValue: data.observaciones,
+                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  onChanged: (value) => pinpadActual.observaciones = value,
                 ),
 
                 //TODO:AGREGAR LO QUE FALTA
@@ -136,7 +136,7 @@ class PinpadPage extends StatelessWidget {
                 child: DataTable(
               columns: const [
                 DataColumn(label: Text('IP')),
-                DataColumn(label: Text('Desc')),
+                DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Sector')),
                 DataColumn(label: Text('Sucursal')),
                 DataColumn(label: Text('Acciones')),
@@ -149,7 +149,7 @@ class PinpadPage extends StatelessWidget {
                           Text(data.ip),
                         ),
                         DataCell(
-                          Text(data.descripcion ?? ''),
+                          Text(data.observaciones ?? ''),
                         ),
                         DataCell(
                           Text(data.expand!.sector!.nombre),

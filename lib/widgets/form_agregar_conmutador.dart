@@ -60,9 +60,11 @@ class FormAgregarConmutador extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Desc'),
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(labelText: 'Observaciones'),
                 onChanged: (value) =>
-                    conmutador.conmutadorParaAgregar.descripcion = value,
+                    conmutador.conmutadorParaAgregar.observaciones = value,
               ),
               SizedBox(
                 height: 20,
