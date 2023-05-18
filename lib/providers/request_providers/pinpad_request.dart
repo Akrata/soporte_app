@@ -24,6 +24,7 @@ class PinpadRequest extends ChangeNotifier {
   //PARA BUSQUEDA
   List<Pinpad> listaBusquedaPinpad = [];
   bool inSearch = false;
+  TextEditingController controller = TextEditingController();
 
   PinpadRequest() {
     getPinpad();

@@ -5,11 +5,12 @@ class SearchBarCustom extends StatelessWidget {
   dynamic Function(dynamic) buscar;
   dynamic Function() getAll;
   // String textoBusqueda;
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController controller;
   SearchBarCustom({
     required this.enBusqueda,
     required this.buscar,
     required this.getAll,
+    required this.controller,
     // required this.textoBusqueda,
     super.key,
   });
@@ -21,9 +22,10 @@ class SearchBarCustom extends StatelessWidget {
       decoration: BoxDecoration(),
       child: ListTile(
         title: TextField(
-          decoration:
-              InputDecoration(hintText: 'Buscar', helperText: _controller.text),
-          controller: _controller,
+          decoration: InputDecoration(
+            hintText: 'Buscar',
+          ),
+          controller: controller,
         ),
         trailing: Container(
             width: 100,
@@ -33,7 +35,7 @@ class SearchBarCustom extends StatelessWidget {
                   onPressed: () {
                     enBusqueda(true);
                     // equipos.searchText = _controller.text;
-                    buscar(_controller.text);
+                    buscar(controller.text.toLowerCase());
                   },
                   icon: Icon(
                     Icons.search,
@@ -42,7 +44,7 @@ class SearchBarCustom extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    _controller.clear();
+                    controller.clear();
                     enBusqueda(false);
                     getAll();
                   },

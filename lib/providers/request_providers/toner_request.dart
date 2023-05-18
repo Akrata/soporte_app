@@ -24,6 +24,7 @@ class TonerRequest extends ChangeNotifier {
   //PARA BUSQUEDA
   List<Toner> listaBusquedaToner = [];
   bool inSearch = false;
+  TextEditingController controller = TextEditingController();
 
   TonerRequest() {
     getToners();

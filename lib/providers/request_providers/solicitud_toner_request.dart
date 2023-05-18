@@ -43,6 +43,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
   //PARA BUSQUEDA
   List<SolicitudToner> listaBusquedaSolicitud = [];
   bool inSearch = false;
+  TextEditingController controller = TextEditingController();
 
   SolicitudTonerRequest() {
     getSolicitudToner();

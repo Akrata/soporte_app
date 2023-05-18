@@ -95,9 +95,11 @@ class SucursalPage extends StatelessWidget {
       body: Column(
         children: [
           SearchBarCustom(
-              enBusqueda: sucursal.enBusqueda,
-              buscar: sucursal.busquedaEnLista,
-              getAll: sucursal.getSucursales),
+            enBusqueda: sucursal.enBusqueda,
+            buscar: sucursal.busquedaEnLista,
+            getAll: sucursal.getSucursales,
+            controller: sucursal.controller,
+          ),
           SizedBox(
             height: 20,
           ),

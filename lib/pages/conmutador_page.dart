@@ -123,7 +123,8 @@ class ConmutadorPage extends StatelessWidget {
           SearchBarCustom(
               enBusqueda: conmutador.enBusqueda,
               buscar: conmutador.busquedaEnLista,
-              getAll: conmutador.getConmutador),
+              getAll: conmutador.getConmutador,
+              controller: conmutador.controller),
           SizedBox(
             height: 20,
           ),
@@ -134,8 +135,8 @@ class ConmutadorPage extends StatelessWidget {
               columns: const [
                 DataColumn(label: Text('Nombre')),
                 DataColumn(label: Text('Ip')),
-                DataColumn(label: Text('Obs')),
                 DataColumn(label: Text('Sucursal')),
+                DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Acciones')),
               ],
               rows: _data
@@ -149,10 +150,10 @@ class ConmutadorPage extends StatelessWidget {
                           Text(data.ip),
                         ),
                         DataCell(
-                          Text(data.observaciones ?? ''),
+                          Text(data.expand!.sucursal.nombre),
                         ),
                         DataCell(
-                          Text(data.expand!.sucursal.nombre),
+                          Text(data.observaciones ?? ''),
                         ),
                         DataCell(Row(
                           children: [

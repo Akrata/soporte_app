@@ -15,6 +15,7 @@ class SucursalesRequest extends ChangeNotifier {
   List<Sucursal> listaBusquedaSucursal = [];
   bool inSearch = false;
   String textoBusqueda = '';
+  TextEditingController controller = TextEditingController();
 
   SucursalesRequest() {
     getSucursales();

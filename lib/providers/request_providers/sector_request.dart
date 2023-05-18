@@ -12,6 +12,7 @@ class SectorRequest extends ChangeNotifier {
   //PARA BUSQUEDA
   List<Sector> listaBusquedaSector = [];
   bool inSearch = false;
+  TextEditingController controller = TextEditingController();
 
   Sector sectorParaAgregar = Sector(
     id: '',

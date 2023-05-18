@@ -110,9 +110,11 @@ class ImpresorasPage extends StatelessWidget {
       body: Column(
         children: [
           SearchBarCustom(
-              enBusqueda: impresoras.enBusqueda,
-              buscar: impresoras.busquedaEnLista,
-              getAll: impresoras.getImpresoras),
+            enBusqueda: impresoras.enBusqueda,
+            buscar: impresoras.busquedaEnLista,
+            getAll: impresoras.getImpresoras,
+            controller: impresoras.controller,
+          ),
           Row(
             children: [
               // TextButton(

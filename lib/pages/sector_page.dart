@@ -108,9 +108,11 @@ class SectorPage extends StatelessWidget {
       body: Column(
         children: [
           SearchBarCustom(
-              enBusqueda: sector.enBusqueda,
-              buscar: sector.busquedaEnLista,
-              getAll: sector.obtenerSectores),
+            enBusqueda: sector.enBusqueda,
+            buscar: sector.busquedaEnLista,
+            getAll: sector.obtenerSectores,
+            controller: sector.controller,
+          ),
           SizedBox(
             height: 20,
           ),

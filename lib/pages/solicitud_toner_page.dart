@@ -30,9 +30,11 @@ class SolicitudTonerPage extends StatelessWidget {
           // ),
 
           SearchBarCustom(
-              enBusqueda: solicitudToner.enBusqueda,
-              buscar: solicitudToner.busquedaEnLista,
-              getAll: solicitudToner.getSolicitudToner),
+            enBusqueda: solicitudToner.enBusqueda,
+            buscar: solicitudToner.busquedaEnLista,
+            getAll: solicitudToner.getSolicitudToner,
+            controller: solicitudToner.controller,
+          ),
           SizedBox(
             height: 20,
           ),

@@ -20,6 +20,7 @@ class EquiposRequest extends ChangeNotifier {
 //PARA BUSQUEDA
   List<Equipo> listaBusquedaEquipos = [];
   bool inSearch = false;
+  TextEditingController controller = TextEditingController();
 
   EquiposRequest() {
     getEquipos();

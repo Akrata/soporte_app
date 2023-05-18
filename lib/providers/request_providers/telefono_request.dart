@@ -23,6 +23,7 @@ class TelefonoRequest extends ChangeNotifier {
   //PARA BUSQUEDA
   List<Telefono> listaBusquedaTelefono = [];
   bool inSearch = false;
+  TextEditingController controller = TextEditingController();
 
   TelefonoRequest() {
     getTelefonos();

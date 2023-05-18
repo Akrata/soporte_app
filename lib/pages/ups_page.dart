@@ -103,9 +103,11 @@ class UpsPage extends StatelessWidget {
       body: Column(
         children: [
           SearchBarCustom(
-              enBusqueda: ups.enBusqueda,
-              buscar: ups.busquedaEnLista,
-              getAll: ups.getUps),
+            enBusqueda: ups.enBusqueda,
+            buscar: ups.busquedaEnLista,
+            getAll: ups.getUps,
+            controller: ups.controller,
+          ),
           Row(
             children: [
               // TextButton(
@@ -140,10 +142,10 @@ class UpsPage extends StatelessWidget {
               columns: const [
                 DataColumn(label: Text('Marca')),
                 DataColumn(label: Text('Modelo')),
-                DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Sector')),
                 DataColumn(label: Text('Sucursal')),
                 DataColumn(label: Text('Ultimo Mant.')),
+                DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Acciones')),
               ],
               rows: _data
@@ -157,9 +159,6 @@ class UpsPage extends StatelessWidget {
                           Text(data.modelo),
                         ),
                         DataCell(
-                          Text(data.observaciones ?? ""),
-                        ),
-                        DataCell(
                           Text(data.expand!.sector.nombre),
                         ),
                         DataCell(
@@ -167,6 +166,9 @@ class UpsPage extends StatelessWidget {
                         ),
                         DataCell(
                           Text(data.ultimoMantenimiento.toString()),
+                        ),
+                        DataCell(
+                          Text(data.observaciones ?? ""),
                         ),
                         DataCell(Row(
                           children: [

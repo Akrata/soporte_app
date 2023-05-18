@@ -26,6 +26,7 @@ class ConmutadorRequest extends ChangeNotifier {
   //PARA BUSQUEDA
   List<Conmutador> listaBusquedaConmutador = [];
   bool inSearch = false;
+  TextEditingController controller = TextEditingController();
 
   ConmutadorRequest() {
     getConmutador();

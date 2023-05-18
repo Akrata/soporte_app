@@ -107,9 +107,11 @@ class PinpadPage extends StatelessWidget {
       body: Column(
         children: [
           SearchBarCustom(
-              enBusqueda: pinpad.enBusqueda,
-              buscar: pinpad.busquedaEnLista,
-              getAll: pinpad.getPinpad),
+            enBusqueda: pinpad.enBusqueda,
+            buscar: pinpad.busquedaEnLista,
+            getAll: pinpad.getPinpad,
+            controller: pinpad.controller,
+          ),
           Row(
             children: [
               // TextButton(
@@ -143,9 +145,9 @@ class PinpadPage extends StatelessWidget {
                 child: DataTable(
               columns: const [
                 DataColumn(label: Text('IP')),
-                DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Sector')),
                 DataColumn(label: Text('Sucursal')),
+                DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Acciones')),
               ],
               rows: _data
@@ -156,13 +158,13 @@ class PinpadPage extends StatelessWidget {
                           Text(data.ip),
                         ),
                         DataCell(
-                          Text(data.observaciones ?? ''),
-                        ),
-                        DataCell(
                           Text(data.expand!.sector!.nombre),
                         ),
                         DataCell(
                           Text(data.expand!.sector!.expand!.sucursal.nombre),
+                        ),
+                        DataCell(
+                          Text(data.observaciones ?? ''),
                         ),
                         DataCell(Row(
                           children: [

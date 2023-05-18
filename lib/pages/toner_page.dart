@@ -141,7 +141,8 @@ class TonerPage extends StatelessWidget {
           SearchBarCustom(
               enBusqueda: toner.enBusqueda,
               buscar: toner.busquedaEnLista,
-              getAll: toner.getToners),
+              getAll: toner.getToners,
+              controller: toner.controller),
           Row(
             children: [
               TextButton(

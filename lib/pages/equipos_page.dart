@@ -107,7 +107,8 @@ class EquiposPage extends StatelessWidget {
           SearchBarCustom(
               enBusqueda: equipos.enBusqueda,
               buscar: equipos.busquedaEnLista,
-              getAll: equipos.getEquipos),
+              getAll: equipos.getEquipos,
+              controller: equipos.controller),
           // Container(
           //   width: 800,
           //   decoration: BoxDecoration(),
@@ -192,8 +193,8 @@ class EquiposPage extends StatelessWidget {
                 DataColumn(label: Text('IP')),
                 DataColumn(label: Text('Sector')),
                 DataColumn(label: Text('Sucursal')),
-                DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Ult_Mant')),
+                DataColumn(label: Text('Observaciones')),
                 // DataColumn(label: Text('Lic_Windows')),
                 // DataColumn(label: Text('Lic_Office')),
                 DataColumn(label: Text('Acciones')),
@@ -232,6 +233,12 @@ class EquiposPage extends StatelessWidget {
                           ),
                         ),
                         DataCell(
+                          Text(
+                            data.ultimoMantenimiento.toString(),
+                            softWrap: true,
+                          ),
+                        ),
+                        DataCell(
                           Tooltip(
                             message: data.observaciones,
                             child: ConstrainedBox(
@@ -243,12 +250,6 @@ class EquiposPage extends StatelessWidget {
                                 softWrap: true,
                               ),
                             ),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            data.ultimoMantenimiento.toString(),
-                            softWrap: true,
                           ),
                         ),
                         // DataCell(

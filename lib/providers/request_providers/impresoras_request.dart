@@ -19,6 +19,7 @@ class ImpresorasRequest extends ChangeNotifier {
   //PARA BUSQUEDA
   List<Impresora> listaBusquedaImpresoras = [];
   bool inSearch = false;
+  TextEditingController controller = TextEditingController();
 
   ImpresorasRequest() {
     getImpresoras();

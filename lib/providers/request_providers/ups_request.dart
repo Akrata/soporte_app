@@ -21,7 +21,7 @@ class UpsRequest extends ChangeNotifier {
   //PARA BUSQUEDA
   List<Ups> listaBusquedaUps = [];
   bool inSearch = false;
-
+  TextEditingController controller = TextEditingController();
   UpsRequest() {
     getUps();
     realTime();

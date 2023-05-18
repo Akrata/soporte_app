@@ -109,9 +109,11 @@ class TelefonosPage extends StatelessWidget {
       body: Column(
         children: [
           SearchBarCustom(
-              enBusqueda: telefonos.enBusqueda,
-              buscar: telefonos.busquedaEnLista,
-              getAll: telefonos.getTelefonos),
+            enBusqueda: telefonos.enBusqueda,
+            buscar: telefonos.busquedaEnLista,
+            getAll: telefonos.getTelefonos,
+            controller: telefonos.controller,
+          ),
           Row(
             children: [
               // TextButton(
