@@ -10,6 +10,7 @@ import 'package:soporte_app/widgets/form_agregar_sector.dart';
 
 import '../models/sector.dart';
 import '../providers/auth/auth_with_pass.dart';
+import '../widgets/searchbar.dart';
 
 class ConmutadorPage extends StatelessWidget {
   const ConmutadorPage({Key? key}) : super(key: key);
@@ -17,7 +18,9 @@ class ConmutadorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final conmutador = Provider.of<ConmutadorRequest>(context);
-    final _data = conmutador.listaConmutadores;
+    final _data = conmutador.inSearch == false
+        ? conmutador.listaConmutadores
+        : conmutador.listaBusquedaConmutador;
     final listaSucursales =
         Provider.of<SucursalesRequest>(context).listaSucursales;
 
@@ -117,6 +120,13 @@ class ConmutadorPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          SearchBarCustom(
+              enBusqueda: conmutador.enBusqueda,
+              buscar: conmutador.busquedaEnLista,
+              getAll: conmutador.getConmutador),
+          SizedBox(
+            height: 20,
+          ),
           Container(
             width: double.infinity,
             child: SingleChildScrollView(

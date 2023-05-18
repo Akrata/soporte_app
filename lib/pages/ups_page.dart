@@ -7,6 +7,7 @@ import 'package:soporte_app/providers/request_providers/ups_request.dart';
 import 'package:soporte_app/widgets/form_agregar_ups.dart';
 
 import '../widgets/form_agregar_equipo.dart';
+import '../widgets/searchbar.dart';
 
 class UpsPage extends StatelessWidget {
   const UpsPage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class UpsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ups = Provider.of<UpsRequest>(context);
-    final _data = ups.listaUps;
+    final _data = ups.inSearch == false ? ups.listaUps : ups.listaBusquedaUps;
 
     _showDeletePopup(Ups data) {
       showDialog(
@@ -101,6 +102,10 @@ class UpsPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          SearchBarCustom(
+              enBusqueda: ups.enBusqueda,
+              buscar: ups.busquedaEnLista,
+              getAll: ups.getUps),
           Row(
             children: [
               // TextButton(

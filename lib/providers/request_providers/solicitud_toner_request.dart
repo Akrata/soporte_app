@@ -40,24 +40,30 @@ class SolicitudTonerRequest extends ChangeNotifier {
   bool entregado = false;
 
   //SEARCH_BAR
-  List<SolicitudToner> listaSolicitudTonerFiltrada = [];
-  String searchText = '';
-  bool enBusqueda = false;
-
-  busqueda(String texto) {
-    listaSolicitudToner = listaSolicitudToner
-        .where((element) =>
-            element.expand!.sector.nombre.contains(texto) ||
-            element.expand!.toner.modelo.contains(texto))
-        .toList();
-    searchText = '';
-    print(listaSolicitudToner);
-  }
+  //PARA BUSQUEDA
+  List<SolicitudToner> listaBusquedaSolicitud = [];
+  bool inSearch = false;
 
   SolicitudTonerRequest() {
     getSolicitudToner();
     realTime();
     notifyListeners();
+  }
+
+  enBusqueda(bool dato) {
+    inSearch = dato;
+    notifyListeners();
+  }
+
+  busquedaEnLista(texto) {
+    listaBusquedaSolicitud = listaSolicitudToner
+        .where((element) =>
+            element.toner.toLowerCase().contains(texto) ||
+            element.expand!.sector.nombre.toLowerCase().contains(texto) ||
+            element.expand!.sector.expand!.sucursal.nombre
+                .toLowerCase()
+                .contains(texto))
+        .toList();
   }
 
   limpiarForm() {

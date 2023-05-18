@@ -23,10 +23,28 @@ class ConmutadorRequest extends ChangeNotifier {
 
   List<Conmutador> listaConmutadores = [];
 
+  //PARA BUSQUEDA
+  List<Conmutador> listaBusquedaConmutador = [];
+  bool inSearch = false;
+
   ConmutadorRequest() {
     getConmutador();
     realTime();
     notifyListeners();
+  }
+
+  enBusqueda(bool dato) {
+    inSearch = dato;
+    notifyListeners();
+  }
+
+  busquedaEnLista(texto) {
+    listaBusquedaConmutador = listaConmutadores
+        .where((element) =>
+            element.nombre.toLowerCase().contains(texto) ||
+            element.ip.toLowerCase().contains(texto) ||
+            element.expand!.sucursal.nombre.toLowerCase().contains(texto))
+        .toList();
   }
 
   getConmutador() async {

@@ -20,10 +20,31 @@ class TelefonoRequest extends ChangeNotifier {
   List<Telefono> listaTelefonos = [];
   String sucursal = '';
 
+  //PARA BUSQUEDA
+  List<Telefono> listaBusquedaTelefono = [];
+  bool inSearch = false;
+
   TelefonoRequest() {
     getTelefonos();
     realTime();
     notifyListeners();
+  }
+
+  enBusqueda(bool dato) {
+    inSearch = dato;
+    notifyListeners();
+  }
+
+  busquedaEnLista(texto) {
+    listaBusquedaTelefono = listaTelefonos
+        .where((element) =>
+            element.interno.toLowerCase().contains(texto) ||
+            element.ip.toLowerCase().contains(texto) ||
+            element.expand!.sector.nombre.toLowerCase().contains(texto) ||
+            element.expand!.sector.expand!.sucursal.nombre
+                .toLowerCase()
+                .contains(texto))
+        .toList();
   }
 
   getTelefonos() async {

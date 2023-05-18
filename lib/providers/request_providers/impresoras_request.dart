@@ -16,10 +16,32 @@ class ImpresorasRequest extends ChangeNotifier {
       Impresora(id: '', marca: '', modelo: '', sector: '', toner: '', ip: '');
   String sucursal = '';
 
+  //PARA BUSQUEDA
+  List<Impresora> listaBusquedaImpresoras = [];
+  bool inSearch = false;
+
   ImpresorasRequest() {
     getImpresoras();
     realTime();
     notifyListeners();
+  }
+
+  enBusqueda(bool dato) {
+    inSearch = dato;
+    notifyListeners();
+  }
+
+  busquedaEnLista(texto) {
+    listaBusquedaImpresoras = listaImpresoras
+        .where((element) =>
+            element.marca.toLowerCase().contains(texto) ||
+            element.modelo.toLowerCase().contains(texto) ||
+            element.ip.toLowerCase().contains(texto) ||
+            element.expand!.sector!.nombre.toLowerCase().contains(texto) ||
+            element.expand!.sector!.expand!.sucursal.nombre
+                .toLowerCase()
+                .contains(texto))
+        .toList();
   }
 
   // getImpresoras() async {

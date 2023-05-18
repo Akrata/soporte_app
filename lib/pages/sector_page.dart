@@ -7,6 +7,7 @@ import 'package:soporte_app/widgets/form_agregar_sector.dart';
 
 import '../models/sector.dart';
 import '../providers/auth/auth_with_pass.dart';
+import '../widgets/searchbar.dart';
 
 class SectorPage extends StatelessWidget {
   const SectorPage({Key? key}) : super(key: key);
@@ -14,7 +15,9 @@ class SectorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sector = Provider.of<SectorRequest>(context);
-    final listaSectores = sector.listaSectores;
+    final listaSectores = sector.inSearch == false
+        ? sector.listaSectores
+        : sector.listaBusquedaSector;
     final listaSucursales =
         Provider.of<SucursalesRequest>(context).listaSucursales;
 
@@ -104,6 +107,13 @@ class SectorPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          SearchBarCustom(
+              enBusqueda: sector.enBusqueda,
+              buscar: sector.busquedaEnLista,
+              getAll: sector.obtenerSectores),
+          SizedBox(
+            height: 20,
+          ),
           Container(
             width: double.infinity,
             child: SingleChildScrollView(

@@ -9,6 +9,10 @@ class SectorRequest extends ChangeNotifier {
   final pb = PocketBase('http://${DB.dbIp}');
   List<Sector> listaSectores = [];
 
+  //PARA BUSQUEDA
+  List<Sector> listaBusquedaSector = [];
+  bool inSearch = false;
+
   Sector sectorParaAgregar = Sector(
     id: '',
     nombre: '',
@@ -19,6 +23,18 @@ class SectorRequest extends ChangeNotifier {
     realTime();
     obtenerSectores();
     notifyListeners();
+  }
+  enBusqueda(bool dato) {
+    inSearch = dato;
+    notifyListeners();
+  }
+
+  busquedaEnLista(texto) {
+    listaBusquedaSector = listaSectores
+        .where((element) =>
+            element.nombre.contains(texto) ||
+            element.expand!.sucursal.nombre.toLowerCase().contains(texto))
+        .toList();
   }
 
   obtenerSectores() async {

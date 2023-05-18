@@ -10,6 +10,7 @@ import '../models/impresora.dart';
 import '../models/telefono.dart';
 import '../providers/request_providers/impresoras_request.dart';
 import '../widgets/form_agregar_equipo.dart';
+import '../widgets/searchbar.dart';
 
 class TelefonosPage extends StatelessWidget {
   const TelefonosPage({Key? key}) : super(key: key);
@@ -17,7 +18,9 @@ class TelefonosPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final telefonos = Provider.of<TelefonoRequest>(context);
-    final _data = telefonos.listaTelefonos;
+    final _data = telefonos.inSearch == false
+        ? telefonos.listaTelefonos
+        : telefonos.listaBusquedaTelefono;
 
     _showDeletePopup(Telefono data) {
       showDialog(
@@ -105,6 +108,10 @@ class TelefonosPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          SearchBarCustom(
+              enBusqueda: telefonos.enBusqueda,
+              buscar: telefonos.busquedaEnLista,
+              getAll: telefonos.getTelefonos),
           Row(
             children: [
               // TextButton(

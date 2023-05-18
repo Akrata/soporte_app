@@ -10,7 +10,7 @@ import 'package:soporte_app/models/responses/ups_response.dart';
 import 'package:soporte_app/models/ups.dart';
 
 class UpsRequest extends ChangeNotifier {
-  late Ups equipoActual;
+  late Ups upsActual;
   Ups upsParaAgregar = Ups(id: 'id', marca: '', modelo: '', sector: '');
 
   final pb = PocketBase('http://${DB.dbIp}');
@@ -18,10 +18,31 @@ class UpsRequest extends ChangeNotifier {
   List<Ups> listaUps = [];
   String sucursal = '';
 
+  //PARA BUSQUEDA
+  List<Ups> listaBusquedaUps = [];
+  bool inSearch = false;
+
   UpsRequest() {
     getUps();
     realTime();
     notifyListeners();
+  }
+
+  enBusqueda(bool dato) {
+    inSearch = dato;
+    notifyListeners();
+  }
+
+  busquedaEnLista(texto) {
+    listaBusquedaUps = listaUps
+        .where((element) =>
+            element.marca.toLowerCase().contains(texto) ||
+            element.modelo.toLowerCase().contains(texto) ||
+            element.expand!.sector.nombre.toLowerCase().contains(texto) ||
+            element.expand!.sector.expand!.sucursal.nombre
+                .toLowerCase()
+                .contains(texto))
+        .toList();
   }
 
   getUps() async {

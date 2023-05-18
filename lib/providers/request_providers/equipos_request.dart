@@ -14,8 +14,10 @@ class EquiposRequest extends ChangeNotifier {
   final pb = PocketBase('http://${DB.dbIp}');
 
   List<Equipo> listaEquipos = [];
+
   String sucursal = '';
-  // String searchText = '';
+
+//PARA BUSQUEDA
   List<Equipo> listaBusquedaEquipos = [];
   bool inSearch = false;
 
@@ -49,6 +51,8 @@ class EquiposRequest extends ChangeNotifier {
 
   //   notifyListeners();
   // }
+
+//PARA BUSQUEDA
 
   enBusqueda(bool dato) {
     inSearch = dato;

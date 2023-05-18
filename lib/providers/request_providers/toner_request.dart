@@ -21,10 +21,25 @@ class TonerRequest extends ChangeNotifier {
 
   List<Toner> listaToners = [];
 
+  //PARA BUSQUEDA
+  List<Toner> listaBusquedaToner = [];
+  bool inSearch = false;
+
   TonerRequest() {
     getToners();
     realTime();
     notifyListeners();
+  }
+
+  enBusqueda(bool dato) {
+    inSearch = dato;
+    notifyListeners();
+  }
+
+  busquedaEnLista(texto) {
+    listaBusquedaToner = listaToners
+        .where((element) => element.modelo.toLowerCase().contains(texto))
+        .toList();
   }
 
   getToners() async {

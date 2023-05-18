@@ -10,13 +10,16 @@ import '../widgets/form_agregar_toner.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
+import '../widgets/searchbar.dart';
+
 class TonerPage extends StatelessWidget {
   const TonerPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final toner = Provider.of<TonerRequest>(context);
-    final _data = toner.listaToners;
+    final _data =
+        toner.inSearch == false ? toner.listaToners : toner.listaBusquedaToner;
     final user = Provider.of<AuthWithPass>(context);
 
     final String ultravncUrl =
@@ -135,6 +138,10 @@ class TonerPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          SearchBarCustom(
+              enBusqueda: toner.enBusqueda,
+              buscar: toner.busquedaEnLista,
+              getAll: toner.getToners),
           Row(
             children: [
               TextButton(

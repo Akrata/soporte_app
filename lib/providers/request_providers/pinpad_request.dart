@@ -21,10 +21,30 @@ class PinpadRequest extends ChangeNotifier {
   List<Pinpad> listaPinpad = [];
   String sucursal = '';
 
+  //PARA BUSQUEDA
+  List<Pinpad> listaBusquedaPinpad = [];
+  bool inSearch = false;
+
   PinpadRequest() {
     getPinpad();
     realTime();
     notifyListeners();
+  }
+
+  enBusqueda(bool dato) {
+    inSearch = dato;
+    notifyListeners();
+  }
+
+  busquedaEnLista(texto) {
+    listaBusquedaPinpad = listaPinpad
+        .where((element) =>
+            element.ip.toLowerCase().contains(texto) ||
+            element.expand!.sector.nombre.toLowerCase().contains(texto) ||
+            element.expand!.sector.expand!.sucursal.nombre
+                .toLowerCase()
+                .contains(texto))
+        .toList();
   }
 
   getPinpad() async {

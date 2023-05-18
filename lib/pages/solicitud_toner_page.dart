@@ -16,7 +16,9 @@ class SolicitudTonerPage extends StatelessWidget {
 
     final user = Provider.of<AuthWithPass>(context);
 
-    final _data = solicitudToner.listaSolicitudToner;
+    final _data = solicitudToner.inSearch == false
+        ? solicitudToner.listaSolicitudToner
+        : solicitudToner.listaBusquedaSolicitud;
 
     return Scaffold(
       body: Column(
@@ -26,6 +28,11 @@ class SolicitudTonerPage extends StatelessWidget {
           //   actualizar: solicitudToner.getSolicitudToner(),
           //   buscar: solicitudToner.busqueda,
           // ),
+
+          SearchBarCustom(
+              enBusqueda: solicitudToner.enBusqueda,
+              buscar: solicitudToner.busquedaEnLista,
+              getAll: solicitudToner.getSolicitudToner),
           SizedBox(
             height: 20,
           ),

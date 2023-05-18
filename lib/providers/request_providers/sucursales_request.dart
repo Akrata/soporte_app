@@ -11,9 +11,24 @@ class SucursalesRequest extends ChangeNotifier {
 
   List<Sucursal> listaSucursales = [];
 
+  //PARA BUSQUEDA
+  List<Sucursal> listaBusquedaSucursal = [];
+  bool inSearch = false;
+  String textoBusqueda = '';
+
   SucursalesRequest() {
     getSucursales();
     notifyListeners();
+  }
+  enBusqueda(bool dato) {
+    inSearch = dato;
+    notifyListeners();
+  }
+
+  busquedaEnLista(texto) {
+    listaBusquedaSucursal = listaSucursales
+        .where((element) => element.nombre.toLowerCase().contains(texto))
+        .toList();
   }
 
   getSucursales() async {

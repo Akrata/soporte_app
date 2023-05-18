@@ -14,8 +14,10 @@ class SucursalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sucursal = Provider.of<SucursalesRequest>(context);
-    final listaSucursales = sucursal.listaSucursales;
 
+    final listaSucursales = sucursal.inSearch == false
+        ? sucursal.listaSucursales
+        : sucursal.listaBusquedaSucursal;
     final user = Provider.of<AuthWithPass>(context);
 
     // _showDeletePopup(Sucursal data) {
@@ -92,6 +94,13 @@ class SucursalPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          SearchBarCustom(
+              enBusqueda: sucursal.enBusqueda,
+              buscar: sucursal.busquedaEnLista,
+              getAll: sucursal.getSucursales),
+          SizedBox(
+            height: 20,
+          ),
           Container(
             width: double.infinity,
             child: SingleChildScrollView(

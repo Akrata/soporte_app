@@ -13,6 +13,7 @@ import '../models/impresora.dart';
 import '../models/telefono.dart';
 import '../providers/request_providers/impresoras_request.dart';
 import '../widgets/form_agregar_equipo.dart';
+import '../widgets/searchbar.dart';
 
 class PinpadPage extends StatelessWidget {
   const PinpadPage({Key? key}) : super(key: key);
@@ -20,7 +21,9 @@ class PinpadPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pinpad = Provider.of<PinpadRequest>(context);
-    final _data = pinpad.listaPinpad;
+    final _data = pinpad.inSearch == false
+        ? pinpad.listaPinpad
+        : pinpad.listaBusquedaPinpad;
 
     _showDeletePopup(Pinpad data) {
       showDialog(
@@ -103,6 +106,10 @@ class PinpadPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          SearchBarCustom(
+              enBusqueda: pinpad.enBusqueda,
+              buscar: pinpad.busquedaEnLista,
+              getAll: pinpad.getPinpad),
           Row(
             children: [
               // TextButton(

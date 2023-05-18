@@ -7,6 +7,7 @@ import 'package:soporte_app/widgets/form_agregar_impresora.dart';
 import '../models/impresora.dart';
 import '../providers/request_providers/impresoras_request.dart';
 import '../widgets/form_agregar_equipo.dart';
+import '../widgets/searchbar.dart';
 
 class ImpresorasPage extends StatelessWidget {
   const ImpresorasPage({Key? key}) : super(key: key);
@@ -14,7 +15,9 @@ class ImpresorasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final impresoras = Provider.of<ImpresorasRequest>(context);
-    final _data = impresoras.listaImpresoras;
+    final _data = impresoras.inSearch == false
+        ? impresoras.listaImpresoras
+        : impresoras.listaBusquedaImpresoras;
 
     _showDeletePopup(Impresora data) {
       showDialog(
@@ -106,6 +109,10 @@ class ImpresorasPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          SearchBarCustom(
+              enBusqueda: impresoras.enBusqueda,
+              buscar: impresoras.busquedaEnLista,
+              getAll: impresoras.getImpresoras),
           Row(
             children: [
               // TextButton(

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class SearchBarCustom extends StatelessWidget {
-  final TextEditingController _controller = TextEditingController();
   dynamic Function(bool) enBusqueda;
   dynamic Function(dynamic) buscar;
   dynamic Function() getAll;
+  // String textoBusqueda;
+  final TextEditingController _controller = TextEditingController();
   SearchBarCustom({
     required this.enBusqueda,
     required this.buscar,
     required this.getAll,
+    // required this.textoBusqueda,
     super.key,
   });
 
@@ -19,9 +21,8 @@ class SearchBarCustom extends StatelessWidget {
       decoration: BoxDecoration(),
       child: ListTile(
         title: TextField(
-          decoration: InputDecoration(
-            hintText: 'Buscar',
-          ),
+          decoration:
+              InputDecoration(hintText: 'Buscar', helperText: _controller.text),
           controller: _controller,
         ),
         trailing: Container(

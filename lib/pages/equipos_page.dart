@@ -13,7 +13,9 @@ class EquiposPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final equipos = Provider.of<EquiposRequest>(context);
-    final _data = equipos.listaEquipos;
+    final _data = equipos.inSearch == false
+        ? equipos.listaEquipos
+        : equipos.listaBusquedaEquipos;
 
     _showDeletePopup(Equipo data) {
       showDialog(
@@ -71,6 +73,8 @@ class EquiposPage extends StatelessWidget {
                   onChanged: (value) => equipoActual.nombre = value,
                 ),
                 TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
                   initialValue: data.observaciones,
                   decoration: InputDecoration(labelText: 'Observaciones'),
                   onChanged: (value) => equipoActual.observaciones = value,
@@ -194,197 +198,104 @@ class EquiposPage extends StatelessWidget {
                 // DataColumn(label: Text('Lic_Office')),
                 DataColumn(label: Text('Acciones')),
               ],
-              rows: equipos.inSearch == false
-                  ? _data
-                      .map(
-                        (data) => DataRow(
-                          cells: [
-                            DataCell(
-                              ConstrainedBox(
-                                constraints: BoxConstraints(
-                                    maxWidth: 100, maxHeight: 20),
-                                child: Text(
-                                  data.nombre,
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
+              rows: _data
+                  .map(
+                    (data) => DataRow(
+                      cells: [
+                        DataCell(
+                          ConstrainedBox(
+                            constraints:
+                                BoxConstraints(maxWidth: 100, maxHeight: 20),
+                            child: Text(
+                              data.nombre,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: true,
                             ),
-                            DataCell(
-                              Text(
-                                data.ip,
-                                softWrap: true,
-                              ),
-                            ),
-                            DataCell(
-                              Text(
-                                data.expand!.sector.nombre,
-                                softWrap: true,
-                              ),
-                            ),
-                            DataCell(
-                              Text(
-                                data.expand!.sector.expand!.sucursal.nombre,
-                                softWrap: true,
-                              ),
-                            ),
-                            DataCell(
-                              ConstrainedBox(
-                                constraints: BoxConstraints(
-                                    maxWidth: 200, maxHeight: 20),
-                                child: Text(
-                                  data.observaciones ?? '',
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ),
-                            DataCell(
-                              Text(
-                                data.ultimoMantenimiento.toString(),
-                                softWrap: true,
-                              ),
-                            ),
-                            // DataCell(
-                            //   Text(
-                            //     data.licenciaWindows ?? '',
-                            //     softWrap: true,
-                            //   ),
-                            // ),
-                            // DataCell(
-                            //   Text(
-                            //     data.licenciaOffice ?? '',
-                            //     softWrap: true,
-                            //   ),
-                            // ),
-                            DataCell(Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.edit,
-                                      color: Colors.amber.shade300),
-                                  onPressed: () {
-                                    _showEditPopup(data);
-                                  },
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: Colors.red.shade300,
-                                  ),
-                                  onPressed: () {
-                                    _showDeletePopup(data);
-                                  },
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.remove_red_eye_outlined,
-                                    color: Colors.green.shade300,
-                                  ),
-                                  onPressed: () {
-                                    // _showDeletePopup(data);
-                                  },
-                                ),
-                              ],
-                            )),
-                          ],
+                          ),
                         ),
-                      )
-                      .toList()
-                  : equipos.listaBusquedaEquipos
-                      .map(
-                        (data) => DataRow(
-                          cells: [
-                            DataCell(
-                              ConstrainedBox(
-                                constraints: BoxConstraints(
-                                    maxWidth: 100, maxHeight: 20),
-                                child: Text(
-                                  data.nombre,
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ),
-                            DataCell(
-                              Text(
-                                data.ip,
-                                softWrap: true,
-                              ),
-                            ),
-                            DataCell(
-                              Text(
-                                data.expand!.sector.nombre,
-                                softWrap: true,
-                              ),
-                            ),
-                            DataCell(
-                              Text(
-                                data.expand!.sector.expand!.sucursal.nombre,
-                                softWrap: true,
-                              ),
-                            ),
-                            DataCell(
-                              ConstrainedBox(
-                                constraints: BoxConstraints(
-                                    maxWidth: 200, maxHeight: 20),
-                                child: Text(
-                                  data.observaciones ?? '',
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ),
-                            DataCell(
-                              Text(
-                                data.ultimoMantenimiento.toString(),
-                                softWrap: true,
-                              ),
-                            ),
-                            // DataCell(
-                            //   Text(
-                            //     data.licenciaWindows ?? '',
-                            //     softWrap: true,
-                            //   ),
-                            // ),
-                            // DataCell(
-                            //   Text(
-                            //     data.licenciaOffice ?? '',
-                            //     softWrap: true,
-                            //   ),
-                            // ),
-                            DataCell(Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.edit,
-                                      color: Colors.amber.shade300),
-                                  onPressed: () {
-                                    _showEditPopup(data);
-                                  },
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: Colors.red.shade300,
-                                  ),
-                                  onPressed: () {
-                                    _showDeletePopup(data);
-                                  },
-                                ),
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.remove_red_eye_outlined,
-                                    color: Colors.green.shade300,
-                                  ),
-                                  onPressed: () {
-                                    // _showDeletePopup(data);
-                                  },
-                                ),
-                              ],
-                            )),
-                          ],
+                        DataCell(
+                          Text(
+                            data.ip,
+                            softWrap: true,
+                          ),
                         ),
-                      )
-                      .toList(),
+                        DataCell(
+                          Text(
+                            data.expand!.sector.nombre,
+                            softWrap: true,
+                          ),
+                        ),
+                        DataCell(
+                          Text(
+                            data.expand!.sector.expand!.sucursal.nombre,
+                            softWrap: true,
+                          ),
+                        ),
+                        DataCell(
+                          Tooltip(
+                            message: data.observaciones,
+                            child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(maxWidth: 200, maxHeight: 20),
+                              child: Text(
+                                data.observaciones ?? '',
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Text(
+                            data.ultimoMantenimiento.toString(),
+                            softWrap: true,
+                          ),
+                        ),
+                        // DataCell(
+                        //   Text(
+                        //     data.licenciaWindows ?? '',
+                        //     softWrap: true,
+                        //   ),
+                        // ),
+                        // DataCell(
+                        //   Text(
+                        //     data.licenciaOffice ?? '',
+                        //     softWrap: true,
+                        //   ),
+                        // ),
+                        DataCell(Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.edit,
+                                  color: Colors.amber.shade300),
+                              onPressed: () {
+                                _showEditPopup(data);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.red.shade300,
+                              ),
+                              onPressed: () {
+                                _showDeletePopup(data);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.green.shade300,
+                              ),
+                              onPressed: () {
+                                // _showDeletePopup(data);
+                              },
+                            ),
+                          ],
+                        )),
+                      ],
+                    ),
+                  )
+                  .toList(),
             )),
           ),
         ],
