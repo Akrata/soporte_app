@@ -153,10 +153,32 @@ class UpsPage extends StatelessWidget {
                     (data) => DataRow(
                       cells: [
                         DataCell(
-                          Text(data.marca),
+                          Tooltip(
+                            message: data.marca,
+                            child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              child: Text(
+                                data.marca,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
+                            ),
+                          ),
                         ),
                         DataCell(
-                          Text(data.modelo),
+                          Tooltip(
+                            message: data.modelo,
+                            child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              child: Text(
+                                data.modelo,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
+                            ),
+                          ),
                         ),
                         DataCell(
                           Text(data.expand!.sector.nombre),
@@ -168,7 +190,18 @@ class UpsPage extends StatelessWidget {
                           Text(data.ultimoMantenimiento.toString()),
                         ),
                         DataCell(
-                          Text(data.observaciones ?? ""),
+                          Tooltip(
+                            message: data.observaciones,
+                            child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              child: Text(
+                                data.observaciones ?? '',
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
+                            ),
+                          ),
                         ),
                         DataCell(Row(
                           children: [

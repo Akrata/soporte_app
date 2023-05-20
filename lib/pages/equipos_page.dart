@@ -204,13 +204,16 @@ class EquiposPage extends StatelessWidget {
                     (data) => DataRow(
                       cells: [
                         DataCell(
-                          ConstrainedBox(
-                            constraints:
-                                BoxConstraints(maxWidth: 100, maxHeight: 20),
-                            child: Text(
-                              data.nombre,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: true,
+                          Tooltip(
+                            message: data.nombre,
+                            child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              child: Text(
+                                data.nombre,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
                             ),
                           ),
                         ),
@@ -243,7 +246,7 @@ class EquiposPage extends StatelessWidget {
                             message: data.observaciones,
                             child: ConstrainedBox(
                               constraints:
-                                  BoxConstraints(maxWidth: 200, maxHeight: 20),
+                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
                               child: Text(
                                 data.observaciones ?? '',
                                 overflow: TextOverflow.ellipsis,

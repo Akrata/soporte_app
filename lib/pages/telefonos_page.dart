@@ -170,7 +170,18 @@ class TelefonosPage extends StatelessWidget {
                           Text(data.expand!.sector!.expand!.sucursal.nombre),
                         ),
                         DataCell(
-                          Text(data.observaciones ?? ''),
+                          Tooltip(
+                            message: data.observaciones,
+                            child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              child: Text(
+                                data.observaciones ?? '',
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
+                            ),
+                          ),
                         ),
                         DataCell(Row(
                           children: [

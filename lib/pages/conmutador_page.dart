@@ -144,7 +144,18 @@ class ConmutadorPage extends StatelessWidget {
                     (data) => DataRow(
                       cells: [
                         DataCell(
-                          Text(data.nombre),
+                          Tooltip(
+                            message: data.nombre,
+                            child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              child: Text(
+                                data.nombre,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
+                            ),
+                          ),
                         ),
                         DataCell(
                           Text(data.ip),
@@ -153,7 +164,18 @@ class ConmutadorPage extends StatelessWidget {
                           Text(data.expand!.sucursal.nombre),
                         ),
                         DataCell(
-                          Text(data.observaciones ?? ''),
+                          Tooltip(
+                            message: data.observaciones,
+                            child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              child: Text(
+                                data.observaciones ?? '',
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                              ),
+                            ),
+                          ),
                         ),
                         DataCell(Row(
                           children: [
