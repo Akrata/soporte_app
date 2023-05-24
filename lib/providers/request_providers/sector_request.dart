@@ -33,7 +33,7 @@ class SectorRequest extends ChangeNotifier {
   busquedaEnLista(texto) {
     listaBusquedaSector = listaSectores
         .where((element) =>
-            element.nombre.contains(texto) ||
+            element.nombre.toLowerCase().contains(texto) ||
             element.expand!.sucursal.nombre.toLowerCase().contains(texto))
         .toList();
   }
