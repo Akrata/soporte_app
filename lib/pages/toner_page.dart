@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
+import 'package:soporte_app/utils/temporal_vnc.dart';
 import 'package:soporte_app/widgets/form_realizar_pedido.dart';
 
 import '../models/toner.dart';
@@ -11,6 +12,8 @@ import '../widgets/form_agregar_toner.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/searchbar.dart';
+
+import 'package:path_provider/path_provider.dart';
 
 class TonerPage extends StatelessWidget {
   const TonerPage({Key? key}) : super(key: key);
@@ -21,9 +24,6 @@ class TonerPage extends StatelessWidget {
     final _data =
         toner.inSearch == false ? toner.listaToners : toner.listaBusquedaToner;
     final user = Provider.of<AuthWithPass>(context);
-
-    final String ultravncUrl =
-        'file:///C:/Program Files/uvnc bvba/UltraVNC/vncviewer.exe';
 
     _showDeletePopup(Toner data) {
       showDialog(
@@ -148,9 +148,7 @@ class TonerPage extends StatelessWidget {
               TextButton(
                   onPressed: () async {
                     try {
-                      await launch(
-                        '"$ultravncUrl 192.1.1.220',
-                      );
+                      TemporalVnc().generarArchivoVNC("192.2.2.155", 5900);
                     } catch (e) {
                       print('Error al abrir UltraVNC: $e');
                     }

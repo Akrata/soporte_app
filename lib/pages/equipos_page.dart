@@ -4,6 +4,7 @@ import 'package:soporte_app/models/equipo.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/widgets/searchbar.dart';
 
+import '../utils/temporal_vnc.dart';
 import '../widgets/form_agregar_equipo.dart';
 
 class EquiposPage extends StatelessWidget {
@@ -290,8 +291,13 @@ class EquiposPage extends StatelessWidget {
                                 Icons.remove_red_eye_outlined,
                                 color: Colors.green.shade300,
                               ),
-                              onPressed: () {
-                                // _showDeletePopup(data);
+                              onPressed: () async {
+                                try {
+                                  TemporalVnc()
+                                      .generarArchivoVNC(data.ip, 5900);
+                                } catch (e) {
+                                  print('Error al abrir UltraVNC: $e');
+                                }
                               },
                             ),
                           ],
