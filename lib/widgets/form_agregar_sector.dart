@@ -16,25 +16,28 @@ class FormAgregarSector extends StatelessWidget {
     return Form(
       child: AlertDialog(
         content: Form(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Sector'),
-                onChanged: (value) => sector.sectorParaAgregar.nombre = value,
-              ),
-              DropdownButtonFormField(
-                items: listaSucursales
-                    .map((e) => DropdownMenuItem(
-                          child: Text(e.nombre),
-                          value: e,
-                        ))
-                    .toList(),
-                decoration: InputDecoration(labelText: 'Sucursal'),
-                onChanged: (value) =>
-                    sector.sectorParaAgregar.sucursal = value!.id,
-              ),
-            ],
+          child: Container(
+            width: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Sector'),
+                  onChanged: (value) => sector.sectorParaAgregar.nombre = value,
+                ),
+                DropdownButtonFormField(
+                  items: listaSucursales
+                      .map((e) => DropdownMenuItem(
+                            child: Text(e.nombre),
+                            value: e,
+                          ))
+                      .toList(),
+                  decoration: InputDecoration(labelText: 'Sucursal'),
+                  onChanged: (value) =>
+                      sector.sectorParaAgregar.sucursal = value!.id,
+                ),
+              ],
+            ),
           ),
         ),
         actions: [

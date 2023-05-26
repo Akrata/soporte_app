@@ -14,15 +14,18 @@ class FormAgregarSucursal extends StatelessWidget {
     return Form(
       child: AlertDialog(
         content: Form(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Nombre de sucursal'),
-                // onChanged: (value) =>
-                //     sucursal.sucursalParaAgregar.nombre = value,
-              ),
-            ],
+          child: Container(
+            width: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Nombre de sucursal'),
+                  // onChanged: (value) =>
+                  //     sucursal.sucursalParaAgregar.nombre = value,
+                ),
+              ],
+            ),
           ),
         ),
         actions: [

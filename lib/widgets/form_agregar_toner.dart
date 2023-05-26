@@ -13,34 +13,37 @@ class FormAgregarToner extends StatelessWidget {
 
     return AlertDialog(
       content: Form(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextFormField(
-              decoration: InputDecoration(labelText: "Modelo"),
-              onChanged: (value) => toner.tonerParaAgregar.modelo = value,
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: "Stock Fijo Pol.Cent"),
-              onChanged: (value) => toner
-                  .tonerParaAgregar.stockFijoPoliclinico = int.parse(value),
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: "Stock Movil Pol.Cent"),
-              onChanged: (value) => toner
-                  .tonerParaAgregar.stockMovilPoliclinico = int.parse(value),
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: "Stock Fijo SC"),
-              onChanged: (value) =>
-                  toner.tonerParaAgregar.stockFijoSanatorio = int.parse(value),
-            ),
-            TextFormField(
-              decoration: InputDecoration(labelText: "Stock Movil SC"),
-              onChanged: (value) =>
-                  toner.tonerParaAgregar.stockMovilSanatorio = int.parse(value),
-            ),
-          ],
+        child: Container(
+          width: 400,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextFormField(
+                decoration: InputDecoration(labelText: "Modelo"),
+                onChanged: (value) => toner.tonerParaAgregar.modelo = value,
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Stock Fijo Pol.Cent"),
+                onChanged: (value) => toner
+                    .tonerParaAgregar.stockFijoPoliclinico = int.parse(value),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Stock Movil Pol.Cent"),
+                onChanged: (value) => toner
+                    .tonerParaAgregar.stockMovilPoliclinico = int.parse(value),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Stock Fijo SC"),
+                onChanged: (value) => toner
+                    .tonerParaAgregar.stockFijoSanatorio = int.parse(value),
+              ),
+              TextFormField(
+                decoration: InputDecoration(labelText: "Stock Movil SC"),
+                onChanged: (value) => toner
+                    .tonerParaAgregar.stockMovilSanatorio = int.parse(value),
+              ),
+            ],
+          ),
         ),
       ),
       actions: [

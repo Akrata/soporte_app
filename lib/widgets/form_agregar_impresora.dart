@@ -24,87 +24,92 @@ class FormAgregarImpresora extends StatelessWidget {
     return Form(
       child: AlertDialog(
         content: Form(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              DropdownButtonFormField(
-                decoration: InputDecoration(hintText: 'Sucursal'),
-                items: listaSucursales
-                    .map((e) => DropdownMenuItem(
-                          child: Text(e.nombre),
-                          value: e,
-                        ))
-                    .toList(),
-                onChanged: (value) async {
-                  await secYTon.getSectorSegunSucursal(value!.id);
-                  impresora.sucursal = value.id;
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              if (impresora.sucursal != "")
+          child: Container(
+            width: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 DropdownButtonFormField(
-                  decoration: InputDecoration(hintText: 'Sector'),
-                  items: secYTon.listaSectoresValue
+                  decoration: InputDecoration(hintText: 'Sucursal'),
+                  items: listaSucursales
                       .map((e) => DropdownMenuItem(
                             child: Text(e.nombre),
                             value: e,
                           ))
                       .toList(),
                   onChanged: (value) async {
-                    impresora.impresoraParaAgregar.sector = value!.id;
+                    await secYTon.getSectorSegunSucursal(value!.id);
+                    impresora.sucursal = value.id;
                   },
                 ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Marca'),
-                onChanged: (value) =>
-                    impresora.impresoraParaAgregar.marca = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Modelo'),
-                onChanged: (value) =>
-                    impresora.impresoraParaAgregar.modelo = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'IP'),
-                onChanged: (value) => impresora.impresoraParaAgregar.ip = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(labelText: 'Observaciones'),
-                onChanged: (value) =>
-                    impresora.impresoraParaAgregar.observaciones = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              DropdownButtonFormField(
-                decoration: InputDecoration(hintText: 'Toner'),
-                items: toner.listaToners
-                    .map((e) => DropdownMenuItem(
-                          child: Text(e.modelo),
-                          value: e,
-                        ))
-                    .toList(),
-                onChanged: (value) async {
-                  impresora.impresoraParaAgregar.toner = value!.id;
-                },
-              ),
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                if (impresora.sucursal != "")
+                  DropdownButtonFormField(
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.listaSectoresValue
+                        .map((e) => DropdownMenuItem(
+                              child: Text(e.nombre),
+                              value: e,
+                            ))
+                        .toList(),
+                    onChanged: (value) async {
+                      impresora.impresoraParaAgregar.sector = value!.id;
+                    },
+                  ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Marca'),
+                  onChanged: (value) =>
+                      impresora.impresoraParaAgregar.marca = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Modelo'),
+                  onChanged: (value) =>
+                      impresora.impresoraParaAgregar.modelo = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'IP'),
+                  onChanged: (value) =>
+                      impresora.impresoraParaAgregar.ip = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  minLines: 3,
+                  maxLines: null,
+                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  onChanged: (value) =>
+                      impresora.impresoraParaAgregar.observaciones = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                DropdownButtonFormField(
+                  decoration: InputDecoration(hintText: 'Toner'),
+                  items: toner.listaToners
+                      .map((e) => DropdownMenuItem(
+                            child: Text(e.modelo),
+                            value: e,
+                          ))
+                      .toList(),
+                  onChanged: (value) async {
+                    impresora.impresoraParaAgregar.toner = value!.id;
+                  },
+                ),
+              ],
+            ),
           ),
         ),
         actions: [

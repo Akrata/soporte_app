@@ -25,51 +25,55 @@ class FormAgregarConmutador extends StatelessWidget {
     return Form(
       child: AlertDialog(
         content: Form(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              DropdownButtonFormField(
-                decoration: InputDecoration(hintText: 'Sucursal'),
-                items: listaSucursales
-                    .map((e) => DropdownMenuItem(
-                          child: Text(e.nombre),
-                          value: e,
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  conmutador.conmutadorParaAgregar.sucursal = value!.id;
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'IP'),
-                onChanged: (value) =>
-                    conmutador.conmutadorParaAgregar.ip = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Nombre'),
-                onChanged: (value) =>
-                    conmutador.conmutadorParaAgregar.nombre = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(labelText: 'Observaciones'),
-                onChanged: (value) =>
-                    conmutador.conmutadorParaAgregar.observaciones = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-            ],
+          child: Container(
+            width: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DropdownButtonFormField(
+                  decoration: InputDecoration(hintText: 'Sucursal'),
+                  items: listaSucursales
+                      .map((e) => DropdownMenuItem(
+                            child: Text(e.nombre),
+                            value: e,
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    conmutador.conmutadorParaAgregar.sucursal = value!.id;
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'IP'),
+                  onChanged: (value) =>
+                      conmutador.conmutadorParaAgregar.ip = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Nombre'),
+                  onChanged: (value) =>
+                      conmutador.conmutadorParaAgregar.nombre = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  minLines: 3,
+                  maxLines: null,
+                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  onChanged: (value) =>
+                      conmutador.conmutadorParaAgregar.observaciones = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
         ),
         actions: [

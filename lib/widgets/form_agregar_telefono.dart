@@ -24,67 +24,71 @@ class FormAgregarTelefono extends StatelessWidget {
     return Form(
       child: AlertDialog(
         content: Form(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              DropdownButtonFormField(
-                decoration: InputDecoration(hintText: 'Sucursal'),
-                items: listaSucursales
-                    .map((e) => DropdownMenuItem(
-                          child: Text(e.nombre),
-                          value: e,
-                        ))
-                    .toList(),
-                onChanged: (value) async {
-                  await secYTon.getSectorSegunSucursal(value!.id);
-                  telefono.sucursal = value.id;
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              if (telefono.sucursal != "")
+          child: Container(
+            width: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 DropdownButtonFormField(
-                  decoration: InputDecoration(hintText: 'Sector'),
-                  items: secYTon.listaSectoresValue
+                  decoration: InputDecoration(hintText: 'Sucursal'),
+                  items: listaSucursales
                       .map((e) => DropdownMenuItem(
                             child: Text(e.nombre),
                             value: e,
                           ))
                       .toList(),
                   onChanged: (value) async {
-                    telefono.telefonoParaAgregar.sector = value!.id;
+                    await secYTon.getSectorSegunSucursal(value!.id);
+                    telefono.sucursal = value.id;
                   },
                 ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Interno'),
-                onChanged: (value) =>
-                    telefono.telefonoParaAgregar.interno = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'IP'),
-                onChanged: (value) => telefono.telefonoParaAgregar.ip = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(labelText: 'Observaciones'),
-                onChanged: (value) =>
-                    telefono.telefonoParaAgregar.observaciones = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                if (telefono.sucursal != "")
+                  DropdownButtonFormField(
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.listaSectoresValue
+                        .map((e) => DropdownMenuItem(
+                              child: Text(e.nombre),
+                              value: e,
+                            ))
+                        .toList(),
+                    onChanged: (value) async {
+                      telefono.telefonoParaAgregar.sector = value!.id;
+                    },
+                  ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Interno'),
+                  onChanged: (value) =>
+                      telefono.telefonoParaAgregar.interno = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'IP'),
+                  onChanged: (value) => telefono.telefonoParaAgregar.ip = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  minLines: 3,
+                  maxLines: null,
+                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  onChanged: (value) =>
+                      telefono.telefonoParaAgregar.observaciones = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
         ),
         actions: [

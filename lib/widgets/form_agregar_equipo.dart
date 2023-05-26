@@ -22,82 +22,86 @@ class FormAgregarEquipo extends StatelessWidget {
     return Form(
       child: AlertDialog(
         content: Form(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              DropdownButtonFormField(
-                decoration: InputDecoration(hintText: 'Sucursal'),
-                items: listaSucursales
-                    .map((e) => DropdownMenuItem(
-                          child: Text(e.nombre),
-                          value: e,
-                        ))
-                    .toList(),
-                onChanged: (value) async {
-                  await secYTon.getSectorSegunSucursal(value!.id);
-                  equipo.sucursal = value.id;
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              if (equipo.sucursal != "")
+          child: Container(
+            width: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 DropdownButtonFormField(
-                  decoration: InputDecoration(hintText: 'Sector'),
-                  items: secYTon.listaSectoresValue
+                  decoration: InputDecoration(hintText: 'Sucursal'),
+                  items: listaSucursales
                       .map((e) => DropdownMenuItem(
                             child: Text(e.nombre),
                             value: e,
                           ))
                       .toList(),
                   onChanged: (value) async {
-                    equipo.equipoParaAgregar.sector = value!.id;
+                    await secYTon.getSectorSegunSucursal(value!.id);
+                    equipo.sucursal = value.id;
                   },
                 ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Nombre de equipo'),
-                onChanged: (value) => equipo.equipoParaAgregar.nombre = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'IP'),
-                onChanged: (value) => equipo.equipoParaAgregar.ip = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                decoration: InputDecoration(labelText: 'Observaciones'),
-                onChanged: (value) =>
-                    equipo.equipoParaAgregar.observaciones = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Licencia Windows'),
-                onChanged: (value) =>
-                    equipo.equipoParaAgregar.licenciaWindows = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Licencia Office'),
-                onChanged: (value) =>
-                    equipo.equipoParaAgregar.licenciaOffice = value,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-            ],
+                SizedBox(
+                  height: 20,
+                ),
+                if (equipo.sucursal != "")
+                  DropdownButtonFormField(
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.listaSectoresValue
+                        .map((e) => DropdownMenuItem(
+                              child: Text(e.nombre),
+                              value: e,
+                            ))
+                        .toList(),
+                    onChanged: (value) async {
+                      equipo.equipoParaAgregar.sector = value!.id;
+                    },
+                  ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Nombre de equipo'),
+                  onChanged: (value) => equipo.equipoParaAgregar.nombre = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'IP'),
+                  onChanged: (value) => equipo.equipoParaAgregar.ip = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Licencia Windows'),
+                  onChanged: (value) =>
+                      equipo.equipoParaAgregar.licenciaWindows = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Licencia Office'),
+                  onChanged: (value) =>
+                      equipo.equipoParaAgregar.licenciaOffice = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  minLines: 3,
+                  maxLines: null,
+                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  onChanged: (value) =>
+                      equipo.equipoParaAgregar.observaciones = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
         ),
         actions: [
