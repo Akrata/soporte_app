@@ -7,6 +7,7 @@ import 'package:soporte_app/providers/request_providers/sucursales_request.dart'
 import 'package:soporte_app/screens/sector_screen.dart';
 import 'package:soporte_app/widgets/form_agregar_conmutador.dart';
 import 'package:soporte_app/widgets/form_agregar_sector.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/sector.dart';
 import '../providers/auth/auth_with_pass.dart';
@@ -193,6 +194,19 @@ class ConmutadorPage extends StatelessWidget {
                               ),
                               onPressed: () {
                                 _showDeletePopup(data);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.green.shade300,
+                              ),
+                              onPressed: () async {
+                                try {
+                                  await launch("http://${data.ip}");
+                                } catch (e) {
+                                  print('Error al abrir UltraVNC: $e');
+                                }
                               },
                             ),
                           ],

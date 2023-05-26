@@ -5,6 +5,7 @@ import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/telefono_request.dart';
 import 'package:soporte_app/widgets/form_agregar_impresora.dart';
 import 'package:soporte_app/widgets/form_agregar_telefono.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/impresora.dart';
 import '../models/telefono.dart';
@@ -199,6 +200,19 @@ class TelefonosPage extends StatelessWidget {
                               ),
                               onPressed: () {
                                 _showDeletePopup(data);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Colors.green.shade300,
+                              ),
+                              onPressed: () async {
+                                try {
+                                  await launch("http://${data.ip}");
+                                } catch (e) {
+                                  print('Error al abrir UltraVNC: $e');
+                                }
                               },
                             ),
                           ],

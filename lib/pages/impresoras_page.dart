@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:soporte_app/models/equipo.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/widgets/form_agregar_impresora.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/impresora.dart';
 import '../providers/request_providers/impresoras_request.dart';
@@ -232,6 +233,20 @@ class ImpresorasPage extends StatelessWidget {
                                 _showDeletePopup(data);
                               },
                             ),
+                            if (data.ip != '')
+                              IconButton(
+                                icon: Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.green.shade300,
+                                ),
+                                onPressed: () async {
+                                  try {
+                                    await launch("https://${data.ip}");
+                                  } catch (e) {
+                                    print('Error al abrir UltraVNC: $e');
+                                  }
+                                },
+                              ),
                           ],
                         )),
                       ],
