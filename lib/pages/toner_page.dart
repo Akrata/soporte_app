@@ -62,76 +62,9 @@ class TonerPage extends StatelessWidget {
     }
 
     _showEditPopup(Toner data) {
-      Toner tonerActual = data;
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          content: user.usuario.lugarTrabajo == "Policlinico"
-              ? Form(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        initialValue: data.modelo,
-                        decoration: InputDecoration(labelText: 'Modelo'),
-                        onChanged: (value) => tonerActual.modelo = value,
-                      ),
-                      TextFormField(
-                          initialValue: '${data.stockFijoPoliclinico}',
-                          onChanged: (value) => tonerActual
-                              .stockFijoPoliclinico = int.parse(value),
-                          decoration: InputDecoration(
-                              labelText: 'Stock Fijo Pol.Cent')),
-                      TextFormField(
-                          initialValue: '${data.stockMovilPoliclinico}',
-                          onChanged: (value) => tonerActual
-                              .stockMovilPoliclinico = int.parse(value),
-                          decoration: InputDecoration(
-                            labelText: 'Stock Movil Pol.Cent',
-                          )),
-                    ],
-                  ),
-                )
-              : Form(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        initialValue: data.modelo,
-                        decoration: InputDecoration(labelText: 'Modelo'),
-                        onChanged: (value) => tonerActual.modelo = value,
-                      ),
-                      TextFormField(
-                        initialValue: '${data.stockFijoSanatorio}',
-                        decoration: InputDecoration(labelText: 'Stock Fijo SC'),
-                        onChanged: (value) =>
-                            tonerActual.stockFijoSanatorio = int.parse(value),
-                      ),
-                      TextFormField(
-                        initialValue: '${data.stockMovilSanatorio}',
-                        decoration:
-                            InputDecoration(labelText: 'Stock Movil SC'),
-                        onChanged: (value) =>
-                            tonerActual.stockMovilSanatorio = int.parse(value),
-                      ),
-                    ],
-                  ),
-                ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancelar")),
-            ElevatedButton(
-                onPressed: () {
-                  toner.editToner(tonerActual);
-                  print(tonerActual.modelo);
-                  Navigator.pop(context);
-                },
-                child: Text("Confirmar")),
-          ],
-        ),
+        builder: (context) => FormAgregarToner(esEdit: true, tonerActual: data),
       );
     }
 
@@ -263,7 +196,9 @@ class TonerPage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => FormAgregarToner(),
+              builder: (context) => FormAgregarToner(
+                esEdit: false,
+              ),
             );
           }),
     );

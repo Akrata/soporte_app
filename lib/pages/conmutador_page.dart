@@ -67,57 +67,9 @@ class ConmutadorPage extends StatelessWidget {
       Conmutador conmutadorActual = data;
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          content: Form(
-            child: Container(
-              width: 400,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextFormField(
-                    initialValue: data.nombre,
-                    decoration: InputDecoration(labelText: 'Nombre'),
-                    onChanged: (value) => conmutadorActual.nombre = value,
-                  ),
-                  TextFormField(
-                    initialValue: data.ip,
-                    decoration: InputDecoration(labelText: 'ip'),
-                    onChanged: (value) => conmutadorActual.ip = value,
-                  ),
-                  TextFormField(
-                    initialValue: data.observaciones,
-                    decoration: InputDecoration(labelText: 'Observaciones'),
-                    onChanged: (value) =>
-                        conmutadorActual.observaciones = value,
-                  ),
-                  DropdownButtonFormField(
-                    items: listaSucursales
-                        .map((e) => DropdownMenuItem(
-                              child: Text(e.nombre),
-                              value: e,
-                            ))
-                        .toList(),
-                    decoration: InputDecoration(labelText: 'Sucursal'),
-                    onChanged: (value) => conmutadorActual.sucursal = value!.id,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancelar")),
-            ElevatedButton(
-                onPressed: () {
-                  conmutador.editConmutador(conmutadorActual);
-
-                  Navigator.pop(context);
-                },
-                child: Text("Confirmar")),
-          ],
+        builder: (context) => FormAgregarConmutador(
+          esEdit: true,
+          conmutadorActual: data,
         ),
       );
     }
@@ -227,7 +179,7 @@ class ConmutadorPage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => FormAgregarConmutador(),
+              builder: (context) => FormAgregarConmutador(esEdit: false),
             );
           },
           child: Icon(Icons.add)),

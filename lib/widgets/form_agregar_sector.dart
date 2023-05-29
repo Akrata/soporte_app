@@ -5,7 +5,9 @@ import 'package:soporte_app/providers/request_providers/sector_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 
 class FormAgregarSector extends StatelessWidget {
-  const FormAgregarSector({super.key});
+  bool esEdit = false;
+  Sector? sectorActual;
+  FormAgregarSector({super.key, required this.esEdit, this.sectorActual});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,11 @@ class FormAgregarSector extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'Sector'),
-                  onChanged: (value) => sector.sectorParaAgregar.nombre = value,
-                ),
                 DropdownButtonFormField(
+                  value: esEdit
+                      ? listaSucursales.firstWhere(
+                          (element) => element.id == sectorActual!.sucursal)
+                      : null,
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
                             child: Text(e.nombre),
@@ -33,8 +35,16 @@ class FormAgregarSector extends StatelessWidget {
                           ))
                       .toList(),
                   decoration: InputDecoration(labelText: 'Sucursal'),
-                  onChanged: (value) =>
-                      sector.sectorParaAgregar.sucursal = value!.id,
+                  onChanged: (value) => esEdit
+                      ? sectorActual!.sucursal = value!.id
+                      : sector.sectorParaAgregar.sucursal = value!.id,
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Sector'),
+                  initialValue: esEdit ? sectorActual!.nombre : null,
+                  onChanged: (value) => esEdit
+                      ? sectorActual!.nombre = value
+                      : sector.sectorParaAgregar.nombre = value,
                 ),
               ],
             ),
@@ -48,7 +58,9 @@ class FormAgregarSector extends StatelessWidget {
               child: Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
-                sector.agregarSector(sector.sectorParaAgregar);
+                esEdit
+                    ? sector.editSector(sectorActual!)
+                    : sector.agregarSector(sector.sectorParaAgregar);
 
                 Navigator.pop(context);
               },

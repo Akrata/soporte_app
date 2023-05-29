@@ -8,11 +8,16 @@ import 'package:soporte_app/providers/request_providers/pinpad_request.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
 
+import '../models/conmutador.dart';
 import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarConmutador extends StatelessWidget {
-  const FormAgregarConmutador({super.key});
+  bool esEdit = false;
+  Conmutador? conmutadorActual;
+
+  FormAgregarConmutador(
+      {super.key, required this.esEdit, this.conmutadorActual});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +36,10 @@ class FormAgregarConmutador extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 DropdownButtonFormField(
+                  value: esEdit
+                      ? listaSucursales.firstWhere(
+                          (element) => element.id == conmutadorActual!.sucursal)
+                      : null,
                   decoration: InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
@@ -39,7 +48,9 @@ class FormAgregarConmutador extends StatelessWidget {
                           ))
                       .toList(),
                   onChanged: (value) {
-                    conmutador.conmutadorParaAgregar.sucursal = value!.id;
+                    esEdit
+                        ? conmutadorActual!.sucursal = value!.id
+                        : conmutador.conmutadorParaAgregar.sucursal = value!.id;
                   },
                 ),
                 SizedBox(
@@ -47,16 +58,20 @@ class FormAgregarConmutador extends StatelessWidget {
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'IP'),
-                  onChanged: (value) =>
-                      conmutador.conmutadorParaAgregar.ip = value,
+                  initialValue: esEdit ? conmutadorActual!.ip : null,
+                  onChanged: (value) => esEdit
+                      ? conmutadorActual!.ip = value
+                      : conmutador.conmutadorParaAgregar.ip = value,
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Nombre'),
-                  onChanged: (value) =>
-                      conmutador.conmutadorParaAgregar.nombre = value,
+                  initialValue: esEdit ? conmutadorActual!.nombre : null,
+                  onChanged: (value) => esEdit
+                      ? conmutadorActual!.nombre = value
+                      : conmutador.conmutadorParaAgregar.nombre = value,
                 ),
                 SizedBox(
                   height: 20,
@@ -65,9 +80,11 @@ class FormAgregarConmutador extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   minLines: 3,
                   maxLines: null,
+                  initialValue: esEdit ? conmutadorActual!.observaciones : null,
                   decoration: InputDecoration(labelText: 'Observaciones'),
-                  onChanged: (value) =>
-                      conmutador.conmutadorParaAgregar.observaciones = value,
+                  onChanged: (value) => esEdit
+                      ? conmutadorActual!.observaciones = value
+                      : conmutador.conmutadorParaAgregar.observaciones = value,
                 ),
                 SizedBox(
                   height: 20,
@@ -84,7 +101,10 @@ class FormAgregarConmutador extends StatelessWidget {
               child: Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
-                conmutador.agregarConmutador(conmutador.conmutadorParaAgregar);
+                esEdit
+                    ? conmutador.editConmutador(conmutadorActual!)
+                    : conmutador
+                        .agregarConmutador(conmutador.conmutadorParaAgregar);
 
                 Navigator.pop(context);
               },

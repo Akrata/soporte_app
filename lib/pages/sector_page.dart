@@ -60,47 +60,10 @@ class SectorPage extends StatelessWidget {
     }
 
     _showEditPopup(Sector data) {
-      Sector sectorActual = data;
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          content: Form(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  initialValue: data.nombre,
-                  decoration: InputDecoration(labelText: 'Sector'),
-                  onChanged: (value) => sectorActual.nombre = value,
-                ),
-                DropdownButtonFormField(
-                  items: listaSucursales
-                      .map((e) => DropdownMenuItem(
-                            child: Text(e.nombre),
-                            value: e,
-                          ))
-                      .toList(),
-                  decoration: InputDecoration(labelText: 'Sucursal'),
-                  onChanged: (value) => sectorActual.sucursal = value!.id,
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancelar")),
-            ElevatedButton(
-                onPressed: () {
-                  sector.editSector(sectorActual);
-
-                  Navigator.pop(context);
-                },
-                child: Text("Confirmar")),
-          ],
-        ),
+        builder: (context) =>
+            FormAgregarSector(esEdit: true, sectorActual: data),
       );
     }
 
@@ -184,7 +147,9 @@ class SectorPage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => FormAgregarSector(),
+              builder: (context) => FormAgregarSector(
+                esEdit: false,
+              ),
             );
           },
           child: Icon(Icons.add)),

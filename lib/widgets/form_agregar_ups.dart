@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/models/equipo.dart';
+import 'package:soporte_app/models/ups.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
@@ -10,7 +11,9 @@ import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarUps extends StatelessWidget {
-  const FormAgregarUps({super.key});
+  bool esEdit = false;
+  Ups? upsActual;
+  FormAgregarUps({super.key, required this.esEdit, this.upsActual});
 
   @override
   Widget build(BuildContext context) {
@@ -62,14 +65,20 @@ class FormAgregarUps extends StatelessWidget {
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Marca'),
-                  onChanged: (value) => ups.upsParaAgregar.marca = value,
+                  initialValue: esEdit ? upsActual!.marca : null,
+                  onChanged: (value) => esEdit
+                      ? upsActual!.marca = value
+                      : ups.upsParaAgregar.marca = value,
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Modelo'),
-                  onChanged: (value) => ups.upsParaAgregar.modelo = value,
+                  initialValue: esEdit ? upsActual!.modelo : null,
+                  onChanged: (value) => esEdit
+                      ? upsActual!.modelo = value
+                      : ups.upsParaAgregar.modelo = value,
                 ),
                 SizedBox(
                   height: 20,
@@ -79,8 +88,10 @@ class FormAgregarUps extends StatelessWidget {
                   minLines: 3,
                   maxLines: null,
                   decoration: InputDecoration(labelText: 'Observaciones'),
-                  onChanged: (value) =>
-                      ups.upsParaAgregar.observaciones = value,
+                  initialValue: esEdit ? upsActual!.observaciones : null,
+                  onChanged: (value) => esEdit
+                      ? upsActual!.observaciones = value
+                      : ups.upsParaAgregar.observaciones = value,
                 ),
                 SizedBox(
                   height: 20,
@@ -97,7 +108,9 @@ class FormAgregarUps extends StatelessWidget {
               child: Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
-                ups.agregarUps(ups.upsParaAgregar);
+                esEdit
+                    ? ups.editUps(upsActual!)
+                    : ups.agregarUps(ups.upsParaAgregar);
 
                 Navigator.pop(context);
               },

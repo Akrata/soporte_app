@@ -58,47 +58,8 @@ class EquiposPage extends StatelessWidget {
       Equipo equipoActual = data;
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          content: Form(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  initialValue: data.nombre,
-                  decoration: InputDecoration(labelText: 'Nombre'),
-                  onChanged: (value) => equipoActual.nombre = value,
-                ),
-                TextFormField(
-                  initialValue: data.ip,
-                  decoration: InputDecoration(labelText: 'IP'),
-                  onChanged: (value) => equipoActual.nombre = value,
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  initialValue: data.observaciones,
-                  decoration: InputDecoration(labelText: 'Observaciones'),
-                  onChanged: (value) => equipoActual.observaciones = value,
-                ),
-                //TODO:AGREGAR LO QUE FALTA
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancelar")),
-            ElevatedButton(
-                onPressed: () {
-                  equipos.editEquipo(equipoActual);
-                  // print(equipoActual.ip);
-                  Navigator.pop(context);
-                },
-                child: Text("Confirmar")),
-          ],
-        ),
+        builder: (context) =>
+            FormAgregarEquipo(esEdit: true, equipoActual: data),
       );
     }
 
@@ -316,7 +277,9 @@ class EquiposPage extends StatelessWidget {
             showDialog(
               context: context,
               //TODO:
-              builder: (context) => FormAgregarEquipo(),
+              builder: (context) => FormAgregarEquipo(
+                esEdit: false,
+              ),
             );
           }),
     );

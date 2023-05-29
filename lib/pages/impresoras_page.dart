@@ -60,50 +60,8 @@ class ImpresorasPage extends StatelessWidget {
       Impresora impresoraActual = data;
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          content: Form(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  initialValue: data.marca,
-                  decoration: InputDecoration(labelText: 'marca'),
-                  onChanged: (value) => impresoraActual.marca = value,
-                ),
-                TextFormField(
-                  initialValue: data.modelo,
-                  decoration: InputDecoration(labelText: 'modelo'),
-                  onChanged: (value) => impresoraActual.modelo = value,
-                ),
-                TextFormField(
-                  initialValue: data.ip,
-                  decoration: InputDecoration(labelText: 'ip'),
-                  onChanged: (value) => impresoraActual.ip = value,
-                ),
-                TextFormField(
-                  initialValue: data.observaciones,
-                  decoration: InputDecoration(labelText: 'Observaciones'),
-                  onChanged: (value) => impresoraActual.observaciones = value,
-                ),
-                //TODO:AGREGAR LO QUE FALTA
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancelar")),
-            ElevatedButton(
-                onPressed: () {
-                  impresoras.editImpresora(impresoraActual);
-                  // print(equipoActual.ip);
-                  Navigator.pop(context);
-                },
-                child: Text("Confirmar")),
-          ],
-        ),
+        builder: (context) =>
+            FormAgregarImpresora(esEdit: true, impresoraActual: data),
       );
     }
 
@@ -263,7 +221,7 @@ class ImpresorasPage extends StatelessWidget {
             showDialog(
               context: context,
               //TODO:
-              builder: (context) => FormAgregarImpresora(),
+              builder: (context) => FormAgregarImpresora(esEdit: false),
             );
           }),
     );

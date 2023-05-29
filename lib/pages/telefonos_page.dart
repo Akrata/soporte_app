@@ -60,49 +60,10 @@ class TelefonosPage extends StatelessWidget {
     }
 
     _showEditPopup(Telefono data) {
-      Telefono telefonoActual = data;
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          content: Form(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  initialValue: data.interno.toString(),
-                  decoration: InputDecoration(labelText: 'Interno'),
-                  onChanged: (value) => telefonoActual.interno = value,
-                ),
-                TextFormField(
-                  initialValue: data.ip,
-                  decoration: InputDecoration(labelText: 'ip'),
-                  onChanged: (value) => telefonoActual.ip = value,
-                ),
-                TextFormField(
-                  initialValue: data.observaciones,
-                  decoration: InputDecoration(labelText: 'Observaciones'),
-                  onChanged: (value) => telefonoActual.observaciones = value,
-                ),
-
-                //TODO:AGREGAR LO QUE FALTA
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancelar")),
-            ElevatedButton(
-                onPressed: () {
-                  telefonos.editTelefono(telefonoActual);
-                  // print(equipoActual.ip);
-                  Navigator.pop(context);
-                },
-                child: Text("Confirmar")),
-          ],
-        ),
+        builder: (context) =>
+            FormAgregarTelefono(esEdit: true, telefonoActual: data),
       );
     }
 
@@ -230,8 +191,9 @@ class TelefonosPage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              //TODO:
-              builder: (context) => FormAgregarTelefono(),
+              builder: (context) => FormAgregarTelefono(
+                esEdit: false,
+              ),
             );
           }),
     );

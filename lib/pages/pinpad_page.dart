@@ -65,41 +65,8 @@ class PinpadPage extends StatelessWidget {
       Pinpad pinpadActual = data;
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          content: Form(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  initialValue: data.ip,
-                  decoration: InputDecoration(labelText: 'IP'),
-                  onChanged: (value) => pinpadActual.ip = value,
-                ),
-                TextFormField(
-                  initialValue: data.observaciones,
-                  decoration: InputDecoration(labelText: 'Observaciones'),
-                  onChanged: (value) => pinpadActual.observaciones = value,
-                ),
-
-                //TODO:AGREGAR LO QUE FALTA
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancelar")),
-            ElevatedButton(
-                onPressed: () {
-                  pinpad.editPinpad(pinpadActual);
-                  // print(equipoActual.ip);
-                  Navigator.pop(context);
-                },
-                child: Text("Confirmar")),
-          ],
-        ),
+        builder: (context) =>
+            FormAgregarPinpad(esEdit: true, pinpadActual: data),
       );
     }
 
@@ -211,7 +178,9 @@ class PinpadPage extends StatelessWidget {
             showDialog(
               context: context,
               //TODO:
-              builder: (context) => FormAgregarPinpad(),
+              builder: (context) => FormAgregarPinpad(
+                esEdit: false,
+              ),
             );
           }),
     );

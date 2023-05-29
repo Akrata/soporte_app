@@ -5,7 +5,9 @@ import 'package:soporte_app/providers/request_providers/toner_request.dart';
 import '../models/toner.dart';
 
 class FormAgregarToner extends StatelessWidget {
-  const FormAgregarToner({super.key});
+  bool esEdit = false;
+  Toner? tonerActual;
+  FormAgregarToner({super.key, required this.esEdit, this.tonerActual});
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +22,48 @@ class FormAgregarToner extends StatelessWidget {
             children: [
               TextFormField(
                 decoration: InputDecoration(labelText: "Modelo"),
-                onChanged: (value) => toner.tonerParaAgregar.modelo = value,
+                initialValue: esEdit ? tonerActual!.modelo : null,
+                onChanged: (value) => esEdit
+                    ? tonerActual!.modelo = value
+                    : toner.tonerParaAgregar.modelo = value,
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: "Stock Fijo Pol.Cent"),
-                onChanged: (value) => toner
-                    .tonerParaAgregar.stockFijoPoliclinico = int.parse(value),
+                initialValue: esEdit
+                    ? tonerActual!.stockFijoPoliclinico.toString()
+                    : null,
+                onChanged: (value) => esEdit
+                    ? tonerActual!.stockFijoPoliclinico = int.parse(value)
+                    : toner.tonerParaAgregar.stockFijoPoliclinico =
+                        int.parse(value),
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: "Stock Movil Pol.Cent"),
-                onChanged: (value) => toner
-                    .tonerParaAgregar.stockMovilPoliclinico = int.parse(value),
+                initialValue: esEdit
+                    ? tonerActual!.stockMovilPoliclinico.toString()
+                    : null,
+                onChanged: (value) => esEdit
+                    ? tonerActual!.stockMovilPoliclinico = int.parse(value)
+                    : toner.tonerParaAgregar.stockMovilPoliclinico =
+                        int.parse(value),
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: "Stock Fijo SC"),
-                onChanged: (value) => toner
-                    .tonerParaAgregar.stockFijoSanatorio = int.parse(value),
+                initialValue:
+                    esEdit ? tonerActual!.stockFijoSanatorio.toString() : null,
+                onChanged: (value) => esEdit
+                    ? tonerActual!.stockFijoSanatorio = int.parse(value)
+                    : toner.tonerParaAgregar.stockFijoSanatorio =
+                        int.parse(value),
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: "Stock Movil SC"),
-                onChanged: (value) => toner
-                    .tonerParaAgregar.stockMovilSanatorio = int.parse(value),
+                initialValue:
+                    esEdit ? tonerActual!.stockMovilSanatorio.toString() : null,
+                onChanged: (value) => esEdit
+                    ? tonerActual!.stockMovilSanatorio = int.parse(value)
+                    : toner.tonerParaAgregar.stockMovilSanatorio =
+                        int.parse(value),
               ),
             ],
           ),
@@ -54,7 +77,9 @@ class FormAgregarToner extends StatelessWidget {
             child: Text("Cancelar")),
         ElevatedButton(
             onPressed: () {
-              toner.agregarToner(toner.tonerParaAgregar);
+              esEdit
+                  ? toner.editToner(tonerActual!)
+                  : toner.agregarToner(toner.tonerParaAgregar);
               Navigator.pop(context);
             },
             child: Text("Agregar"))

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/models/equipo.dart';
+import 'package:soporte_app/models/pinpad.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/impresoras_request.dart';
 import 'package:soporte_app/providers/request_providers/pinpad_request.dart';
@@ -11,7 +12,9 @@ import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarPinpad extends StatelessWidget {
-  const FormAgregarPinpad({super.key});
+  bool esEdit = false;
+  Pinpad? pinpadActual;
+  FormAgregarPinpad({super.key, required this.esEdit, this.pinpadActual});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,10 @@ class FormAgregarPinpad extends StatelessWidget {
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'IP'),
-                  onChanged: (value) => pinpad.pinpadParaAgregar.ip = value,
+                  initialValue: esEdit ? pinpadActual!.ip : null,
+                  onChanged: (value) => esEdit
+                      ? pinpadActual!.ip = value
+                      : pinpad.pinpadParaAgregar.ip = value,
                 ),
                 SizedBox(
                   height: 20,
@@ -73,8 +79,10 @@ class FormAgregarPinpad extends StatelessWidget {
                   minLines: 3,
                   maxLines: null,
                   decoration: InputDecoration(labelText: 'Observaciones'),
-                  onChanged: (value) =>
-                      pinpad.pinpadParaAgregar.observaciones = value,
+                  initialValue: esEdit ? pinpadActual!.observaciones : null,
+                  onChanged: (value) => esEdit
+                      ? pinpadActual!.observaciones = value
+                      : pinpad.pinpadParaAgregar.observaciones = value,
                 ),
                 SizedBox(
                   height: 20,
@@ -91,7 +99,9 @@ class FormAgregarPinpad extends StatelessWidget {
               child: Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
-                pinpad.agregarPinpad(pinpad.pinpadParaAgregar);
+                esEdit
+                    ? pinpad.editPinpad(pinpadActual!)
+                    : pinpad.agregarPinpad(pinpad.pinpadParaAgregar);
 
                 Navigator.pop(context);
               },

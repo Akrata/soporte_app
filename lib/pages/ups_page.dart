@@ -54,48 +54,9 @@ class UpsPage extends StatelessWidget {
     }
 
     _showEditPopup(Ups data) {
-      Ups upsActual = data;
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          content: Form(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  initialValue: data.marca,
-                  decoration: InputDecoration(labelText: 'Marca'),
-                  onChanged: (value) => upsActual.marca = value,
-                ),
-                TextFormField(
-                  initialValue: data.modelo,
-                  decoration: InputDecoration(labelText: 'Modelo'),
-                  onChanged: (value) => upsActual.modelo = value,
-                ),
-                TextFormField(
-                  initialValue: data.observaciones,
-                  decoration: InputDecoration(labelText: 'Observaciones'),
-                  onChanged: (value) => upsActual.observaciones = value,
-                ),
-                //TODO:AGREGAR LO QUE FALTA
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancelar")),
-            ElevatedButton(
-                onPressed: () {
-                  ups.editUps(upsActual);
-                  // print(equipoActual.ip);
-                  Navigator.pop(context);
-                },
-                child: Text("Confirmar")),
-          ],
-        ),
+        builder: (context) => FormAgregarUps(esEdit: true, upsActual: data),
       );
     }
 
@@ -237,7 +198,9 @@ class UpsPage extends StatelessWidget {
             showDialog(
               context: context,
               //TODO:
-              builder: (context) => FormAgregarUps(),
+              builder: (context) => FormAgregarUps(
+                esEdit: false,
+              ),
             );
           }),
     );

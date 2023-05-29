@@ -6,11 +6,14 @@ import 'package:soporte_app/providers/request_providers/impresoras_request.dart'
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
 
+import '../models/impresora.dart';
 import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarImpresora extends StatelessWidget {
-  const FormAgregarImpresora({super.key});
+  bool esEdit = false;
+  Impresora? impresoraActual;
+  FormAgregarImpresora({super.key, required this.esEdit, this.impresoraActual});
 
   @override
   Widget build(BuildContext context) {
@@ -63,24 +66,30 @@ class FormAgregarImpresora extends StatelessWidget {
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Marca'),
-                  onChanged: (value) =>
-                      impresora.impresoraParaAgregar.marca = value,
+                  initialValue: esEdit ? impresoraActual!.marca : null,
+                  onChanged: (value) => esEdit
+                      ? impresoraActual!.marca = value
+                      : impresora.impresoraParaAgregar.marca = value,
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Modelo'),
-                  onChanged: (value) =>
-                      impresora.impresoraParaAgregar.modelo = value,
+                  initialValue: esEdit ? impresoraActual!.modelo : null,
+                  onChanged: (value) => esEdit
+                      ? impresoraActual!.modelo = value
+                      : impresora.impresoraParaAgregar.modelo = value,
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'IP'),
-                  onChanged: (value) =>
-                      impresora.impresoraParaAgregar.ip = value,
+                  initialValue: esEdit ? impresoraActual!.ip : null,
+                  onChanged: (value) => esEdit
+                      ? impresoraActual!.ip = value
+                      : impresora.impresoraParaAgregar.ip = value,
                 ),
                 SizedBox(
                   height: 20,
@@ -90,8 +99,10 @@ class FormAgregarImpresora extends StatelessWidget {
                   minLines: 3,
                   maxLines: null,
                   decoration: InputDecoration(labelText: 'Observaciones'),
-                  onChanged: (value) =>
-                      impresora.impresoraParaAgregar.observaciones = value,
+                  initialValue: esEdit ? impresoraActual!.observaciones : null,
+                  onChanged: (value) => esEdit
+                      ? impresoraActual!.observaciones = value
+                      : impresora.impresoraParaAgregar.observaciones = value,
                 ),
                 SizedBox(
                   height: 20,

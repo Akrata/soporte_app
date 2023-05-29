@@ -7,11 +7,14 @@ import 'package:soporte_app/providers/request_providers/solicitud_toner_request.
 import 'package:soporte_app/providers/request_providers/telefono_request.dart';
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
 
+import '../models/telefono.dart';
 import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarTelefono extends StatelessWidget {
-  const FormAgregarTelefono({super.key});
+  bool esEdit = false;
+  Telefono? telefonoActual;
+  FormAgregarTelefono({super.key, required this.esEdit, this.telefonoActual});
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +66,20 @@ class FormAgregarTelefono extends StatelessWidget {
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Interno'),
-                  onChanged: (value) =>
-                      telefono.telefonoParaAgregar.interno = value,
+                  initialValue: esEdit ? telefonoActual!.interno : null,
+                  onChanged: (value) => esEdit
+                      ? telefonoActual!.interno = value
+                      : telefono.telefonoParaAgregar.interno = value,
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'IP'),
-                  onChanged: (value) => telefono.telefonoParaAgregar.ip = value,
+                  initialValue: esEdit ? telefonoActual!.ip : null,
+                  onChanged: (value) => esEdit
+                      ? telefonoActual!.ip = value
+                      : telefono.telefonoParaAgregar.ip = value,
                 ),
                 SizedBox(
                   height: 20,
@@ -81,8 +89,10 @@ class FormAgregarTelefono extends StatelessWidget {
                   minLines: 3,
                   maxLines: null,
                   decoration: InputDecoration(labelText: 'Observaciones'),
-                  onChanged: (value) =>
-                      telefono.telefonoParaAgregar.observaciones = value,
+                  initialValue: esEdit ? telefonoActual!.observaciones : null,
+                  onChanged: (value) => esEdit
+                      ? telefonoActual!.observaciones = value
+                      : telefono.telefonoParaAgregar.observaciones = value,
                 ),
                 SizedBox(
                   height: 20,
@@ -99,7 +109,9 @@ class FormAgregarTelefono extends StatelessWidget {
               child: Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
-                telefono.agregarTelefono(telefono.telefonoParaAgregar);
+                esEdit
+                    ? telefono.editTelefono(telefonoActual!)
+                    : telefono.agregarTelefono(telefono.telefonoParaAgregar);
 
                 Navigator.pop(context);
               },
