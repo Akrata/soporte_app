@@ -5,6 +5,7 @@ import 'package:soporte_app/models/pinpad.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/pinpad_request.dart';
 import 'package:soporte_app/providers/request_providers/telefono_request.dart';
+import 'package:soporte_app/widgets/custom_appbar.dart';
 import 'package:soporte_app/widgets/form_agregar_impresora.dart';
 import 'package:soporte_app/widgets/form_agregar_pinpad.dart';
 import 'package:soporte_app/widgets/form_agregar_telefono.dart';
@@ -16,7 +17,8 @@ import '../widgets/form_agregar_equipo.dart';
 import '../widgets/searchbar.dart';
 
 class PinpadPage extends StatelessWidget {
-  const PinpadPage({Key? key}) : super(key: key);
+  String nombre;
+  PinpadPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +73,7 @@ class PinpadPage extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: CustomAppbar(nombre: nombre),
       body: Column(
         children: [
           SearchBarCustom(

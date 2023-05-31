@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/models/equipo.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
+import 'package:soporte_app/widgets/custom_appbar.dart';
 import 'package:soporte_app/widgets/form_agregar_impresora.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,7 +12,8 @@ import '../widgets/form_agregar_equipo.dart';
 import '../widgets/searchbar.dart';
 
 class ImpresorasPage extends StatelessWidget {
-  const ImpresorasPage({Key? key}) : super(key: key);
+  String nombre;
+  ImpresorasPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,7 @@ class ImpresorasPage extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: CustomAppbar(nombre: nombre),
       body: Column(
         children: [
           SearchBarCustom(

@@ -23,6 +23,8 @@ class FormAgregarEquipo extends StatelessWidget {
     final secYTon = Provider.of<SolicitudTonerRequest>(context);
     final equipo = Provider.of<EquiposRequest>(context);
 
+    final DateTime now = DateTime.now();
+
     return Form(
       child: AlertDialog(
         content: Form(
@@ -45,6 +47,7 @@ class FormAgregarEquipo extends StatelessWidget {
                       .toList(),
                   onChanged: (value) async {
                     await secYTon.getSectorSegunSucursal(value!.id);
+                    secYTon.cambiarSucursal(true);
                     esEdit
                         ? equipoActual!.expand!.sector.sucursal = value.id
                         : equipo.sucursal = value.id;
@@ -53,12 +56,28 @@ class FormAgregarEquipo extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                if (equipo.sucursal != "")
+                if (equipoActual!.expand!.sector.sucursal != "" &&
+                    secYTon.abriendoSucursal == false)
                   DropdownButtonFormField(
                     value: esEdit
                         ? secYTon.listaSectoresValue.firstWhere(
                             (element) => element.id == equipoActual!.sector)
                         : null,
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.listaSectoresValue
+                        .map((e) => DropdownMenuItem(
+                              child: Text(e.nombre),
+                              value: e,
+                            ))
+                        .toList(),
+                    onChanged: (value) async {
+                      esEdit
+                          ? equipoActual!.sector = value!.id
+                          : equipo.equipoParaAgregar.sector = value!.id;
+                    },
+                  ),
+                if (secYTon.abriendoSucursal == true)
+                  DropdownButtonFormField(
                     decoration: InputDecoration(hintText: 'Sector'),
                     items: secYTon.listaSectoresValue
                         .map((e) => DropdownMenuItem(
@@ -92,6 +111,15 @@ class FormAgregarEquipo extends StatelessWidget {
                       ? equipoActual!.ip = value
                       : equipo.equipoParaAgregar.ip = value,
                 ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // Container(
+                //   child: DatePickerDialog(
+                //       initialDate: equipoActual?.ultimoMantenimiento ?? now,
+                //       firstDate: DateTime.now(),
+                //       lastDate: DateTime(2030)),
+                // ),
                 SizedBox(
                   height: 20,
                 ),

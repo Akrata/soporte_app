@@ -5,6 +5,7 @@ import 'package:soporte_app/providers/request_providers/conmutador_request.dart'
 import 'package:soporte_app/providers/request_providers/sector_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 import 'package:soporte_app/screens/sector_screen.dart';
+import 'package:soporte_app/widgets/custom_appbar.dart';
 import 'package:soporte_app/widgets/form_agregar_conmutador.dart';
 import 'package:soporte_app/widgets/form_agregar_sector.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,7 +15,8 @@ import '../providers/auth/auth_with_pass.dart';
 import '../widgets/searchbar.dart';
 
 class ConmutadorPage extends StatelessWidget {
-  const ConmutadorPage({Key? key}) : super(key: key);
+  String nombre;
+  ConmutadorPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +77,7 @@ class ConmutadorPage extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: CustomAppbar(nombre: nombre),
       body: Column(
         children: [
           SearchBarCustom(

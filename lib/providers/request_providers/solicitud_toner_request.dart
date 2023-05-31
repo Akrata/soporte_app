@@ -32,6 +32,9 @@ class SolicitudTonerRequest extends ChangeNotifier {
   List<Impresora> listaImpresorasValue = [];
   List<Impresora> listaTonerValue = [];
 
+  //Abriendo sucursal
+  bool abriendoSucursal = false;
+
 // Propiedades para agregar una solicitud
   String sucursal = '';
   String sector = '';
@@ -53,6 +56,11 @@ class SolicitudTonerRequest extends ChangeNotifier {
 
   enBusqueda(bool dato) {
     inSearch = dato;
+    notifyListeners();
+  }
+
+  cambiarSucursal(bool dato) {
+    abriendoSucursal = dato;
     notifyListeners();
   }
 

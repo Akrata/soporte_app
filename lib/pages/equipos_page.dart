@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/models/equipo.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
+import 'package:soporte_app/widgets/custom_appbar.dart';
 import 'package:soporte_app/widgets/searchbar.dart';
 
 import '../utils/temporal_vnc.dart';
 import '../widgets/form_agregar_equipo.dart';
 
 class EquiposPage extends StatelessWidget {
+  String nombre;
   final TextEditingController _controller = TextEditingController();
-  EquiposPage({Key? key}) : super(key: key);
+  EquiposPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,7 @@ class EquiposPage extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: CustomAppbar(nombre: nombre),
       body: Column(
         children: [
           SearchBarCustom(

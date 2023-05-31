@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/request_providers/sector_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 import 'package:soporte_app/screens/sector_screen.dart';
+import 'package:soporte_app/widgets/custom_appbar.dart';
 import 'package:soporte_app/widgets/form_agregar_sector.dart';
 
 import '../models/sector.dart';
@@ -10,7 +11,8 @@ import '../providers/auth/auth_with_pass.dart';
 import '../widgets/searchbar.dart';
 
 class SectorPage extends StatelessWidget {
-  const SectorPage({Key? key}) : super(key: key);
+  String nombre;
+  SectorPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +70,7 @@ class SectorPage extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: CustomAppbar(nombre: nombre),
       body: Column(
         children: [
           SearchBarCustom(

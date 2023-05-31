@@ -7,8 +7,11 @@ import 'package:soporte_app/utils/fecha_formater.dart';
 import 'package:soporte_app/widgets/searchbar.dart';
 import 'package:soporte_app/widgets/widgets.dart';
 
+import '../widgets/custom_appbar.dart';
+
 class SolicitudTonerPage extends StatelessWidget {
-  const SolicitudTonerPage({Key? key}) : super(key: key);
+  String nombre;
+  SolicitudTonerPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +24,7 @@ class SolicitudTonerPage extends StatelessWidget {
         : solicitudToner.listaBusquedaSolicitud;
 
     return Scaffold(
+      appBar: CustomAppbar(nombre: nombre),
       body: Column(
         children: [
           // SearchBarCustom(

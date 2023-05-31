@@ -3,13 +3,15 @@ import 'package:provider/provider.dart';
 import 'package:soporte_app/models/sucursal.dart';
 
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
+import 'package:soporte_app/widgets/custom_appbar.dart';
 import 'package:soporte_app/widgets/form_agregar_sucursal.dart';
 
 import '../providers/auth/auth_with_pass.dart';
 import '../widgets/searchbar.dart';
 
 class SucursalPage extends StatelessWidget {
-  const SucursalPage({Key? key}) : super(key: key);
+  String nombre;
+  SucursalPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +94,7 @@ class SucursalPage extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: CustomAppbar(nombre: nombre),
       body: Column(
         children: [
           SearchBarCustom(

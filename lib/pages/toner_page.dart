@@ -7,6 +7,7 @@ import 'package:soporte_app/utils/temporal_vnc.dart';
 import 'package:soporte_app/widgets/form_realizar_pedido.dart';
 
 import '../models/toner.dart';
+import '../widgets/custom_appbar.dart';
 import '../widgets/form_agregar_toner.dart';
 
 import 'package:url_launcher/url_launcher.dart';
@@ -16,7 +17,8 @@ import '../widgets/searchbar.dart';
 import 'package:path_provider/path_provider.dart';
 
 class TonerPage extends StatelessWidget {
-  const TonerPage({Key? key}) : super(key: key);
+  String nombre;
+  TonerPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +71,7 @@ class TonerPage extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: CustomAppbar(nombre: nombre),
       body: Column(
         children: [
           SearchBarCustom(

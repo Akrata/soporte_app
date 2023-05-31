@@ -6,11 +6,13 @@ import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/ups_request.dart';
 import 'package:soporte_app/widgets/form_agregar_ups.dart';
 
+import '../widgets/custom_appbar.dart';
 import '../widgets/form_agregar_equipo.dart';
 import '../widgets/searchbar.dart';
 
 class UpsPage extends StatelessWidget {
-  const UpsPage({Key? key}) : super(key: key);
+  String nombre;
+  UpsPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,7 @@ class UpsPage extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: CustomAppbar(nombre: nombre),
       body: Column(
         children: [
           SearchBarCustom(

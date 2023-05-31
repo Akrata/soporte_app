@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:soporte_app/models/equipo.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/telefono_request.dart';
+import 'package:soporte_app/widgets/custom_appbar.dart';
 import 'package:soporte_app/widgets/form_agregar_impresora.dart';
 import 'package:soporte_app/widgets/form_agregar_telefono.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,7 +15,8 @@ import '../widgets/form_agregar_equipo.dart';
 import '../widgets/searchbar.dart';
 
 class TelefonosPage extends StatelessWidget {
-  const TelefonosPage({Key? key}) : super(key: key);
+  String nombre;
+  TelefonosPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +70,7 @@ class TelefonosPage extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: CustomAppbar(nombre: nombre),
       body: Column(
         children: [
           SearchBarCustom(
