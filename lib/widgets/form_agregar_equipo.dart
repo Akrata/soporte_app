@@ -36,7 +36,8 @@ class FormAgregarEquipo extends StatelessWidget {
                 DropdownButtonFormField(
                   value: esEdit
                       ? listaSucursales.firstWhere((element) =>
-                          element.id == equipoActual!.expand!.sector.sucursal)
+                          element.id ==
+                          equipoActual!.expand!.sector.expand!.sucursal.id)
                       : null,
                   decoration: InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
@@ -47,7 +48,10 @@ class FormAgregarEquipo extends StatelessWidget {
                       .toList(),
                   onChanged: (value) async {
                     await secYTon.getSectorSegunSucursal(value!.id);
-                    secYTon.cambiarSucursal(true);
+                    if (esEdit) {
+                      secYTon.cambiarSucursal(false);
+                      secYTon.cambiarSucursal(true);
+                    }
                     esEdit
                         ? equipoActual!.expand!.sector.sucursal = value.id
                         : equipo.sucursal = value.id;
@@ -56,7 +60,7 @@ class FormAgregarEquipo extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                if (equipo.sucursal != '')
+                if (!esEdit)
                   DropdownButtonFormField(
                     decoration: InputDecoration(hintText: 'Sector'),
                     items: secYTon.listaSectoresValue
@@ -71,21 +75,37 @@ class FormAgregarEquipo extends StatelessWidget {
                           : equipo.equipoParaAgregar.sector = value!.id;
                     },
                   ),
-                // if (secYTon.abriendoSucursal == true)
-                //   DropdownButtonFormField(
-                //     decoration: InputDecoration(hintText: 'Sector'),
-                //     items: secYTon.listaSectoresValue
-                //         .map((e) => DropdownMenuItem(
-                //               child: Text(e.nombre),
-                //               value: e,
-                //             ))
-                //         .toList(),
-                //     onChanged: (value) async {
-                //       esEdit
-                //           ? equipoActual!.sector = value!.id
-                //           : equipo.equipoParaAgregar.sector = value!.id;
-                //     },
-                //   ),
+                if (esEdit)
+                  DropdownButtonFormField(
+                    value: secYTon.abriendoSucursal
+                        ? null
+                        : sector.listaSectores.firstWhere((element) =>
+                            element.id == equipoActual!.expand!.sector.id),
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.abriendoSucursal
+                        ? secYTon.listaSectoresValue
+                            .map((e) => DropdownMenuItem(
+                                  child: Text(e.nombre),
+                                  value: e,
+                                ))
+                            .toList()
+                        : sector.listaSectores
+                            .where((element) =>
+                                element.sucursal ==
+                                equipoActual!
+                                    .expand!.sector.expand!.sucursal.id)
+                            .toList()
+                            .map((e) => DropdownMenuItem(
+                                  child: Text(e.nombre),
+                                  value: e,
+                                ))
+                            .toList(),
+                    onChanged: (value) async {
+                      esEdit
+                          ? equipoActual!.sector = value!.id
+                          : equipo.equipoParaAgregar.sector = value!.id;
+                    },
+                  ),
                 SizedBox(
                   height: 20,
                 ),
@@ -158,8 +178,8 @@ class FormAgregarEquipo extends StatelessWidget {
         actions: [
           TextButton(
               onPressed: () {
-                Navigator.pop(context);
                 secYTon.cambiarSucursal(false);
+                Navigator.pop(context);
               },
               child: Text("Cancelar")),
           ElevatedButton(
