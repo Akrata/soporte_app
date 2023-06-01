@@ -12,9 +12,9 @@ class LoginScreen extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
 
     final auth = Provider.of<AuthWithPass>(context);
-
-    String usuario = "";
-    String contrasena = "";
+//TODO:SACAR ESTO
+    String usuario = "feijop";
+    String contrasena = "pablo123";
     return Scaffold(
       body: Form(
         child: Center(
