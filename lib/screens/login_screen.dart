@@ -13,8 +13,8 @@ class LoginScreen extends StatelessWidget {
 
     final auth = Provider.of<AuthWithPass>(context);
 //TODO:SACAR ESTO
-    String usuario = "feijop";
-    String contrasena = "pablo123";
+    String usuario = "";
+    String contrasena = "";
     return Scaffold(
       body: Form(
         child: Center(

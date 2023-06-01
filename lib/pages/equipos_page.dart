@@ -59,6 +59,7 @@ class EquiposPage extends StatelessWidget {
     _showEditPopup(Equipo data) {
       Equipo equipoActual = data;
       showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) =>
             FormAgregarEquipo(esEdit: true, equipoActual: data),

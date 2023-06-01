@@ -47,14 +47,17 @@ class FormAgregarEquipo extends StatelessWidget {
                           ))
                       .toList(),
                   onChanged: (value) async {
-                    await secYTon.getSectorSegunSucursal(value!.id);
-                    if (esEdit) {
-                      secYTon.cambiarSucursal(false);
-                      secYTon.cambiarSucursal(true);
+                    try {
+                      await secYTon.getSectorSegunSucursal(value!.id);
+                      if (esEdit) {
+                        secYTon.cambiarSucursal(true);
+                      }
+                      esEdit
+                          ? equipoActual!.expand!.sector.sucursal = value.id
+                          : equipo.sucursal = value.id;
+                    } catch (e) {
+                      print(e);
                     }
-                    esEdit
-                        ? equipoActual!.expand!.sector.sucursal = value.id
-                        : equipo.sucursal = value.id;
                   },
                 ),
                 SizedBox(
@@ -70,9 +73,7 @@ class FormAgregarEquipo extends StatelessWidget {
                             ))
                         .toList(),
                     onChanged: (value) async {
-                      esEdit
-                          ? equipoActual!.sector = value!.id
-                          : equipo.equipoParaAgregar.sector = value!.id;
+                      equipo.equipoParaAgregar.sector = value!.id;
                     },
                   ),
                 if (esEdit)
@@ -184,13 +185,14 @@ class FormAgregarEquipo extends StatelessWidget {
               child: Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
+                secYTon.cambiarSucursal(false);
                 esEdit
                     ? equipo.editEquipo(equipoActual!)
                     : equipo.agregarEquipo(equipo.equipoParaAgregar);
 
                 Navigator.pop(context);
               },
-              child: Text("Agregar")),
+              child: Text("Confirmar")),
         ],
       ),
     );
