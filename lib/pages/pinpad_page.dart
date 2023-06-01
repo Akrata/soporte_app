@@ -66,6 +66,7 @@ class PinpadPage extends StatelessWidget {
     _showEditPopup(Pinpad data) {
       Pinpad pinpadActual = data;
       showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) =>
             FormAgregarPinpad(esEdit: true, pinpadActual: data),

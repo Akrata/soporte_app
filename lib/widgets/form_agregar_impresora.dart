@@ -32,7 +32,26 @@ class FormAgregarImpresora extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                // DropdownButtonFormField(
+                //   decoration: InputDecoration(hintText: 'Sucursal'),
+                //   items: listaSucursales
+                //       .map((e) => DropdownMenuItem(
+                //             child: Text(e.nombre),
+                //             value: e,
+                //           ))
+                //       .toList(),
+                //   onChanged: (value) async {
+                //     await secYTon.getSectorSegunSucursal(value!.id);
+                //     impresora.sucursal = value.id;
+                //   },
+                // ),
+
                 DropdownButtonFormField(
+                  value: esEdit
+                      ? listaSucursales.firstWhere((element) =>
+                          element.id ==
+                          impresoraActual!.expand!.sector!.expand!.sucursal.id)
+                      : null,
                   decoration: InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
@@ -41,10 +60,67 @@ class FormAgregarImpresora extends StatelessWidget {
                           ))
                       .toList(),
                   onChanged: (value) async {
-                    await secYTon.getSectorSegunSucursal(value!.id);
-                    impresora.sucursal = value.id;
+                    try {
+                      await secYTon.getSectorSegunSucursal(value!.id);
+                      if (esEdit) {
+                        secYTon.cambiarSucursal(true);
+                      }
+                      esEdit
+                          ? impresoraActual!.expand!.sector!.sucursal = value.id
+                          : impresora.sucursal = value.id;
+                    } catch (e) {
+                      print(e);
+                    }
                   },
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                if (!esEdit)
+                  DropdownButtonFormField(
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.listaSectoresValue
+                        .map((e) => DropdownMenuItem(
+                              child: Text(e.nombre),
+                              value: e,
+                            ))
+                        .toList(),
+                    onChanged: (value) async {
+                      impresora.impresoraParaAgregar.sector = value!.id;
+                    },
+                  ),
+                if (esEdit)
+                  DropdownButtonFormField(
+                    value: secYTon.abriendoSucursal
+                        ? null
+                        : sector.listaSectores.firstWhere((element) =>
+                            element.id == impresoraActual!.expand!.sector!.id),
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.abriendoSucursal
+                        ? secYTon.listaSectoresValue
+                            .map((e) => DropdownMenuItem(
+                                  child: Text(e.nombre),
+                                  value: e,
+                                ))
+                            .toList()
+                        : sector.listaSectores
+                            .where((element) =>
+                                element.sucursal ==
+                                impresoraActual!
+                                    .expand!.sector!.expand!.sucursal.id)
+                            .toList()
+                            .map((e) => DropdownMenuItem(
+                                  child: Text(e.nombre),
+                                  value: e,
+                                ))
+                            .toList(),
+                    onChanged: (value) async {
+                      esEdit
+                          ? impresoraActual!.sector = value!.id
+                          : impresora.impresoraParaAgregar.sector = value!.id;
+                    },
+                  ),
+
                 SizedBox(
                   height: 20,
                 ),
@@ -126,16 +202,22 @@ class FormAgregarImpresora extends StatelessWidget {
         actions: [
           TextButton(
               onPressed: () {
+                secYTon.cambiarSucursal(false);
                 Navigator.pop(context);
               },
               child: Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
-                impresora.agregarImpresora(impresora.impresoraParaAgregar);
+                secYTon.cambiarSucursal(false);
+
+                esEdit
+                    ? impresora.editImpresora(impresoraActual!)
+                    : impresora
+                        .agregarImpresora(impresora.impresoraParaAgregar);
 
                 Navigator.pop(context);
               },
-              child: Text("Agregar")),
+              child: Text("Confirmar")),
         ],
       ),
     );

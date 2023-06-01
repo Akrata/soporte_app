@@ -68,6 +68,7 @@ class ConmutadorPage extends StatelessWidget {
     _showEditPopup(Conmutador data) {
       Conmutador conmutadorActual = data;
       showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) => FormAgregarConmutador(
           esEdit: true,

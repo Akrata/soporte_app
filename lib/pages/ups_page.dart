@@ -57,6 +57,7 @@ class UpsPage extends StatelessWidget {
 
     _showEditPopup(Ups data) {
       showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) => FormAgregarUps(esEdit: true, upsActual: data),
       );

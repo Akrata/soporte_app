@@ -33,6 +33,11 @@ class FormAgregarTelefono extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 DropdownButtonFormField(
+                  value: esEdit
+                      ? listaSucursales.firstWhere((element) =>
+                          element.id ==
+                          telefonoActual!.expand!.sector.expand!.sucursal.id)
+                      : null,
                   decoration: InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
@@ -41,10 +46,66 @@ class FormAgregarTelefono extends StatelessWidget {
                           ))
                       .toList(),
                   onChanged: (value) async {
-                    await secYTon.getSectorSegunSucursal(value!.id);
-                    telefono.sucursal = value.id;
+                    try {
+                      await secYTon.getSectorSegunSucursal(value!.id);
+                      if (esEdit) {
+                        secYTon.cambiarSucursal(true);
+                      }
+                      esEdit
+                          ? telefonoActual!.expand!.sector.sucursal = value.id
+                          : telefono.sucursal = value.id;
+                    } catch (e) {
+                      print(e);
+                    }
                   },
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                if (!esEdit)
+                  DropdownButtonFormField(
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.listaSectoresValue
+                        .map((e) => DropdownMenuItem(
+                              child: Text(e.nombre),
+                              value: e,
+                            ))
+                        .toList(),
+                    onChanged: (value) async {
+                      telefono.telefonoParaAgregar.sector = value!.id;
+                    },
+                  ),
+                if (esEdit)
+                  DropdownButtonFormField(
+                    value: secYTon.abriendoSucursal
+                        ? null
+                        : sector.listaSectores.firstWhere((element) =>
+                            element.id == telefonoActual!.expand!.sector.id),
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.abriendoSucursal
+                        ? secYTon.listaSectoresValue
+                            .map((e) => DropdownMenuItem(
+                                  child: Text(e.nombre),
+                                  value: e,
+                                ))
+                            .toList()
+                        : sector.listaSectores
+                            .where((element) =>
+                                element.sucursal ==
+                                telefonoActual!
+                                    .expand!.sector.expand!.sucursal.id)
+                            .toList()
+                            .map((e) => DropdownMenuItem(
+                                  child: Text(e.nombre),
+                                  value: e,
+                                ))
+                            .toList(),
+                    onChanged: (value) async {
+                      esEdit
+                          ? telefonoActual!.sector = value!.id
+                          : telefono.telefonoParaAgregar.sector = value!.id;
+                    },
+                  ),
                 SizedBox(
                   height: 20,
                 ),
@@ -104,18 +165,20 @@ class FormAgregarTelefono extends StatelessWidget {
         actions: [
           TextButton(
               onPressed: () {
+                secYTon.cambiarSucursal(false);
                 Navigator.pop(context);
               },
               child: Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
+                secYTon.cambiarSucursal(false);
                 esEdit
                     ? telefono.editTelefono(telefonoActual!)
                     : telefono.agregarTelefono(telefono.telefonoParaAgregar);
 
                 Navigator.pop(context);
               },
-              child: Text("Agregar")),
+              child: Text("Confirmar")),
         ],
       ),
     );

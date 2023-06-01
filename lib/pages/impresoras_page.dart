@@ -61,6 +61,7 @@ class ImpresorasPage extends StatelessWidget {
     _showEditPopup(Impresora data) {
       Impresora impresoraActual = data;
       showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) =>
             FormAgregarImpresora(esEdit: true, impresoraActual: data),

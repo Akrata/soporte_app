@@ -33,6 +33,11 @@ class FormAgregarPinpad extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 DropdownButtonFormField(
+                  value: esEdit
+                      ? listaSucursales.firstWhere((element) =>
+                          element.id ==
+                          pinpadActual!.expand!.sector.expand!.sucursal.id)
+                      : null,
                   decoration: InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
@@ -41,10 +46,66 @@ class FormAgregarPinpad extends StatelessWidget {
                           ))
                       .toList(),
                   onChanged: (value) async {
-                    await secYTon.getSectorSegunSucursal(value!.id);
-                    pinpad.sucursal = value.id;
+                    try {
+                      await secYTon.getSectorSegunSucursal(value!.id);
+                      if (esEdit) {
+                        secYTon.cambiarSucursal(true);
+                      }
+                      esEdit
+                          ? pinpadActual!.expand!.sector.sucursal = value.id
+                          : pinpad.sucursal = value.id;
+                    } catch (e) {
+                      print(e);
+                    }
                   },
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                if (!esEdit)
+                  DropdownButtonFormField(
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.listaSectoresValue
+                        .map((e) => DropdownMenuItem(
+                              child: Text(e.nombre),
+                              value: e,
+                            ))
+                        .toList(),
+                    onChanged: (value) async {
+                      pinpad.pinpadParaAgregar.sector = value!.id;
+                    },
+                  ),
+                if (esEdit)
+                  DropdownButtonFormField(
+                    value: secYTon.abriendoSucursal
+                        ? null
+                        : sector.listaSectores.firstWhere((element) =>
+                            element.id == pinpadActual!.expand!.sector.id),
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.abriendoSucursal
+                        ? secYTon.listaSectoresValue
+                            .map((e) => DropdownMenuItem(
+                                  child: Text(e.nombre),
+                                  value: e,
+                                ))
+                            .toList()
+                        : sector.listaSectores
+                            .where((element) =>
+                                element.sucursal ==
+                                pinpadActual!
+                                    .expand!.sector.expand!.sucursal.id)
+                            .toList()
+                            .map((e) => DropdownMenuItem(
+                                  child: Text(e.nombre),
+                                  value: e,
+                                ))
+                            .toList(),
+                    onChanged: (value) async {
+                      esEdit
+                          ? pinpadActual!.sector = value!.id
+                          : pinpad.pinpadParaAgregar.sector = value!.id;
+                    },
+                  ),
                 SizedBox(
                   height: 20,
                 ),
@@ -94,18 +155,20 @@ class FormAgregarPinpad extends StatelessWidget {
         actions: [
           TextButton(
               onPressed: () {
+                secYTon.cambiarSucursal(false);
                 Navigator.pop(context);
               },
               child: Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
+                secYTon.cambiarSucursal(false);
                 esEdit
                     ? pinpad.editPinpad(pinpadActual!)
                     : pinpad.agregarPinpad(pinpad.pinpadParaAgregar);
 
                 Navigator.pop(context);
               },
-              child: Text("Agregar")),
+              child: Text("Confirmar")),
         ],
       ),
     );

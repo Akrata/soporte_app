@@ -63,6 +63,7 @@ class TelefonosPage extends StatelessWidget {
 
     _showEditPopup(Telefono data) {
       showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) =>
             FormAgregarTelefono(esEdit: true, telefonoActual: data),

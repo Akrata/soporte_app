@@ -32,6 +32,11 @@ class FormAgregarUps extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 DropdownButtonFormField(
+                  value: esEdit
+                      ? listaSucursales.firstWhere((element) =>
+                          element.id ==
+                          upsActual!.expand!.sector.expand!.sucursal.id)
+                      : null,
                   decoration: InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
@@ -40,10 +45,65 @@ class FormAgregarUps extends StatelessWidget {
                           ))
                       .toList(),
                   onChanged: (value) async {
-                    await secYTon.getSectorSegunSucursal(value!.id);
-                    ups.sucursal = value.id;
+                    try {
+                      await secYTon.getSectorSegunSucursal(value!.id);
+                      if (esEdit) {
+                        secYTon.cambiarSucursal(true);
+                      }
+                      esEdit
+                          ? upsActual!.expand!.sector.sucursal = value.id
+                          : ups.sucursal = value.id;
+                    } catch (e) {
+                      print(e);
+                    }
                   },
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                if (!esEdit)
+                  DropdownButtonFormField(
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.listaSectoresValue
+                        .map((e) => DropdownMenuItem(
+                              child: Text(e.nombre),
+                              value: e,
+                            ))
+                        .toList(),
+                    onChanged: (value) async {
+                      ups.upsParaAgregar.sector = value!.id;
+                    },
+                  ),
+                if (esEdit)
+                  DropdownButtonFormField(
+                    value: secYTon.abriendoSucursal
+                        ? null
+                        : sector.listaSectores.firstWhere((element) =>
+                            element.id == upsActual!.expand!.sector.id),
+                    decoration: InputDecoration(hintText: 'Sector'),
+                    items: secYTon.abriendoSucursal
+                        ? secYTon.listaSectoresValue
+                            .map((e) => DropdownMenuItem(
+                                  child: Text(e.nombre),
+                                  value: e,
+                                ))
+                            .toList()
+                        : sector.listaSectores
+                            .where((element) =>
+                                element.sucursal ==
+                                upsActual!.expand!.sector.expand!.sucursal.id)
+                            .toList()
+                            .map((e) => DropdownMenuItem(
+                                  child: Text(e.nombre),
+                                  value: e,
+                                ))
+                            .toList(),
+                    onChanged: (value) async {
+                      esEdit
+                          ? upsActual!.sector = value!.id
+                          : ups.upsParaAgregar.sector = value!.id;
+                    },
+                  ),
                 SizedBox(
                   height: 20,
                 ),
@@ -103,18 +163,20 @@ class FormAgregarUps extends StatelessWidget {
         actions: [
           TextButton(
               onPressed: () {
+                secYTon.cambiarSucursal(false);
                 Navigator.pop(context);
               },
               child: Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
+                secYTon.cambiarSucursal(false);
                 esEdit
                     ? ups.editUps(upsActual!)
                     : ups.agregarUps(ups.upsParaAgregar);
 
                 Navigator.pop(context);
               },
-              child: Text("Agregar")),
+              child: Text("Confirmar")),
         ],
       ),
     );

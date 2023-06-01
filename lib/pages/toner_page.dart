@@ -65,6 +65,7 @@ class TonerPage extends StatelessWidget {
 
     _showEditPopup(Toner data) {
       showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) => FormAgregarToner(esEdit: true, tonerActual: data),
       );
