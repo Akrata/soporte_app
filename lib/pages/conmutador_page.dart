@@ -2,33 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/models/conmutador.dart';
 import 'package:soporte_app/providers/request_providers/conmutador_request.dart';
-import 'package:soporte_app/providers/request_providers/sector_request.dart';
-import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
-import 'package:soporte_app/screens/sector_screen.dart';
+
 import 'package:soporte_app/widgets/custom_appbar.dart';
 import 'package:soporte_app/widgets/form_agregar_conmutador.dart';
-import 'package:soporte_app/widgets/form_agregar_sector.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
-import '../models/sector.dart';
-import '../providers/auth/auth_with_pass.dart';
 import '../widgets/searchbar.dart';
 
 class ConmutadorPage extends StatelessWidget {
-  String nombre;
-  ConmutadorPage({Key? key, required this.nombre}) : super(key: key);
+  final String nombre;
+  const ConmutadorPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final conmutador = Provider.of<ConmutadorRequest>(context);
-    final _data = conmutador.inSearch == false
+    final data = conmutador.inSearch == false
         ? conmutador.listaConmutadores
         : conmutador.listaBusquedaConmutador;
-    final listaSucursales =
-        Provider.of<SucursalesRequest>(context).listaSucursales;
 
-    final user = Provider.of<AuthWithPass>(context);
-
+    // ignore: no_leading_underscores_for_local_identifiers
     _showDeletePopup(Conmutador data) {
       showDialog(
         context: context,
@@ -40,7 +33,7 @@ class ConmutadorPage extends StatelessWidget {
                   "Esta intentando eliminar por completo el conmutador ${data.nombre} (${data.ip})"),
               // Text(
               //     "Al eliminarlo, también eliminará todo lo asociado al sector, impresoras, equipos, etc"),
-              Text("Desea continuar?"),
+              const Text("Desea continuar?"),
             ],
           ),
           actions: [
@@ -48,14 +41,14 @@ class ConmutadorPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Canelar"),
+              child: const Text("Canelar"),
             ),
             TextButton(
               onPressed: () {
                 conmutador.deleteConmutador(data.id);
                 Navigator.pop(context);
               },
-              child: Text(
+              child: const Text(
                 "Eliminar",
                 style: TextStyle(color: Colors.red),
               ),
@@ -66,7 +59,6 @@ class ConmutadorPage extends StatelessWidget {
     }
 
     _showEditPopup(Conmutador data) {
-      Conmutador conmutadorActual = data;
       showDialog(
         barrierDismissible: false,
         context: context,
@@ -86,10 +78,10 @@ class ConmutadorPage extends StatelessWidget {
               buscar: conmutador.busquedaEnLista,
               getAll: conmutador.getConmutador,
               controller: conmutador.controller),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: SingleChildScrollView(
                 child: DataTable(
@@ -100,7 +92,7 @@ class ConmutadorPage extends StatelessWidget {
                 DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Acciones')),
               ],
-              rows: _data
+              rows: data
                   .map(
                     (data) => DataRow(
                       cells: [
@@ -108,8 +100,8 @@ class ConmutadorPage extends StatelessWidget {
                           Tooltip(
                             message: data.nombre,
                             child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              constraints: const BoxConstraints(
+                                  maxWidth: 100, maxHeight: 20),
                               child: Text(
                                 data.nombre,
                                 overflow: TextOverflow.ellipsis,
@@ -128,8 +120,8 @@ class ConmutadorPage extends StatelessWidget {
                           Tooltip(
                             message: data.observaciones,
                             child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              constraints: const BoxConstraints(
+                                  maxWidth: 100, maxHeight: 20),
                               child: Text(
                                 data.observaciones ?? '',
                                 overflow: TextOverflow.ellipsis,
@@ -163,6 +155,7 @@ class ConmutadorPage extends StatelessWidget {
                               ),
                               onPressed: () async {
                                 try {
+                                  // ignore: deprecated_member_use
                                   await launch("http://${data.ip}");
                                 } catch (e) {
                                   print('Error al abrir UltraVNC: $e');
@@ -186,7 +179,7 @@ class ConmutadorPage extends StatelessWidget {
               builder: (context) => FormAgregarConmutador(esEdit: false),
             );
           },
-          child: Icon(Icons.add)),
+          child: const Icon(Icons.add)),
     );
   }
 }

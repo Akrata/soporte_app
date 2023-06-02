@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/models/equipo.dart';
@@ -9,17 +10,17 @@ import '../utils/temporal_vnc.dart';
 import '../widgets/form_agregar_equipo.dart';
 
 class EquiposPage extends StatelessWidget {
-  String nombre;
-  final TextEditingController _controller = TextEditingController();
-  EquiposPage({Key? key, required this.nombre}) : super(key: key);
+  final String nombre;
+  const EquiposPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final equipos = Provider.of<EquiposRequest>(context);
-    final _data = equipos.inSearch == false
+    final data = equipos.inSearch == false
         ? equipos.listaEquipos
         : equipos.listaBusquedaEquipos;
 
+    // ignore: no_leading_underscores_for_local_identifiers
     _showDeletePopup(Equipo data) {
       showDialog(
         context: context,
@@ -31,7 +32,7 @@ class EquiposPage extends StatelessWidget {
                   "Esta intentando eliminar por completo el Equipo ${data.ip}, tanto de Sanatorio como de Policlinico"),
               // Text(
               //     "Al eliminar el Equipo, tambien eliminará todas las solicitudes asociadas."),
-              Text("Desea continuar?"),
+              const Text("Desea continuar?"),
             ],
           ),
           actions: [
@@ -39,14 +40,14 @@ class EquiposPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Canelar"),
+              child: const Text("Canelar"),
             ),
             TextButton(
               onPressed: () {
                 equipos.deleteEquipo(data.id);
                 Navigator.pop(context);
               },
-              child: Text(
+              child: const Text(
                 "Eliminar",
                 style: TextStyle(color: Colors.red),
               ),
@@ -56,8 +57,8 @@ class EquiposPage extends StatelessWidget {
       );
     }
 
+    // ignore: no_leading_underscores_for_local_identifiers
     _showEditPopup(Equipo data) {
-      Equipo equipoActual = data;
       showDialog(
         barrierDismissible: false,
         context: context,
@@ -115,10 +116,10 @@ class EquiposPage extends StatelessWidget {
           //         )),
           //   ),
           // ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Row(
+          const Row(
             children: [
               // TextButton(
               //     onPressed: () async {
@@ -145,7 +146,7 @@ class EquiposPage extends StatelessWidget {
               // ),
             ],
           ),
-          Container(
+          SizedBox(
             width: double.infinity,
             child: SingleChildScrollView(
                 child: DataTable(
@@ -165,7 +166,7 @@ class EquiposPage extends StatelessWidget {
                 // DataColumn(label: Text('Lic_Office')),
                 DataColumn(label: Text('Acciones')),
               ],
-              rows: _data
+              rows: data
                   .map(
                     (data) => DataRow(
                       cells: [
@@ -173,8 +174,8 @@ class EquiposPage extends StatelessWidget {
                           Tooltip(
                             message: data.nombre,
                             child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              constraints: const BoxConstraints(
+                                  maxWidth: 100, maxHeight: 20),
                               child: Text(
                                 data.nombre,
                                 overflow: TextOverflow.ellipsis,
@@ -211,8 +212,8 @@ class EquiposPage extends StatelessWidget {
                           Tooltip(
                             message: data.observaciones,
                             child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              constraints: const BoxConstraints(
+                                  maxWidth: 100, maxHeight: 20),
                               child: Text(
                                 data.observaciones ?? '',
                                 overflow: TextOverflow.ellipsis,
@@ -261,7 +262,9 @@ class EquiposPage extends StatelessWidget {
                                   TemporalVnc()
                                       .generarArchivoVNC(data.ip, 5900);
                                 } catch (e) {
-                                  print('Error al abrir UltraVNC: $e');
+                                  if (kDebugMode) {
+                                    print('Error al abrir UltraVNC: $e');
+                                  }
                                 }
                               },
                             ),
@@ -276,11 +279,10 @@ class EquiposPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
             showDialog(
               context: context,
-              //TODO:
               builder: (context) => FormAgregarEquipo(
                 esEdit: false,
               ),
