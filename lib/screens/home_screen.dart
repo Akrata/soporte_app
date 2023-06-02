@@ -51,19 +51,19 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            child: IconButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    content: Column(),
-                  ),
-                );
-              },
-              icon: Icon(Icons.settings),
-            ),
-          ),
+          // Container(
+          //   child: IconButton(
+          //     onPressed: () {
+          //       showDialog(
+          //         context: context,
+          //         builder: (context) => AlertDialog(
+          //           content: Column(),
+          //         ),
+          //       );
+          //     },
+          //     icon: Icon(Icons.settings),
+          //   ),
+          // ),
           SizedBox(
             width: 30,
           ),
