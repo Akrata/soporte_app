@@ -110,22 +110,6 @@ class FormAgregarTelefono extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                if (telefono.sucursal != "")
-                  DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Sector'),
-                    items: secYTon.listaSectoresValue
-                        .map((e) => DropdownMenuItem(
-                              child: Text(e.nombre),
-                              value: e,
-                            ))
-                        .toList(),
-                    onChanged: (value) async {
-                      telefono.telefonoParaAgregar.sector = value!.id;
-                    },
-                  ),
-                SizedBox(
-                  height: 20,
-                ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Interno'),
                   initialValue: esEdit ? telefonoActual!.interno : null,

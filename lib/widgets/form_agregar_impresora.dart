@@ -125,22 +125,7 @@ class FormAgregarImpresora extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                if (impresora.sucursal != "")
-                  DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Sector'),
-                    items: secYTon.listaSectoresValue
-                        .map((e) => DropdownMenuItem(
-                              child: Text(e.nombre),
-                              value: e,
-                            ))
-                        .toList(),
-                    onChanged: (value) async {
-                      impresora.impresoraParaAgregar.sector = value!.id;
-                    },
-                  ),
-                SizedBox(
-                  height: 20,
-                ),
+
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Marca'),
                   initialValue: esEdit ? impresoraActual!.marca : null,
@@ -171,6 +156,23 @@ class FormAgregarImpresora extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
+
+                DropdownButtonFormField(
+                  decoration: InputDecoration(hintText: 'Toner'),
+                  value: esEdit
+                      ? toner.listaToners.firstWhere((element) =>
+                          element.id == impresoraActual!.expand!.toner!.id)
+                      : null,
+                  items: toner.listaToners
+                      .map((e) => DropdownMenuItem(
+                            child: Text(e.modelo),
+                            value: e,
+                          ))
+                      .toList(),
+                  onChanged: (value) async {
+                    impresora.impresoraParaAgregar.toner = value!.id;
+                  },
+                ),
                 TextFormField(
                   keyboardType: TextInputType.multiline,
                   minLines: 3,
@@ -183,18 +185,6 @@ class FormAgregarImpresora extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 20,
-                ),
-                DropdownButtonFormField(
-                  decoration: InputDecoration(hintText: 'Toner'),
-                  items: toner.listaToners
-                      .map((e) => DropdownMenuItem(
-                            child: Text(e.modelo),
-                            value: e,
-                          ))
-                      .toList(),
-                  onChanged: (value) async {
-                    impresora.impresoraParaAgregar.toner = value!.id;
-                  },
                 ),
               ],
             ),
