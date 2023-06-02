@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SearchBarCustom extends StatelessWidget {
-  dynamic Function(bool) enBusqueda;
-  dynamic Function(dynamic) buscar;
-  dynamic Function() getAll;
+  final dynamic Function(bool) enBusqueda;
+  final dynamic Function(dynamic) buscar;
+  final dynamic Function() getAll;
   // String textoBusqueda;
   final TextEditingController controller;
-  SearchBarCustom({
+  const SearchBarCustom({
     required this.enBusqueda,
     required this.buscar,
     required this.getAll,

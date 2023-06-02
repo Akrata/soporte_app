@@ -11,8 +11,8 @@ import '../widgets/form_agregar_equipo.dart';
 import '../widgets/searchbar.dart';
 
 class UpsPage extends StatelessWidget {
-  String nombre;
-  UpsPage({Key? key, required this.nombre}) : super(key: key);
+  final String nombre;
+  const UpsPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

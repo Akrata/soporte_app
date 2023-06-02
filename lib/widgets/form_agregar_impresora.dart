@@ -11,9 +11,10 @@ import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarImpresora extends StatelessWidget {
-  bool esEdit = false;
-  Impresora? impresoraActual;
-  FormAgregarImpresora({super.key, required this.esEdit, this.impresoraActual});
+  final bool esEdit;
+  final Impresora? impresoraActual;
+  const FormAgregarImpresora(
+      {super.key, required this.esEdit, this.impresoraActual});
 
   @override
   Widget build(BuildContext context) {

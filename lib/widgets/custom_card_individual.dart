@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomCardIndividual extends StatelessWidget {
-  IconData icono;
-  String? ip;
-  String? nombre;
-  String? modelo;
-  String? marca;
-  void Function()? onTap;
-  String? toner;
+  final IconData icono;
+  final String? ip;
+  final String? nombre;
+  final String? modelo;
+  final String? marca;
+  final void Function()? onTap;
+  final String? toner;
 
-  CustomCardIndividual(
+  const CustomCardIndividual(
       {super.key,
       required this.icono,
       this.ip,

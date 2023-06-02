@@ -17,8 +17,8 @@ import '../widgets/form_agregar_equipo.dart';
 import '../widgets/searchbar.dart';
 
 class PinpadPage extends StatelessWidget {
-  String nombre;
-  PinpadPage({Key? key, required this.nombre}) : super(key: key);
+  final String nombre;
+  const PinpadPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -129,10 +129,10 @@ class PinpadPage extends StatelessWidget {
                           Text(data.ip),
                         ),
                         DataCell(
-                          Text(data.expand!.sector!.nombre),
+                          Text(data.expand!.sector.nombre),
                         ),
                         DataCell(
-                          Text(data.expand!.sector!.expand!.sucursal.nombre),
+                          Text(data.expand!.sector.expand!.sucursal.nombre),
                         ),
                         DataCell(
                           Tooltip(

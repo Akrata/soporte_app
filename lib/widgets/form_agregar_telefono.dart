@@ -12,9 +12,10 @@ import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarTelefono extends StatelessWidget {
-  bool esEdit = false;
-  Telefono? telefonoActual;
-  FormAgregarTelefono({super.key, required this.esEdit, this.telefonoActual});
+  final bool esEdit;
+  final Telefono? telefonoActual;
+  const FormAgregarTelefono(
+      {super.key, required this.esEdit, this.telefonoActual});
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +179,7 @@ class FormAgregarTelefono extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: Text("Confirmar")),
+              child: Text("Confirmarfinal ")),
         ],
       ),
     );

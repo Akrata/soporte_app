@@ -15,8 +15,8 @@ import '../widgets/form_agregar_equipo.dart';
 import '../widgets/searchbar.dart';
 
 class TelefonosPage extends StatelessWidget {
-  String nombre;
-  TelefonosPage({Key? key, required this.nombre}) : super(key: key);
+  final String nombre;
+  const TelefonosPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -130,17 +130,17 @@ class TelefonosPage extends StatelessWidget {
                           Text(data.ip),
                         ),
                         DataCell(
-                          Text(data.expand!.sector!.nombre),
+                          Text(data.expand!.sector.nombre),
                         ),
                         DataCell(
-                          Text(data.expand!.sector!.expand!.sucursal.nombre),
+                          Text(data.expand!.sector.expand!.sucursal.nombre),
                         ),
                         DataCell(
                           Tooltip(
                             message: data.observaciones,
                             child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
+                              constraints: const BoxConstraints(
+                                  maxWidth: 100, maxHeight: 20),
                               child: Text(
                                 data.observaciones ?? '',
                                 overflow: TextOverflow.ellipsis,

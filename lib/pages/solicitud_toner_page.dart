@@ -10,8 +10,8 @@ import 'package:soporte_app/widgets/widgets.dart';
 import '../widgets/custom_appbar.dart';
 
 class SolicitudTonerPage extends StatelessWidget {
-  String nombre;
-  SolicitudTonerPage({Key? key, required this.nombre}) : super(key: key);
+  final String nombre;
+  const SolicitudTonerPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

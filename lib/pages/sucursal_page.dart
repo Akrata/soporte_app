@@ -10,8 +10,8 @@ import '../providers/auth/auth_with_pass.dart';
 import '../widgets/searchbar.dart';
 
 class SucursalPage extends StatelessWidget {
-  String nombre;
-  SucursalPage({Key? key, required this.nombre}) : super(key: key);
+  final String nombre;
+  const SucursalPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -5,10 +5,10 @@ import 'package:soporte_app/providers/request_providers/toner_request.dart';
 import '../models/toner.dart';
 
 class FormAgregarToner extends StatelessWidget {
-  bool esEdit = false;
-  Toner? tonerActual;
+  final bool esEdit;
+  final Toner? tonerActual;
   final userSucursal;
-  FormAgregarToner(
+  const FormAgregarToner(
       {super.key,
       required this.esEdit,
       this.tonerActual,

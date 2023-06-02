@@ -11,8 +11,8 @@ import '../providers/auth/auth_with_pass.dart';
 import '../widgets/searchbar.dart';
 
 class SectorPage extends StatelessWidget {
-  String nombre;
-  SectorPage({Key? key, required this.nombre}) : super(key: key);
+  final String nombre;
+  const SectorPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

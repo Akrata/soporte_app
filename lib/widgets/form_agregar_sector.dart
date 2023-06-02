@@ -5,9 +5,9 @@ import 'package:soporte_app/providers/request_providers/sector_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 
 class FormAgregarSector extends StatelessWidget {
-  bool esEdit = false;
-  Sector? sectorActual;
-  FormAgregarSector({super.key, required this.esEdit, this.sectorActual});
+  final bool esEdit;
+  final Sector? sectorActual;
+  const FormAgregarSector({super.key, required this.esEdit, this.sectorActual});
 
   @override
   Widget build(BuildContext context) {

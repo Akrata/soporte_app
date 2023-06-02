@@ -33,7 +33,7 @@ class FormAgregarSolicitud extends StatelessWidget {
                 onChanged: (value) async {
                   secYTon.sucursal = value!.id;
                   // print(secYTon.sucursal);
-                  await secYTon.getSectorSegunSucursal(value!.id);
+                  await secYTon.getSectorSegunSucursal(value.id);
                 },
               ),
               SizedBox(
@@ -49,9 +49,9 @@ class FormAgregarSolicitud extends StatelessWidget {
                           ))
                       .toList(),
                   onChanged: (value) async {
-                    secYTon.sector = "${value!.id}";
+                    secYTon.sector = value!.id;
                     // print(value.id);
-                    await secYTon.getImpresoraSegunSector(value!.id);
+                    await secYTon.getImpresoraSegunSector(value.id);
                   },
                 ),
               SizedBox(
@@ -68,7 +68,7 @@ class FormAgregarSolicitud extends StatelessWidget {
                       .toList(),
                   onChanged: (value) async {
                     secYTon.impresora = "${value!.marca} ${value.modelo}";
-                    await secYTon.getTonerSegunImpresora(value!.id);
+                    await secYTon.getTonerSegunImpresora(value.id);
                     // print(secYTon.impresora);
                   },
                 ),

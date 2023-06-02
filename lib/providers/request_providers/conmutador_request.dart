@@ -78,6 +78,7 @@ class ConmutadorRequest extends ChangeNotifier {
       final response = http.delete(
         Uri.http(DB.dbIp, 'api/collections/conmutador/records/$id'),
       );
+
       notifyListeners();
     } catch (e) {
       print(e);

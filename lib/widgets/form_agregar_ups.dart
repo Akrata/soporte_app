@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/equipo.dart';
+
 import 'package:soporte_app/models/ups.dart';
-import 'package:soporte_app/providers/request_providers/equipos_request.dart';
+
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
-import 'package:soporte_app/providers/request_providers/toner_request.dart';
+
 import 'package:soporte_app/providers/request_providers/ups_request.dart';
 
 import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarUps extends StatelessWidget {
-  bool esEdit = false;
-  Ups? upsActual;
-  FormAgregarUps({super.key, required this.esEdit, this.upsActual});
+  final bool esEdit;
+  final Ups? upsActual;
+  const FormAgregarUps({super.key, required this.esEdit, this.upsActual});
 
   @override
   Widget build(BuildContext context) {

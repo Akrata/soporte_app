@@ -91,6 +91,7 @@ class EquiposRequest extends ChangeNotifier {
       final response = http.delete(
         Uri.http(DB.dbIp, 'api/collections/equipo/records/$id'),
       );
+
       notifyListeners();
     } catch (e) {
       print(e);

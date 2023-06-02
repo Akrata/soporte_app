@@ -6,9 +6,9 @@ import 'package:soporte_app/providers/request_providers/sector_individual_reques
 import '../widgets/custom_card_individual.dart';
 
 class SectorScreen extends StatelessWidget {
-  String idSector;
-  String nombre;
-  SectorScreen({Key? key, required this.idSector, required this.nombre})
+  final String idSector;
+  final String nombre;
+  const SectorScreen({Key? key, required this.idSector, required this.nombre})
       : super(key: key);
 
   @override

@@ -17,8 +17,8 @@ import '../widgets/searchbar.dart';
 import 'package:path_provider/path_provider.dart';
 
 class TonerPage extends StatelessWidget {
-  String nombre;
-  TonerPage({Key? key, required this.nombre}) : super(key: key);
+  final String nombre;
+  const TonerPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

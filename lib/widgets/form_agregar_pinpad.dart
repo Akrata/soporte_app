@@ -12,9 +12,9 @@ import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarPinpad extends StatelessWidget {
-  bool esEdit = false;
-  Pinpad? pinpadActual;
-  FormAgregarPinpad({super.key, required this.esEdit, this.pinpadActual});
+  final bool esEdit;
+  final Pinpad? pinpadActual;
+  const FormAgregarPinpad({super.key, required this.esEdit, this.pinpadActual});
 
   @override
   Widget build(BuildContext context) {

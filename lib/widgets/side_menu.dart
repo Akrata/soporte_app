@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:soporte_app/widgets/side_menu_items.dart';
 
 class SideMenu extends StatelessWidget {
-  List<SideMenuItems> items;
-  PageController page;
-  SideMenu({super.key, required this.items, required this.page});
+  final List<SideMenuItems> items;
+  final PageController page;
+  const SideMenu({super.key, required this.items, required this.page});
 
   @override
   Widget build(BuildContext context) {

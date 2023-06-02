@@ -9,10 +9,10 @@ import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarEquipo extends StatelessWidget {
-  bool esEdit = false;
-  Equipo? equipoActual;
+  final bool esEdit;
+  final Equipo? equipoActual;
 
-  FormAgregarEquipo({super.key, required this.esEdit, this.equipoActual});
+  const FormAgregarEquipo({super.key, required this.esEdit, this.equipoActual});
 
   @override
   Widget build(BuildContext context) {

@@ -12,8 +12,8 @@ import '../widgets/form_agregar_equipo.dart';
 import '../widgets/searchbar.dart';
 
 class ImpresorasPage extends StatelessWidget {
-  String nombre;
-  ImpresorasPage({Key? key, required this.nombre}) : super(key: key);
+  final String nombre;
+  const ImpresorasPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

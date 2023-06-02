@@ -13,10 +13,10 @@ import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
 
 class FormAgregarConmutador extends StatelessWidget {
-  bool esEdit = false;
-  Conmutador? conmutadorActual;
+  final bool esEdit;
+  final Conmutador? conmutadorActual;
 
-  FormAgregarConmutador(
+  const FormAgregarConmutador(
       {super.key, required this.esEdit, this.conmutadorActual});
 
   @override
