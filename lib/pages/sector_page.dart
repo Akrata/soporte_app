@@ -120,22 +120,22 @@ class SectorPage extends StatelessWidget {
                             SizedBox(
                               width: 40,
                             ),
-                            TextButton(
-                                onPressed: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => SectorScreen(
-                                          idSector: data.id,
-                                          nombre: data.nombre));
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //       builder: (context) => SectorScreen(
-                                  //           idSector: data.id,
-                                  //           nombre: data.nombre),
-                                  //     ));
-                                },
-                                child: Text("Visualizar Sector"))
+                            // TextButton(
+                            //     onPressed: () {
+                            //       showDialog(
+                            //           context: context,
+                            //           builder: (context) => SectorScreen(
+                            //               idSector: data.id,
+                            //               nombre: data.nombre));
+                            //       // Navigator.push(
+                            //       //     context,
+                            //       //     MaterialPageRoute(
+                            //       //       builder: (context) => SectorScreen(
+                            //       //           idSector: data.id,
+                            //       //           nombre: data.nombre),
+                            //       //     ));
+                            //     },
+                            //     child: Text("Visualizar Sector"))
                           ],
                         )),
                       ],

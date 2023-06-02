@@ -36,6 +36,7 @@ class ImpresorasRequest extends ChangeNotifier {
     listaBusquedaImpresoras = listaImpresoras
         .where((element) =>
             element.marca.toLowerCase().contains(texto) ||
+            element.expand!.toner!.modelo.toLowerCase().contains(texto) ||
             element.modelo.toLowerCase().contains(texto) ||
             element.ip.toLowerCase().contains(texto) ||
             element.expand!.sector!.nombre.toLowerCase().contains(texto) ||

@@ -109,7 +109,7 @@ class UpsPage extends StatelessWidget {
                 DataColumn(label: Text('Modelo')),
                 DataColumn(label: Text('Sector')),
                 DataColumn(label: Text('Sucursal')),
-                DataColumn(label: Text('Ultimo Mant.')),
+                // DataColumn(label: Text('Ultimo Mant.')),
                 DataColumn(label: Text('Observaciones')),
                 DataColumn(label: Text('Acciones')),
               ],
@@ -151,9 +151,9 @@ class UpsPage extends StatelessWidget {
                         DataCell(
                           Text(data.expand!.sector.expand!.sucursal.nombre),
                         ),
-                        DataCell(
-                          Text(data.ultimoMantenimiento.toString()),
-                        ),
+                        // DataCell(
+                        //   Text(data.ultimoMantenimiento.toString()),
+                        // ),
                         DataCell(
                           Tooltip(
                             message: data.observaciones,

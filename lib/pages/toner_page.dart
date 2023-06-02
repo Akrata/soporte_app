@@ -67,7 +67,10 @@ class TonerPage extends StatelessWidget {
       showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (context) => FormAgregarToner(esEdit: true, tonerActual: data),
+        builder: (context) => FormAgregarToner(
+            esEdit: true,
+            tonerActual: data,
+            userSucursal: user.usuario.lugarTrabajo),
       );
     }
 
@@ -82,15 +85,6 @@ class TonerPage extends StatelessWidget {
               controller: toner.controller),
           Row(
             children: [
-              TextButton(
-                  onPressed: () async {
-                    try {
-                      TemporalVnc().generarArchivoVNC("192.2.2.155", 5900);
-                    } catch (e) {
-                      print('Error al abrir UltraVNC: $e');
-                    }
-                  },
-                  child: Text("vnc")),
               SizedBox(
                 child: TextButton(
                   onPressed: () {
@@ -201,6 +195,7 @@ class TonerPage extends StatelessWidget {
             showDialog(
               context: context,
               builder: (context) => FormAgregarToner(
+                userSucursal: user.usuario.lugarTrabajo,
                 esEdit: false,
               ),
             );

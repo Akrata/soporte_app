@@ -159,7 +159,7 @@ class EquiposPage extends StatelessWidget {
                 DataColumn(label: Text('IP')),
                 DataColumn(label: Text('Sector')),
                 DataColumn(label: Text('Sucursal')),
-                DataColumn(label: Text('Ult_Mant')),
+                // DataColumn(label: Text('Ult_Mant')),
                 DataColumn(label: Text('Observaciones')),
                 // DataColumn(label: Text('Lic_Windows')),
                 // DataColumn(label: Text('Lic_Office')),
@@ -201,12 +201,12 @@ class EquiposPage extends StatelessWidget {
                             softWrap: true,
                           ),
                         ),
-                        DataCell(
-                          Text(
-                            data.ultimoMantenimiento.toString(),
-                            softWrap: true,
-                          ),
-                        ),
+                        // DataCell(
+                        //   Text(
+                        //     data.ultimoMantenimiento.toString(),
+                        //     softWrap: true,
+                        //   ),
+                        // ),
                         DataCell(
                           Tooltip(
                             message: data.observaciones,

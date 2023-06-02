@@ -107,22 +107,6 @@ class FormAgregarUps extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                if (ups.sucursal != "")
-                  DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Sector'),
-                    items: secYTon.listaSectoresValue
-                        .map((e) => DropdownMenuItem(
-                              child: Text(e.nombre),
-                              value: e,
-                            ))
-                        .toList(),
-                    onChanged: (value) async {
-                      ups.upsParaAgregar.sector = value!.id;
-                    },
-                  ),
-                SizedBox(
-                  height: 20,
-                ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Marca'),
                   initialValue: esEdit ? upsActual!.marca : null,
