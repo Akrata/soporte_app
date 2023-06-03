@@ -134,10 +134,15 @@ class SolicitudTonerPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) => FormAgregarSolicitud(),
-          );
+          try {
+            showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) => FormAgregarSolicitud(),
+            );
+          } catch (e) {
+            print(e);
+          }
         },
         child: const Icon(Icons.add),
       ),

@@ -35,6 +35,12 @@ class SolicitudTonerRequest extends ChangeNotifier {
   //Abriendo sucursal
   bool abriendoSucursal = false;
 
+  //deshabilitar dropdowns;
+
+  bool dropDown1 = true;
+  bool dropDown2 = true;
+  bool dropDown3 = true;
+
 // Propiedades para agregar una solicitud
   String sucursal = '';
   String sector = '';
@@ -47,6 +53,11 @@ class SolicitudTonerRequest extends ChangeNotifier {
   List<SolicitudToner> listaBusquedaSolicitud = [];
   bool inSearch = false;
   TextEditingController controller = TextEditingController();
+
+  habilitarDropDown(dropdown, bool dato) {
+    dropdown = dato;
+    notifyListeners();
+  }
 
   SolicitudTonerRequest() {
     getSolicitudToner();
@@ -61,6 +72,11 @@ class SolicitudTonerRequest extends ChangeNotifier {
 
   cambiarSucursal(bool dato) {
     abriendoSucursal = dato;
+    notifyListeners();
+  }
+
+  cambindoSucursal(String dato) {
+    sucursal = dato;
     notifyListeners();
   }
 
@@ -173,7 +189,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
           body: toner.toJson(),
           encoding: utf8,
           headers: {"Content-Type": "application/json"});
-      final decodedData = response.body;
+
       limpiarForm();
       notifyListeners();
     } catch (e) {
