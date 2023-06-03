@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Soporte_App"
-#define MyAppVersion "0.9"
+#define MyAppVersion "0.9.7"
 #define MyAppPublisher "Pablo Feijo"
 #define MyAppExeName "soporte_app.exe"
 
@@ -19,7 +19,7 @@ DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 OutputDir=D:\Dev\Flutter\soporte_app\installers
-OutputBaseFilename=Soporte_App
+OutputBaseFilename=Soporte_App_V0.9.7
 SetupIconFile=D:\Dev\Flutter\soporte_app\installers\apoyo-tecnico.ico
 Password=piedra00
 Compression=lzma
