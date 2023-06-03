@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:soporte_app/models/toner.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
+import 'package:soporte_app/providers/request_providers/toner_request.dart';
 import 'package:soporte_app/utils/fecha_formater.dart';
 import 'package:soporte_app/widgets/searchbar.dart';
 import 'package:soporte_app/widgets/widgets.dart';
@@ -18,6 +20,7 @@ class SolicitudTonerPage extends StatelessWidget {
     final solicitudToner = Provider.of<SolicitudTonerRequest>(context);
 
     final user = Provider.of<AuthWithPass>(context);
+    final toner = Provider.of<TonerRequest>(context);
 
     final _data = solicitudToner.inSearch == false
         ? solicitudToner.listaSolicitudToner
@@ -68,8 +71,8 @@ class SolicitudTonerPage extends StatelessWidget {
                         DataCell(Row(
                           children: [
                             Checkbox(
+                              activeColor: Colors.green,
                               onChanged: (value) {
-                                //TODO: Realizar la baja de stock
                                 // print(user.pb.authStore.model.toString());
                                 // if (value == true) {
                                 //   solicitudToner.entregarToner(
@@ -94,6 +97,27 @@ class SolicitudTonerPage extends StatelessWidget {
                                 //   solicitudToner.entregarToner(
                                 //       data, value!, "");
                                 // }
+                                if (data.expand!.toner.stockMovilPoliclinico >
+                                        0 &&
+                                    user.usuario.lugarTrabajo ==
+                                        "Policlinico") {
+                                  if (value == true) {
+                                    toner.descontarToner(
+                                        data.expand!.toner, "Policlinico");
+                                    solicitudToner.entregarToner(data, value!,
+                                        user.pb.authStore.model.id);
+                                  }
+                                } else if (data
+                                            .expand!.toner.stockMovilSanatorio >
+                                        0 &&
+                                    user.usuario.lugarTrabajo == "Sanatorio") {
+                                  if (value == true) {
+                                    toner.descontarToner(
+                                        data.expand!.toner, "Sanatorio");
+                                    solicitudToner.entregarToner(data, value!,
+                                        user.pb.authStore.model.id);
+                                  }
+                                }
                               },
                               value: data.entregado,
                             ),

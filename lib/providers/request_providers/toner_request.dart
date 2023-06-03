@@ -93,6 +93,25 @@ class TonerRequest extends ChangeNotifier {
     }
   }
 
+  descontarToner(Toner toner, String lugar) async {
+    if (toner.stockMovilPoliclinico > 0 && lugar == "Policlinico") {
+      toner.stockMovilPoliclinico -= 1;
+    } else if (toner.stockFijoSanatorio > 0 && lugar == "Sanatorio") {
+      toner.stockMovilSanatorio -= 1;
+    }
+
+    try {
+      final reponse = await http.patch(
+        Uri.http(DB.dbIp, '/api/collections/toner/records/${toner.id}'),
+        headers: {"Content-Type": "application/json"},
+        body: toner.toJson(),
+      );
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   agregarToner(Toner toner) async {
     try {
       final response = await http.post(
