@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/menu/menu_provider.dart';
 import 'package:soporte_app/providers/request_providers/conmutador_request.dart';
+import 'package:soporte_app/providers/app_status/app_status_request.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/impresoras_request.dart';
 import 'package:soporte_app/providers/request_providers/pinpad_request.dart';
@@ -20,6 +21,8 @@ import 'package:window_manager/window_manager.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
+  bool status = await AppStatusRequest().fetchData();
+  print(status);
   WindowOptions windowOptions = const WindowOptions(
     center: true,
     size: Size(1400, 800),
@@ -29,7 +32,11 @@ void main() async {
     await windowManager.show();
     await windowManager.focus();
   });
-  runApp(const StateApp());
+  if (status) {
+    runApp(const StateApp());
+  } else {
+    runApp(const ErrorMainApp());
+  }
 }
 
 class StateApp extends StatelessWidget {
@@ -96,6 +103,23 @@ class MainApp extends StatelessWidget {
         'login': (context) => const LoginScreen(),
         'home': (context) => const HomeScreen(),
       },
+    );
+  }
+}
+
+class ErrorMainApp extends StatelessWidget {
+  const ErrorMainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      builder: (context, child) => Scaffold(
+        body: Center(
+          child: Text("Aplicacion deshabilitada",
+              style: TextStyle(color: Colors.red, fontSize: 30)),
+        ),
+      ),
     );
   }
 }
