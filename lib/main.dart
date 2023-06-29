@@ -22,6 +22,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   bool status = await AppStatusRequest().fetchData();
+  bool serverStatus = await AppStatusRequest().checkServerStatus();
   print(status);
   WindowOptions windowOptions = const WindowOptions(
     center: true,
@@ -33,7 +34,11 @@ void main() async {
     await windowManager.focus();
   });
   if (status) {
-    runApp(const StateApp());
+    if (serverStatus) {
+      runApp(const StateApp());
+    } else {
+      runApp(const ServerErrorMainApp());
+    }
   } else {
     runApp(const ErrorMainApp());
   }
@@ -85,6 +90,9 @@ class StateApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ConmutadorRequest(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => AppStatusRequest(),
+        ),
       ],
       child: MainApp(),
     );
@@ -117,6 +125,23 @@ class ErrorMainApp extends StatelessWidget {
       builder: (context, child) => Scaffold(
         body: Center(
           child: Text("Aplicacion deshabilitada",
+              style: TextStyle(color: Colors.red, fontSize: 30)),
+        ),
+      ),
+    );
+  }
+}
+
+class ServerErrorMainApp extends StatelessWidget {
+  const ServerErrorMainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      builder: (context, child) => Scaffold(
+        body: Center(
+          child: Text("El servidor esta offline",
               style: TextStyle(color: Colors.red, fontSize: 30)),
         ),
       ),

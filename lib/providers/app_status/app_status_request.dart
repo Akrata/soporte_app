@@ -4,8 +4,31 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 
-class AppStatusRequest {
-  AppStatusRequest() {}
+import '../../DB/db.dart';
+
+class AppStatusRequest extends ChangeNotifier {
+  AppStatusRequest() {
+    checkServerStatus();
+  }
+
+  Future<bool> checkServerStatus() async {
+    try {
+      final response = await http.get(
+        Uri.http(
+          DB.dbIp,
+          '/api/collections/equipo/records',
+        ),
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+      print('Error: $e');
+    }
+  }
 
   Future<bool> fetchData() async {
     var url = Uri.parse(
