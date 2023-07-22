@@ -82,67 +82,69 @@ class SectorPage extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Container(
-            width: double.infinity,
-            child: SingleChildScrollView(
-                child: DataTable(
-              columns: const [
-                DataColumn(label: Text('Sector')),
-                DataColumn(label: Text('Sucursal')),
-                DataColumn(label: Text('Acciones')),
-              ],
-              rows: listaSectores
-                  .map(
-                    (data) => DataRow(
-                      cells: [
-                        DataCell(
-                          Text(data.nombre),
-                        ),
-                        DataCell(Text('${data.expand!.sucursal.nombre}')),
-                        DataCell(Row(
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.edit,
-                                  color: Colors.amber.shade300),
-                              onPressed: () {
-                                _showEditPopup(data);
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: Colors.red.shade300,
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                  child: DataTable(
+                columns: const [
+                  DataColumn(label: Text('Sector')),
+                  DataColumn(label: Text('Sucursal')),
+                  DataColumn(label: Text('Acciones')),
+                ],
+                rows: listaSectores
+                    .map(
+                      (data) => DataRow(
+                        cells: [
+                          DataCell(
+                            Text(data.nombre),
+                          ),
+                          DataCell(Text('${data.expand!.sucursal.nombre}')),
+                          DataCell(Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.edit,
+                                    color: Colors.amber.shade300),
+                                onPressed: () {
+                                  _showEditPopup(data);
+                                },
                               ),
-                              onPressed: () {
-                                _showDeletePopup(data);
-                              },
-                            ),
-                            SizedBox(
-                              width: 40,
-                            ),
-                            // TextButton(
-                            //     onPressed: () {
-                            //       showDialog(
-                            //           context: context,
-                            //           builder: (context) => SectorScreen(
-                            //               idSector: data.id,
-                            //               nombre: data.nombre));
-                            //       // Navigator.push(
-                            //       //     context,
-                            //       //     MaterialPageRoute(
-                            //       //       builder: (context) => SectorScreen(
-                            //       //           idSector: data.id,
-                            //       //           nombre: data.nombre),
-                            //       //     ));
-                            //     },
-                            //     child: Text("Visualizar Sector"))
-                          ],
-                        )),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            )),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red.shade300,
+                                ),
+                                onPressed: () {
+                                  _showDeletePopup(data);
+                                },
+                              ),
+                              SizedBox(
+                                width: 40,
+                              ),
+                              // TextButton(
+                              //     onPressed: () {
+                              //       showDialog(
+                              //           context: context,
+                              //           builder: (context) => SectorScreen(
+                              //               idSector: data.id,
+                              //               nombre: data.nombre));
+                              //       // Navigator.push(
+                              //       //     context,
+                              //       //     MaterialPageRoute(
+                              //       //       builder: (context) => SectorScreen(
+                              //       //           idSector: data.id,
+                              //       //           nombre: data.nombre),
+                              //       //     ));
+                              //     },
+                              //     child: Text("Visualizar Sector"))
+                            ],
+                          )),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              )),
+            ),
           ),
         ],
       ),

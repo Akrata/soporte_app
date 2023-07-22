@@ -117,6 +117,13 @@ class SolicitudTonerPage extends StatelessWidget {
                                     solicitudToner.entregarToner(data, value!,
                                         user.pb.authStore.model.id);
                                   }
+                                } else {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                        content: Text(
+                                            "No hay stock en ${user.usuario.lugarTrabajo}")),
+                                  );
                                 }
                               },
                               value: data.entregado,

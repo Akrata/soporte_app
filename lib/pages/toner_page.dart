@@ -99,92 +99,97 @@ class TonerPage extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            width: double.infinity,
-            child: SingleChildScrollView(
-              child: user.usuario.lugarTrabajo == "Sanatorio"
-                  ? DataTable(
-                      columns: const [
-                        DataColumn(label: Text('Modelo')),
-                        DataColumn(label: Text('Stock Fijo SC')),
-                        DataColumn(label: Text('Stock Movil SC')),
-                        DataColumn(label: Text('Acciones')),
-                      ],
-                      rows: _data
-                          .map(
-                            (data) => DataRow(
-                              cells: [
-                                DataCell(
-                                  Text(data.modelo),
-                                ),
-                                DataCell(Text('${data.stockFijoSanatorio}')),
-                                DataCell(Text('${data.stockMovilSanatorio}')),
-                                DataCell(Row(
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(Icons.edit,
-                                          color: Colors.amber.shade300),
-                                      onPressed: () {
-                                        _showEditPopup(data);
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: Colors.red.shade300,
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: user.usuario.lugarTrabajo == "Sanatorio"
+                    ? DataTable(
+                        columns: const [
+                          DataColumn(label: Text('Modelo')),
+                          DataColumn(label: Text('Stock Fijo SC')),
+                          DataColumn(label: Text('Stock Movil SC')),
+                          DataColumn(label: Text('Acciones')),
+                        ],
+                        rows: _data
+                            .map(
+                              (data) => DataRow(
+                                cells: [
+                                  DataCell(
+                                    Text(data.modelo),
+                                  ),
+                                  DataCell(Text('${data.stockFijoSanatorio}')),
+                                  DataCell(Text('${data.stockMovilSanatorio}')),
+                                  DataCell(Row(
+                                    children: [
+                                      IconButton(
+                                        icon: Icon(Icons.edit,
+                                            color: Colors.amber.shade300),
+                                        onPressed: () {
+                                          _showEditPopup(data);
+                                        },
                                       ),
-                                      onPressed: () {
-                                        _showDeletePopup(data);
-                                      },
-                                    ),
-                                  ],
-                                )),
-                              ],
-                            ),
-                          )
-                          .toList(),
-                    )
-                  : DataTable(
-                      columns: const [
-                        DataColumn(label: Text('Modelo')),
-                        DataColumn(label: Text('Stock Fijo Pol.Cent')),
-                        DataColumn(label: Text('Stock Movil Pol.Cent')),
-                        DataColumn(label: Text('Acciones')),
-                      ],
-                      rows: _data
-                          .map(
-                            (data) => DataRow(
-                              cells: [
-                                DataCell(
-                                  Text(data.modelo),
-                                ),
-                                DataCell(Text('${data.stockFijoPoliclinico}')),
-                                DataCell(Text('${data.stockMovilPoliclinico}')),
-                                DataCell(Row(
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(Icons.edit,
-                                          color: Colors.amber.shade300),
-                                      onPressed: () {
-                                        _showEditPopup(data);
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: Colors.red.shade300,
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: Colors.red.shade300,
+                                        ),
+                                        onPressed: () {
+                                          _showDeletePopup(data);
+                                        },
                                       ),
-                                      onPressed: () {
-                                        _showDeletePopup(data);
-                                      },
-                                    ),
-                                  ],
-                                )),
-                              ],
-                            ),
-                          )
-                          .toList(),
-                    ),
+                                    ],
+                                  )),
+                                ],
+                              ),
+                            )
+                            .toList(),
+                      )
+                    : DataTable(
+                        columns: const [
+                          DataColumn(label: Text('Modelo')),
+                          DataColumn(label: Text('Stock Fijo Pol.Cent')),
+                          DataColumn(label: Text('Stock Movil Pol.Cent')),
+                          DataColumn(label: Text('Acciones')),
+                        ],
+                        rows: _data
+                            .map(
+                              (data) => DataRow(
+                                cells: [
+                                  DataCell(
+                                    Text(data.modelo),
+                                  ),
+                                  DataCell(
+                                      Text('${data.stockFijoPoliclinico}')),
+                                  DataCell(
+                                      Text('${data.stockMovilPoliclinico}')),
+                                  DataCell(Row(
+                                    children: [
+                                      IconButton(
+                                        icon: Icon(Icons.edit,
+                                            color: Colors.amber.shade300),
+                                        onPressed: () {
+                                          _showEditPopup(data);
+                                        },
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: Colors.red.shade300,
+                                        ),
+                                        onPressed: () {
+                                          _showDeletePopup(data);
+                                        },
+                                      ),
+                                    ],
+                                  )),
+                                ],
+                              ),
+                            )
+                            .toList(),
+                      ),
+              ),
             ),
           ),
         ],

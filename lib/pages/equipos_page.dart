@@ -146,135 +146,137 @@ class EquiposPage extends StatelessWidget {
               // ),
             ],
           ),
-          SizedBox(
-            width: double.infinity,
-            child: SingleChildScrollView(
-                child: DataTable(
-              columnSpacing: 50,
-              columns: const [
-                DataColumn(
-                    label: Text(
-                  'Nombre',
-                  softWrap: true,
-                )),
-                DataColumn(label: Text('IP')),
-                DataColumn(label: Text('Sector')),
-                DataColumn(label: Text('Sucursal')),
-                // DataColumn(label: Text('Ult_Mant')),
-                DataColumn(label: Text('Observaciones')),
-                // DataColumn(label: Text('Lic_Windows')),
-                // DataColumn(label: Text('Lic_Office')),
-                DataColumn(label: Text('Acciones')),
-              ],
-              rows: data
-                  .map(
-                    (data) => DataRow(
-                      cells: [
-                        DataCell(
-                          Tooltip(
-                            message: data.nombre,
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                  maxWidth: 100, maxHeight: 20),
-                              child: Text(
-                                data.nombre,
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
+          Expanded(
+            child: SizedBox(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                  child: DataTable(
+                columnSpacing: 50,
+                columns: const [
+                  DataColumn(
+                      label: Text(
+                    'Nombre',
+                    softWrap: true,
+                  )),
+                  DataColumn(label: Text('IP')),
+                  DataColumn(label: Text('Sector')),
+                  DataColumn(label: Text('Sucursal')),
+                  // DataColumn(label: Text('Ult_Mant')),
+                  DataColumn(label: Text('Observaciones')),
+                  // DataColumn(label: Text('Lic_Windows')),
+                  // DataColumn(label: Text('Lic_Office')),
+                  DataColumn(label: Text('Acciones')),
+                ],
+                rows: data
+                    .map(
+                      (data) => DataRow(
+                        cells: [
+                          DataCell(
+                            Tooltip(
+                              message: data.nombre,
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                    maxWidth: 100, maxHeight: 20),
+                                child: Text(
+                                  data.nombre,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        DataCell(
-                          Text(
-                            data.ip,
-                            softWrap: true,
+                          DataCell(
+                            Text(
+                              data.ip,
+                              softWrap: true,
+                            ),
                           ),
-                        ),
-                        DataCell(
-                          Text(
-                            data.expand!.sector.nombre,
-                            softWrap: true,
+                          DataCell(
+                            Text(
+                              data.expand!.sector.nombre,
+                              softWrap: true,
+                            ),
                           ),
-                        ),
-                        DataCell(
-                          Text(
-                            data.expand!.sector.expand!.sucursal.nombre,
-                            softWrap: true,
+                          DataCell(
+                            Text(
+                              data.expand!.sector.expand!.sucursal.nombre,
+                              softWrap: true,
+                            ),
                           ),
-                        ),
-                        // DataCell(
-                        //   Text(
-                        //     data.ultimoMantenimiento.toString(),
-                        //     softWrap: true,
-                        //   ),
-                        // ),
-                        DataCell(
-                          Tooltip(
-                            message: data.observaciones,
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                  maxWidth: 100, maxHeight: 20),
-                              child: Text(
-                                data.observaciones ?? '',
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
+                          // DataCell(
+                          //   Text(
+                          //     data.ultimoMantenimiento.toString(),
+                          //     softWrap: true,
+                          //   ),
+                          // ),
+                          DataCell(
+                            Tooltip(
+                              message: data.observaciones,
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                    maxWidth: 100, maxHeight: 20),
+                                child: Text(
+                                  data.observaciones ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        // DataCell(
-                        //   Text(
-                        //     data.licenciaWindows ?? '',
-                        //     softWrap: true,
-                        //   ),
-                        // ),
-                        // DataCell(
-                        //   Text(
-                        //     data.licenciaOffice ?? '',
-                        //     softWrap: true,
-                        //   ),
-                        // ),
-                        DataCell(Row(
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.edit,
-                                  color: Colors.amber.shade300),
-                              onPressed: () {
-                                _showEditPopup(data);
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: Colors.red.shade300,
+                          // DataCell(
+                          //   Text(
+                          //     data.licenciaWindows ?? '',
+                          //     softWrap: true,
+                          //   ),
+                          // ),
+                          // DataCell(
+                          //   Text(
+                          //     data.licenciaOffice ?? '',
+                          //     softWrap: true,
+                          //   ),
+                          // ),
+                          DataCell(Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.edit,
+                                    color: Colors.amber.shade300),
+                                onPressed: () {
+                                  _showEditPopup(data);
+                                },
                               ),
-                              onPressed: () {
-                                _showDeletePopup(data);
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.remove_red_eye_outlined,
-                                color: Colors.green.shade300,
+                              IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red.shade300,
+                                ),
+                                onPressed: () {
+                                  _showDeletePopup(data);
+                                },
                               ),
-                              onPressed: () async {
-                                try {
-                                  TemporalVnc()
-                                      .generarArchivoVNC(data.ip, 5900);
-                                } catch (e) {
-                                  if (kDebugMode) {
-                                    print('Error al abrir UltraVNC: $e');
+                              IconButton(
+                                icon: Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.green.shade300,
+                                ),
+                                onPressed: () async {
+                                  try {
+                                    TemporalVnc()
+                                        .generarArchivoVNC(data.ip, 5900);
+                                  } catch (e) {
+                                    if (kDebugMode) {
+                                      print('Error al abrir UltraVNC: $e');
+                                    }
                                   }
-                                }
-                              },
-                            ),
-                          ],
-                        )),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            )),
+                                },
+                              ),
+                            ],
+                          )),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              )),
+            ),
           ),
         ],
       ),

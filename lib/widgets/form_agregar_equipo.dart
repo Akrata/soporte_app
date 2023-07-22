@@ -139,26 +139,26 @@ class FormAgregarEquipo extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'Licencia Windows'),
-                  initialValue: esEdit ? equipoActual!.licenciaWindows : null,
-                  onChanged: (value) => esEdit
-                      ? equipoActual!.licenciaWindows = value
-                      : equipo.equipoParaAgregar.licenciaWindows = value,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'Licencia Office'),
-                  initialValue: esEdit ? equipoActual!.licenciaOffice : null,
-                  onChanged: (value) => esEdit
-                      ? equipoActual!.licenciaOffice = value
-                      : equipo.equipoParaAgregar.licenciaOffice = value,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                // TextFormField(
+                //   decoration: InputDecoration(labelText: 'Licencia Windows'),
+                //   initialValue: esEdit ? equipoActual!.licenciaWindows : null,
+                //   onChanged: (value) => esEdit
+                //       ? equipoActual!.licenciaWindows = value
+                //       : equipo.equipoParaAgregar.licenciaWindows = value,
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // TextFormField(
+                //   decoration: InputDecoration(labelText: 'Licencia Office'),
+                //   initialValue: esEdit ? equipoActual!.licenciaOffice : null,
+                //   onChanged: (value) => esEdit
+                //       ? equipoActual!.licenciaOffice = value
+                //       : equipo.equipoParaAgregar.licenciaOffice = value,
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
                 TextFormField(
                   keyboardType: TextInputType.multiline,
                   minLines: 3,

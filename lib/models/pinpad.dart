@@ -10,6 +10,7 @@ class Pinpad {
       this.created,
       this.updated,
       required this.ip,
+      required this.numeroPos,
       this.observaciones,
       required this.sector,
       this.expand});
@@ -21,6 +22,7 @@ class Pinpad {
   DateTime? updated;
   String ip;
   String? observaciones;
+  String numeroPos;
   String sector;
   ItemExpand? expand;
 
@@ -35,6 +37,7 @@ class Pinpad {
         created: DateTime.parse(json["created"]),
         updated: DateTime.parse(json["updated"]),
         ip: json["ip"],
+        numeroPos: json["numero_pos"],
         observaciones: json["observaciones"],
         sector: json["sector"],
         expand: ItemExpand.fromMap(json["expand"]),
@@ -47,6 +50,7 @@ class Pinpad {
         "created": created?.toIso8601String(),
         "updated": updated?.toIso8601String(),
         "ip": ip,
+        "numero_pos": numeroPos,
         "observaciones": observaciones,
         "sector": sector,
         "expand": expand?.toMap(),

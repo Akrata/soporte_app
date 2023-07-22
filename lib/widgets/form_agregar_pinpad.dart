@@ -120,6 +120,16 @@ class FormAgregarPinpad extends StatelessWidget {
                   height: 20,
                 ),
                 TextFormField(
+                  decoration: InputDecoration(labelText: 'Numero Pos'),
+                  initialValue: esEdit ? pinpadActual!.numeroPos : null,
+                  onChanged: (value) => esEdit
+                      ? pinpadActual!.numeroPos = value
+                      : pinpad.pinpadParaAgregar.numeroPos = value,
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
                   keyboardType: TextInputType.multiline,
                   minLines: 3,
                   maxLines: null,

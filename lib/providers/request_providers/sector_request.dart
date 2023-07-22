@@ -41,11 +41,9 @@ class SectorRequest extends ChangeNotifier {
   obtenerSectores() async {
     try {
       final response = await http.get(Uri.http(
-          DB.dbIp, '/api/collections/sector/records', {
-        'expand': 'sucursal',
-        'sort': '-sucursal,-nombre',
-        'perPage': '60'
-      }));
+          DB.dbIp,
+          '/api/collections/sector/records',
+          {'expand': 'sucursal', 'sort': '-sucursal,nombre', 'perPage': '60'}));
       final data = SectorResponse.fromJson(response.body);
       listaSectores = data.items;
       // print("ejecutado0");

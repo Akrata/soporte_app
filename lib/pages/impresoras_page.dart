@@ -105,117 +105,119 @@ class ImpresorasPage extends StatelessWidget {
               // ),
             ],
           ),
-          Container(
-            width: double.infinity,
-            child: SingleChildScrollView(
-                child: DataTable(
-              columns: const [
-                DataColumn(label: Text('Marca')),
-                DataColumn(label: Text('Modelo')),
-                DataColumn(label: Text('IP')),
-                DataColumn(label: Text('Sector')),
-                DataColumn(label: Text('Sucursal')),
-                DataColumn(label: Text('Toner')),
-                DataColumn(label: Text('Observaciones')),
-                DataColumn(label: Text('Acciones')),
-              ],
-              rows: _data
-                  .map(
-                    (data) => DataRow(
-                      cells: [
-                        DataCell(
-                          Tooltip(
-                            message: data.marca,
-                            child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
-                              child: Text(
-                                data.marca,
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
-                              ),
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Tooltip(
-                            message: data.modelo,
-                            child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
-                              child: Text(
-                                data.modelo,
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
-                              ),
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Text(data.ip),
-                        ),
-                        DataCell(
-                          Text(data.expand!.sector!.nombre),
-                        ),
-                        DataCell(
-                          Text(data.expand!.sector!.expand!.sucursal.nombre),
-                        ),
-                        DataCell(
-                          Text(data.expand!.toner!.modelo),
-                        ),
-                        DataCell(
-                          Tooltip(
-                            message: data.observaciones,
-                            child: ConstrainedBox(
-                              constraints:
-                                  BoxConstraints(maxWidth: 100, maxHeight: 20),
-                              child: Text(
-                                data.observaciones ?? '',
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
-                              ),
-                            ),
-                          ),
-                        ),
-                        DataCell(Row(
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.edit,
-                                  color: Colors.amber.shade300),
-                              onPressed: () {
-                                _showEditPopup(data);
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: Colors.red.shade300,
-                              ),
-                              onPressed: () {
-                                _showDeletePopup(data);
-                              },
-                            ),
-                            if (data.ip != '')
-                              IconButton(
-                                icon: Icon(
-                                  Icons.remove_red_eye_outlined,
-                                  color: Colors.green.shade300,
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                  child: DataTable(
+                columns: const [
+                  DataColumn(label: Text('Marca')),
+                  DataColumn(label: Text('Modelo')),
+                  DataColumn(label: Text('IP')),
+                  DataColumn(label: Text('Sector')),
+                  DataColumn(label: Text('Sucursal')),
+                  DataColumn(label: Text('Toner')),
+                  DataColumn(label: Text('Observaciones')),
+                  DataColumn(label: Text('Acciones')),
+                ],
+                rows: _data
+                    .map(
+                      (data) => DataRow(
+                        cells: [
+                          DataCell(
+                            Tooltip(
+                              message: data.marca,
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                    maxWidth: 100, maxHeight: 20),
+                                child: Text(
+                                  data.marca,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
                                 ),
-                                onPressed: () async {
-                                  try {
-                                    await launch("https://${data.ip}");
-                                  } catch (e) {
-                                    print('Error al abrir UltraVNC: $e');
-                                  }
+                              ),
+                            ),
+                          ),
+                          DataCell(
+                            Tooltip(
+                              message: data.modelo,
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                    maxWidth: 100, maxHeight: 20),
+                                child: Text(
+                                  data.modelo,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                ),
+                              ),
+                            ),
+                          ),
+                          DataCell(
+                            Text(data.ip),
+                          ),
+                          DataCell(
+                            Text(data.expand!.sector!.nombre),
+                          ),
+                          DataCell(
+                            Text(data.expand!.sector!.expand!.sucursal.nombre),
+                          ),
+                          DataCell(
+                            Text(data.expand!.toner!.modelo),
+                          ),
+                          DataCell(
+                            Tooltip(
+                              message: data.observaciones,
+                              child: ConstrainedBox(
+                                constraints: BoxConstraints(
+                                    maxWidth: 100, maxHeight: 20),
+                                child: Text(
+                                  data.observaciones ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                ),
+                              ),
+                            ),
+                          ),
+                          DataCell(Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.edit,
+                                    color: Colors.amber.shade300),
+                                onPressed: () {
+                                  _showEditPopup(data);
                                 },
                               ),
-                          ],
-                        )),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            )),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red.shade300,
+                                ),
+                                onPressed: () {
+                                  _showDeletePopup(data);
+                                },
+                              ),
+                              if (data.ip != '')
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    color: Colors.green.shade300,
+                                  ),
+                                  onPressed: () async {
+                                    try {
+                                      await launch("https://${data.ip}");
+                                    } catch (e) {
+                                      print('Error al abrir UltraVNC: $e');
+                                    }
+                                  },
+                                ),
+                            ],
+                          )),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              )),
+            ),
           ),
         ],
       ),

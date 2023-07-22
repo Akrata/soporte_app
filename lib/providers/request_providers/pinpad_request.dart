@@ -14,7 +14,7 @@ import 'package:soporte_app/models/ups.dart';
 
 class PinpadRequest extends ChangeNotifier {
   late Pinpad pinpadActual;
-  Pinpad pinpadParaAgregar = Pinpad(id: '', ip: '', sector: '');
+  Pinpad pinpadParaAgregar = Pinpad(id: '', ip: '', sector: '', numeroPos: '');
 
   final pb = PocketBase('http://${DB.dbIp}');
 
@@ -112,7 +112,7 @@ class PinpadRequest extends ChangeNotifier {
   }
 
   limpiarPinpad() {
-    pinpadParaAgregar = Pinpad(id: '', ip: '', sector: '');
+    pinpadParaAgregar = Pinpad(id: '', ip: '', sector: '', numeroPos: '');
     sucursal = '';
   }
 }

@@ -106,46 +106,48 @@ class SucursalPage extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Container(
-            width: double.infinity,
-            child: SingleChildScrollView(
-                child: DataTable(
-              columns: const [
-                DataColumn(label: Text('Sucursal')),
-                DataColumn(label: Text('Acciones')),
-              ],
-              rows: listaSucursales
-                  .map(
-                    (data) => DataRow(
-                      cells: [
-                        DataCell(
-                          Text(data.nombre),
-                        ),
-                        DataCell(Row(
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.edit,
-                                  color: Colors.amber.shade300),
-                              onPressed: () {
-                                _showEditPopup(data);
-                              },
-                            ),
-                            // IconButton(
-                            //   icon: Icon(
-                            //     Icons.delete,
-                            //     color: Colors.red.shade300,
-                            //   ),
-                            //   onPressed: () {
-                            //     _showDeletePopup(data);
-                            //   },
-                            // ),
-                          ],
-                        )),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            )),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                  child: DataTable(
+                columns: const [
+                  DataColumn(label: Text('Sucursal')),
+                  DataColumn(label: Text('Acciones')),
+                ],
+                rows: listaSucursales
+                    .map(
+                      (data) => DataRow(
+                        cells: [
+                          DataCell(
+                            Text(data.nombre),
+                          ),
+                          DataCell(Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.edit,
+                                    color: Colors.amber.shade300),
+                                onPressed: () {
+                                  _showEditPopup(data);
+                                },
+                              ),
+                              // IconButton(
+                              //   icon: Icon(
+                              //     Icons.delete,
+                              //     color: Colors.red.shade300,
+                              //   ),
+                              //   onPressed: () {
+                              //     _showDeletePopup(data);
+                              //   },
+                              // ),
+                            ],
+                          )),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              )),
+            ),
           ),
         ],
       ),

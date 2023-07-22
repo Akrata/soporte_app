@@ -81,94 +81,96 @@ class ConmutadorPage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          SizedBox(
-            width: double.infinity,
-            child: SingleChildScrollView(
-                child: DataTable(
-              columns: const [
-                DataColumn(label: Text('Nombre')),
-                DataColumn(label: Text('Ip')),
-                DataColumn(label: Text('Sucursal')),
-                DataColumn(label: Text('Observaciones')),
-                DataColumn(label: Text('Acciones')),
-              ],
-              rows: data
-                  .map(
-                    (data) => DataRow(
-                      cells: [
-                        DataCell(
-                          Tooltip(
-                            message: data.nombre,
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                  maxWidth: 100, maxHeight: 20),
-                              child: Text(
-                                data.nombre,
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
+          Expanded(
+            child: SizedBox(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                  child: DataTable(
+                columns: const [
+                  DataColumn(label: Text('Nombre')),
+                  DataColumn(label: Text('Ip')),
+                  DataColumn(label: Text('Sucursal')),
+                  DataColumn(label: Text('Observaciones')),
+                  DataColumn(label: Text('Acciones')),
+                ],
+                rows: data
+                    .map(
+                      (data) => DataRow(
+                        cells: [
+                          DataCell(
+                            Tooltip(
+                              message: data.nombre,
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                    maxWidth: 100, maxHeight: 20),
+                                child: Text(
+                                  data.nombre,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        DataCell(
-                          Text(data.ip),
-                        ),
-                        DataCell(
-                          Text(data.expand!.sucursal.nombre),
-                        ),
-                        DataCell(
-                          Tooltip(
-                            message: data.observaciones,
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                  maxWidth: 100, maxHeight: 20),
-                              child: Text(
-                                data.observaciones ?? '',
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
+                          DataCell(
+                            Text(data.ip),
+                          ),
+                          DataCell(
+                            Text(data.expand!.sucursal.nombre),
+                          ),
+                          DataCell(
+                            Tooltip(
+                              message: data.observaciones,
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                    maxWidth: 100, maxHeight: 20),
+                                child: Text(
+                                  data.observaciones ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        DataCell(Row(
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.edit,
-                                  color: Colors.amber.shade300),
-                              onPressed: () {
-                                _showEditPopup(data);
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: Colors.red.shade300,
+                          DataCell(Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.edit,
+                                    color: Colors.amber.shade300),
+                                onPressed: () {
+                                  _showEditPopup(data);
+                                },
                               ),
-                              onPressed: () {
-                                _showDeletePopup(data);
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.remove_red_eye_outlined,
-                                color: Colors.green.shade300,
+                              IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red.shade300,
+                                ),
+                                onPressed: () {
+                                  _showDeletePopup(data);
+                                },
                               ),
-                              onPressed: () async {
-                                try {
-                                  // ignore: deprecated_member_use
-                                  await launch("http://${data.ip}");
-                                } catch (e) {
-                                  print('Error al abrir UltraVNC: $e');
-                                }
-                              },
-                            ),
-                          ],
-                        )),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            )),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.green.shade300,
+                                ),
+                                onPressed: () async {
+                                  try {
+                                    // ignore: deprecated_member_use
+                                    await launch("http://${data.ip}");
+                                  } catch (e) {
+                                    print('Error al abrir UltraVNC: $e');
+                                  }
+                                },
+                              ),
+                            ],
+                          )),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              )),
+            ),
           ),
         ],
       ),

@@ -40,11 +40,25 @@ class FormAgregarToner extends StatelessWidget {
                         initialValue: esEdit
                             ? tonerActual!.stockFijoPoliclinico.toString()
                             : null,
-                        onChanged: (value) => esEdit
-                            ? tonerActual!.stockFijoPoliclinico =
-                                int.parse(value)
-                            : toner.tonerParaAgregar.stockFijoPoliclinico =
-                                int.parse(value),
+                        onChanged: (value) {
+                          if (value != '') {
+                            esEdit
+                                ? tonerActual!.stockFijoPoliclinico =
+                                    int.parse(value)
+                                : toner.tonerParaAgregar.stockFijoPoliclinico =
+                                    int.parse(value);
+                          } else {
+                            esEdit
+                                ? tonerActual!.stockFijoPoliclinico = 0
+                                : toner.tonerParaAgregar.stockFijoPoliclinico =
+                                    0;
+                          }
+                        },
+                        // onChanged: (value) => esEdit
+                        //     ? tonerActual!.stockFijoPoliclinico =
+                        //         int.parse(value)
+                        //     : toner.tonerParaAgregar.stockFijoPoliclinico =
+                        //         int.parse(value),
                       ),
                     if (userSucursal == 'Policlinico')
                       TextFormField(
@@ -53,11 +67,20 @@ class FormAgregarToner extends StatelessWidget {
                         initialValue: esEdit
                             ? tonerActual!.stockMovilPoliclinico.toString()
                             : null,
-                        onChanged: (value) => esEdit
-                            ? tonerActual!.stockMovilPoliclinico =
-                                int.parse(value)
-                            : toner.tonerParaAgregar.stockMovilPoliclinico =
-                                int.parse(value),
+                        onChanged: (value) {
+                          if (value != '') {
+                            esEdit
+                                ? tonerActual!.stockMovilPoliclinico =
+                                    int.parse(value)
+                                : toner.tonerParaAgregar.stockMovilPoliclinico =
+                                    int.parse(value);
+                          } else {
+                            esEdit
+                                ? tonerActual!.stockMovilPoliclinico = 0
+                                : toner.tonerParaAgregar.stockMovilPoliclinico =
+                                    0;
+                          }
+                        },
                       ),
                     if (userSucursal == 'Sanatorio')
                       TextFormField(
@@ -65,10 +88,19 @@ class FormAgregarToner extends StatelessWidget {
                         initialValue: esEdit
                             ? tonerActual!.stockFijoSanatorio.toString()
                             : null,
-                        onChanged: (value) => esEdit
-                            ? tonerActual!.stockFijoSanatorio = int.parse(value)
-                            : toner.tonerParaAgregar.stockFijoSanatorio =
-                                int.parse(value),
+                        onChanged: (value) {
+                          if (value != '') {
+                            esEdit
+                                ? tonerActual!.stockFijoSanatorio =
+                                    int.parse(value)
+                                : toner.tonerParaAgregar.stockFijoSanatorio =
+                                    int.parse(value);
+                          } else {
+                            esEdit
+                                ? tonerActual!.stockFijoSanatorio = 0
+                                : toner.tonerParaAgregar.stockFijoSanatorio = 0;
+                          }
+                        },
                       ),
                     if (userSucursal == 'Sanatorio')
                       TextFormField(
@@ -77,11 +109,20 @@ class FormAgregarToner extends StatelessWidget {
                         initialValue: esEdit
                             ? tonerActual!.stockMovilSanatorio.toString()
                             : null,
-                        onChanged: (value) => esEdit
-                            ? tonerActual!.stockMovilSanatorio =
-                                int.parse(value)
-                            : toner.tonerParaAgregar.stockMovilSanatorio =
-                                int.parse(value),
+                        onChanged: (value) {
+                          if (value != '') {
+                            esEdit
+                                ? tonerActual!.stockMovilSanatorio =
+                                    int.parse(value)
+                                : toner.tonerParaAgregar.stockMovilSanatorio =
+                                    int.parse(value);
+                          } else {
+                            esEdit
+                                ? tonerActual!.stockMovilSanatorio = 0
+                                : toner.tonerParaAgregar.stockMovilSanatorio =
+                                    0;
+                          }
+                        },
                       ),
                   ],
                 )
@@ -155,7 +196,7 @@ class FormAgregarToner extends StatelessWidget {
                   : toner.agregarToner(toner.tonerParaAgregar);
               Navigator.pop(context);
             },
-            child: Text("Agregar"))
+            child: Text("Confirmar"))
       ],
     );
   }

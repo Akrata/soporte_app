@@ -107,86 +107,88 @@ class TelefonosPage extends StatelessWidget {
               // ),
             ],
           ),
-          Container(
-            width: double.infinity,
-            child: SingleChildScrollView(
-                child: DataTable(
-              columns: const [
-                DataColumn(label: Text('Interno')),
-                DataColumn(label: Text('IP')),
-                DataColumn(label: Text('Sector')),
-                DataColumn(label: Text('Sucursal')),
-                DataColumn(label: Text('Observaciones')),
-                DataColumn(label: Text('Acciones')),
-              ],
-              rows: _data
-                  .map(
-                    (data) => DataRow(
-                      cells: [
-                        DataCell(
-                          Text(data.interno),
-                        ),
-                        DataCell(
-                          Text(data.ip),
-                        ),
-                        DataCell(
-                          Text(data.expand!.sector.nombre),
-                        ),
-                        DataCell(
-                          Text(data.expand!.sector.expand!.sucursal.nombre),
-                        ),
-                        DataCell(
-                          Tooltip(
-                            message: data.observaciones,
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                  maxWidth: 100, maxHeight: 20),
-                              child: Text(
-                                data.observaciones ?? '',
-                                overflow: TextOverflow.ellipsis,
-                                softWrap: true,
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                  child: DataTable(
+                columns: const [
+                  DataColumn(label: Text('Interno')),
+                  DataColumn(label: Text('IP')),
+                  DataColumn(label: Text('Sector')),
+                  DataColumn(label: Text('Sucursal')),
+                  DataColumn(label: Text('Observaciones')),
+                  DataColumn(label: Text('Acciones')),
+                ],
+                rows: _data
+                    .map(
+                      (data) => DataRow(
+                        cells: [
+                          DataCell(
+                            Text(data.interno),
+                          ),
+                          DataCell(
+                            Text(data.ip),
+                          ),
+                          DataCell(
+                            Text(data.expand!.sector.nombre),
+                          ),
+                          DataCell(
+                            Text(data.expand!.sector.expand!.sucursal.nombre),
+                          ),
+                          DataCell(
+                            Tooltip(
+                              message: data.observaciones,
+                              child: ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                    maxWidth: 100, maxHeight: 20),
+                                child: Text(
+                                  data.observaciones ?? '',
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        DataCell(Row(
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.edit,
-                                  color: Colors.amber.shade300),
-                              onPressed: () {
-                                _showEditPopup(data);
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.delete,
-                                color: Colors.red.shade300,
+                          DataCell(Row(
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.edit,
+                                    color: Colors.amber.shade300),
+                                onPressed: () {
+                                  _showEditPopup(data);
+                                },
                               ),
-                              onPressed: () {
-                                _showDeletePopup(data);
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                Icons.remove_red_eye_outlined,
-                                color: Colors.green.shade300,
+                              IconButton(
+                                icon: Icon(
+                                  Icons.delete,
+                                  color: Colors.red.shade300,
+                                ),
+                                onPressed: () {
+                                  _showDeletePopup(data);
+                                },
                               ),
-                              onPressed: () async {
-                                try {
-                                  await launch("http://${data.ip}");
-                                } catch (e) {
-                                  print('Error al abrir UltraVNC: $e');
-                                }
-                              },
-                            ),
-                          ],
-                        )),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            )),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: Colors.green.shade300,
+                                ),
+                                onPressed: () async {
+                                  try {
+                                    await launch("http://${data.ip}");
+                                  } catch (e) {
+                                    print('Error al abrir UltraVNC: $e');
+                                  }
+                                },
+                              ),
+                            ],
+                          )),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              )),
+            ),
           ),
         ],
       ),
