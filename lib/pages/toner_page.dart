@@ -1,20 +1,17 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
-import 'package:soporte_app/utils/temporal_vnc.dart';
 import 'package:soporte_app/widgets/form_realizar_pedido.dart';
 
 import '../models/toner.dart';
 import '../widgets/custom_appbar.dart';
 import '../widgets/form_agregar_toner.dart';
 
-import 'package:url_launcher/url_launcher.dart';
-
 import '../widgets/searchbar.dart';
-
-import 'package:path_provider/path_provider.dart';
 
 class TonerPage extends StatelessWidget {
   final String nombre;
@@ -36,9 +33,9 @@ class TonerPage extends StatelessWidget {
             children: [
               Text(
                   "Esta intentando eliminar por completo el Toner ${data.modelo}, tanto de Sanatorio como de Policlinico"),
-              Text(
+              const Text(
                   "Al eliminar el toner, tambien eliminará todas las solicitudes asociadas."),
-              Text("Desea continuar?"),
+              const Text("Desea continuar?"),
             ],
           ),
           actions: [
@@ -46,14 +43,14 @@ class TonerPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Canelar"),
+              child: const Text("Canelar"),
             ),
             TextButton(
               onPressed: () {
                 toner.deleteToner(data.id);
                 Navigator.pop(context);
               },
-              child: Text(
+              child: const Text(
                 "Eliminar",
                 style: TextStyle(color: Colors.red),
               ),
@@ -86,6 +83,7 @@ class TonerPage extends StatelessWidget {
           Row(
             children: [
               SizedBox(
+                height: 50,
                 child: TextButton(
                   onPressed: () {
                     showDialog(
@@ -93,9 +91,8 @@ class TonerPage extends StatelessWidget {
                       builder: (context) => FormRealizarPedido(),
                     );
                   },
-                  child: Text("Realizar Pedido"),
+                  child: const Text("Realizar Pedido"),
                 ),
-                height: 50,
               ),
             ],
           ),
@@ -195,7 +192,7 @@ class TonerPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
             showDialog(
               context: context,

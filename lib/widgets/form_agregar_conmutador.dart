@@ -1,12 +1,9 @@
+// ignore_for_file: unused_local_variable, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/equipo.dart';
 import 'package:soporte_app/providers/request_providers/conmutador_request.dart';
-import 'package:soporte_app/providers/request_providers/equipos_request.dart';
-import 'package:soporte_app/providers/request_providers/impresoras_request.dart';
-import 'package:soporte_app/providers/request_providers/pinpad_request.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
-import 'package:soporte_app/providers/request_providers/toner_request.dart';
 
 import '../models/conmutador.dart';
 import '../providers/request_providers/sector_request.dart';
@@ -40,11 +37,11 @@ class FormAgregarConmutador extends StatelessWidget {
                       ? listaSucursales.firstWhere(
                           (element) => element.id == conmutadorActual!.sucursal)
                       : null,
-                  decoration: InputDecoration(hintText: 'Sucursal'),
+                  decoration: const InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
-                            child: Text(e.nombre),
                             value: e,
+                            child: Text(e.nombre),
                           ))
                       .toList(),
                   onChanged: (value) {
@@ -53,27 +50,27 @@ class FormAgregarConmutador extends StatelessWidget {
                         : conmutador.conmutadorParaAgregar.sucursal = value!.id;
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'IP'),
+                  decoration: const InputDecoration(labelText: 'IP'),
                   initialValue: esEdit ? conmutadorActual!.ip : null,
                   onChanged: (value) => esEdit
                       ? conmutadorActual!.ip = value
                       : conmutador.conmutadorParaAgregar.ip = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Nombre'),
+                  decoration: const InputDecoration(labelText: 'Nombre'),
                   initialValue: esEdit ? conmutadorActual!.nombre : null,
                   onChanged: (value) => esEdit
                       ? conmutadorActual!.nombre = value
                       : conmutador.conmutadorParaAgregar.nombre = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
@@ -81,12 +78,12 @@ class FormAgregarConmutador extends StatelessWidget {
                   minLines: 3,
                   maxLines: null,
                   initialValue: esEdit ? conmutadorActual!.observaciones : null,
-                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  decoration: const InputDecoration(labelText: 'Observaciones'),
                   onChanged: (value) => esEdit
                       ? conmutadorActual!.observaciones = value
                       : conmutador.conmutadorParaAgregar.observaciones = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ],
@@ -98,7 +95,7 @@ class FormAgregarConmutador extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Cancelar")),
+              child: const Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
                 esEdit
@@ -108,7 +105,7 @@ class FormAgregarConmutador extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: Text("Agregar")),
+              child: const Text("Agregar")),
         ],
       ),
     );

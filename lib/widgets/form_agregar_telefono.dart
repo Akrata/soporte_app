@@ -1,11 +1,9 @@
+// ignore_for_file: sized_box_for_whitespace, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/equipo.dart';
-import 'package:soporte_app/providers/request_providers/equipos_request.dart';
-import 'package:soporte_app/providers/request_providers/impresoras_request.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/telefono_request.dart';
-import 'package:soporte_app/providers/request_providers/toner_request.dart';
 
 import '../models/telefono.dart';
 import '../providers/request_providers/sector_request.dart';
@@ -39,11 +37,11 @@ class FormAgregarTelefono extends StatelessWidget {
                           element.id ==
                           telefonoActual!.expand!.sector.expand!.sucursal.id)
                       : null,
-                  decoration: InputDecoration(hintText: 'Sucursal'),
+                  decoration: const InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
-                            child: Text(e.nombre),
                             value: e,
+                            child: Text(e.nombre),
                           ))
                       .toList(),
                   onChanged: (value) async {
@@ -60,16 +58,16 @@ class FormAgregarTelefono extends StatelessWidget {
                     }
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 if (!esEdit)
                   DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Sector'),
+                    decoration: const InputDecoration(hintText: 'Sector'),
                     items: secYTon.listaSectoresValue
                         .map((e) => DropdownMenuItem(
-                              child: Text(e.nombre),
                               value: e,
+                              child: Text(e.nombre),
                             ))
                         .toList(),
                     onChanged: (value) async {
@@ -82,12 +80,12 @@ class FormAgregarTelefono extends StatelessWidget {
                         ? null
                         : sector.listaSectores.firstWhere((element) =>
                             element.id == telefonoActual!.expand!.sector.id),
-                    decoration: InputDecoration(hintText: 'Sector'),
+                    decoration: const InputDecoration(hintText: 'Sector'),
                     items: secYTon.abriendoSucursal
                         ? secYTon.listaSectoresValue
                             .map((e) => DropdownMenuItem(
-                                  child: Text(e.nombre),
                                   value: e,
+                                  child: Text(e.nombre),
                                 ))
                             .toList()
                         : sector.listaSectores
@@ -97,8 +95,8 @@ class FormAgregarTelefono extends StatelessWidget {
                                     .expand!.sector.expand!.sucursal.id)
                             .toList()
                             .map((e) => DropdownMenuItem(
-                                  child: Text(e.nombre),
                                   value: e,
+                                  child: Text(e.nombre),
                                 ))
                             .toList(),
                     onChanged: (value) async {
@@ -107,40 +105,40 @@ class FormAgregarTelefono extends StatelessWidget {
                           : telefono.telefonoParaAgregar.sector = value!.id;
                     },
                   ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Interno'),
+                  decoration: const InputDecoration(labelText: 'Interno'),
                   initialValue: esEdit ? telefonoActual!.interno : null,
                   onChanged: (value) => esEdit
                       ? telefonoActual!.interno = value
                       : telefono.telefonoParaAgregar.interno = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'IP'),
+                  decoration: const InputDecoration(labelText: 'IP'),
                   initialValue: esEdit ? telefonoActual!.ip : null,
                   onChanged: (value) => esEdit
                       ? telefonoActual!.ip = value
                       : telefono.telefonoParaAgregar.ip = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   keyboardType: TextInputType.multiline,
                   minLines: 3,
                   maxLines: null,
-                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  decoration: const InputDecoration(labelText: 'Observaciones'),
                   initialValue: esEdit ? telefonoActual!.observaciones : null,
                   onChanged: (value) => esEdit
                       ? telefonoActual!.observaciones = value
                       : telefono.telefonoParaAgregar.observaciones = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ],
@@ -153,7 +151,7 @@ class FormAgregarTelefono extends StatelessWidget {
                 secYTon.cambiarSucursal(false);
                 Navigator.pop(context);
               },
-              child: Text("Cancelar")),
+              child: const Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
                 secYTon.cambiarSucursal(false);
@@ -163,7 +161,7 @@ class FormAgregarTelefono extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: Text("Confirmarfinal ")),
+              child: const Text("Confirmar ")),
         ],
       ),
     );

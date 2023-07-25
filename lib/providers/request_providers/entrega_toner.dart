@@ -1,5 +1,6 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
-import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 
 import '../../DB/db.dart';
 import '../../models/responses/toner_response.dart';

@@ -1,12 +1,10 @@
+// ignore_for_file: sized_box_for_whitespace, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/equipo.dart';
 import 'package:soporte_app/models/pinpad.dart';
-import 'package:soporte_app/providers/request_providers/equipos_request.dart';
-import 'package:soporte_app/providers/request_providers/impresoras_request.dart';
 import 'package:soporte_app/providers/request_providers/pinpad_request.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
-import 'package:soporte_app/providers/request_providers/toner_request.dart';
 
 import '../providers/request_providers/sector_request.dart';
 import '../providers/request_providers/sucursales_request.dart';
@@ -38,11 +36,11 @@ class FormAgregarPinpad extends StatelessWidget {
                           element.id ==
                           pinpadActual!.expand!.sector.expand!.sucursal.id)
                       : null,
-                  decoration: InputDecoration(hintText: 'Sucursal'),
+                  decoration: const InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
-                            child: Text(e.nombre),
                             value: e,
+                            child: Text(e.nombre),
                           ))
                       .toList(),
                   onChanged: (value) async {
@@ -59,16 +57,16 @@ class FormAgregarPinpad extends StatelessWidget {
                     }
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 if (!esEdit)
                   DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Sector'),
+                    decoration: const InputDecoration(hintText: 'Sector'),
                     items: secYTon.listaSectoresValue
                         .map((e) => DropdownMenuItem(
-                              child: Text(e.nombre),
                               value: e,
+                              child: Text(e.nombre),
                             ))
                         .toList(),
                     onChanged: (value) async {
@@ -81,12 +79,12 @@ class FormAgregarPinpad extends StatelessWidget {
                         ? null
                         : sector.listaSectores.firstWhere((element) =>
                             element.id == pinpadActual!.expand!.sector.id),
-                    decoration: InputDecoration(hintText: 'Sector'),
+                    decoration: const InputDecoration(hintText: 'Sector'),
                     items: secYTon.abriendoSucursal
                         ? secYTon.listaSectoresValue
                             .map((e) => DropdownMenuItem(
-                                  child: Text(e.nombre),
                                   value: e,
+                                  child: Text(e.nombre),
                                 ))
                             .toList()
                         : sector.listaSectores
@@ -96,8 +94,8 @@ class FormAgregarPinpad extends StatelessWidget {
                                     .expand!.sector.expand!.sucursal.id)
                             .toList()
                             .map((e) => DropdownMenuItem(
-                                  child: Text(e.nombre),
                                   value: e,
+                                  child: Text(e.nombre),
                                 ))
                             .toList(),
                     onChanged: (value) async {
@@ -106,40 +104,40 @@ class FormAgregarPinpad extends StatelessWidget {
                           : pinpad.pinpadParaAgregar.sector = value!.id;
                     },
                   ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'IP'),
+                  decoration: const InputDecoration(labelText: 'IP'),
                   initialValue: esEdit ? pinpadActual!.ip : null,
                   onChanged: (value) => esEdit
                       ? pinpadActual!.ip = value
                       : pinpad.pinpadParaAgregar.ip = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Numero Pos'),
+                  decoration: const InputDecoration(labelText: 'Numero Pos'),
                   initialValue: esEdit ? pinpadActual!.numeroPos : null,
                   onChanged: (value) => esEdit
                       ? pinpadActual!.numeroPos = value
                       : pinpad.pinpadParaAgregar.numeroPos = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   keyboardType: TextInputType.multiline,
                   minLines: 3,
                   maxLines: null,
-                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  decoration: const InputDecoration(labelText: 'Observaciones'),
                   initialValue: esEdit ? pinpadActual!.observaciones : null,
                   onChanged: (value) => esEdit
                       ? pinpadActual!.observaciones = value
                       : pinpad.pinpadParaAgregar.observaciones = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ],
@@ -152,7 +150,7 @@ class FormAgregarPinpad extends StatelessWidget {
                 secYTon.cambiarSucursal(false);
                 Navigator.pop(context);
               },
-              child: Text("Cancelar")),
+              child: const Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
                 secYTon.cambiarSucursal(false);
@@ -162,7 +160,7 @@ class FormAgregarPinpad extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: Text("Confirmar")),
+              child: const Text("Confirmar")),
         ],
       ),
     );

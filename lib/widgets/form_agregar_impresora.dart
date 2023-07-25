@@ -1,7 +1,7 @@
+// ignore_for_file: sized_box_for_whitespace, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/equipo.dart';
-import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/impresoras_request.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
@@ -53,11 +53,11 @@ class FormAgregarImpresora extends StatelessWidget {
                           element.id ==
                           impresoraActual!.expand!.sector!.expand!.sucursal.id)
                       : null,
-                  decoration: InputDecoration(hintText: 'Sucursal'),
+                  decoration: const InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
-                            child: Text(e.nombre),
                             value: e,
+                            child: Text(e.nombre),
                           ))
                       .toList(),
                   onChanged: (value) async {
@@ -74,16 +74,16 @@ class FormAgregarImpresora extends StatelessWidget {
                     }
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 if (!esEdit)
                   DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Sector'),
+                    decoration: const InputDecoration(hintText: 'Sector'),
                     items: secYTon.listaSectoresValue
                         .map((e) => DropdownMenuItem(
-                              child: Text(e.nombre),
                               value: e,
+                              child: Text(e.nombre),
                             ))
                         .toList(),
                     onChanged: (value) async {
@@ -96,12 +96,12 @@ class FormAgregarImpresora extends StatelessWidget {
                         ? null
                         : sector.listaSectores.firstWhere((element) =>
                             element.id == impresoraActual!.expand!.sector!.id),
-                    decoration: InputDecoration(hintText: 'Sector'),
+                    decoration: const InputDecoration(hintText: 'Sector'),
                     items: secYTon.abriendoSucursal
                         ? secYTon.listaSectoresValue
                             .map((e) => DropdownMenuItem(
-                                  child: Text(e.nombre),
                                   value: e,
+                                  child: Text(e.nombre),
                                 ))
                             .toList()
                         : sector.listaSectores
@@ -111,8 +111,8 @@ class FormAgregarImpresora extends StatelessWidget {
                                     .expand!.sector!.expand!.sucursal.id)
                             .toList()
                             .map((e) => DropdownMenuItem(
-                                  child: Text(e.nombre),
                                   value: e,
+                                  child: Text(e.nombre),
                                 ))
                             .toList(),
                     onChanged: (value) async {
@@ -122,51 +122,51 @@ class FormAgregarImpresora extends StatelessWidget {
                     },
                   ),
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
 
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Marca'),
+                  decoration: const InputDecoration(labelText: 'Marca'),
                   initialValue: esEdit ? impresoraActual!.marca : null,
                   onChanged: (value) => esEdit
                       ? impresoraActual!.marca = value
                       : impresora.impresoraParaAgregar.marca = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Modelo'),
+                  decoration: const InputDecoration(labelText: 'Modelo'),
                   initialValue: esEdit ? impresoraActual!.modelo : null,
                   onChanged: (value) => esEdit
                       ? impresoraActual!.modelo = value
                       : impresora.impresoraParaAgregar.modelo = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'IP'),
+                  decoration: const InputDecoration(labelText: 'IP'),
                   initialValue: esEdit ? impresoraActual!.ip : null,
                   onChanged: (value) => esEdit
                       ? impresoraActual!.ip = value
                       : impresora.impresoraParaAgregar.ip = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
 
                 DropdownButtonFormField(
-                  decoration: InputDecoration(hintText: 'Toner'),
+                  decoration: const InputDecoration(hintText: 'Toner'),
                   value: esEdit
                       ? toner.listaToners.firstWhere((element) =>
                           element.id == impresoraActual!.expand!.toner!.id)
                       : null,
                   items: toner.listaToners
                       .map((e) => DropdownMenuItem(
-                            child: Text(e.modelo),
                             value: e,
+                            child: Text(e.modelo),
                           ))
                       .toList(),
                   onChanged: (value) async {
@@ -177,13 +177,13 @@ class FormAgregarImpresora extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   minLines: 3,
                   maxLines: null,
-                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  decoration: const InputDecoration(labelText: 'Observaciones'),
                   initialValue: esEdit ? impresoraActual!.observaciones : null,
                   onChanged: (value) => esEdit
                       ? impresoraActual!.observaciones = value
                       : impresora.impresoraParaAgregar.observaciones = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ],
@@ -196,7 +196,7 @@ class FormAgregarImpresora extends StatelessWidget {
                 secYTon.cambiarSucursal(false);
                 Navigator.pop(context);
               },
-              child: Text("Cancelar")),
+              child: const Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
                 secYTon.cambiarSucursal(false);
@@ -208,7 +208,7 @@ class FormAgregarImpresora extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: Text("Confirmar")),
+              child: const Text("Confirmar")),
         ],
       ),
     );

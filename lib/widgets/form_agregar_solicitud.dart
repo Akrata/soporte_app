@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/models/solicitud_toner.dart';
@@ -18,37 +20,37 @@ class FormAgregarSolicitud extends StatelessWidget {
       child: Builder(builder: (context) {
         try {
           return AlertDialog(
-            title: Text("Agregar Solicitud"),
+            title: const Text("Agregar Solicitud"),
             content: Container(
               width: 400,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Sucursal'),
+                    decoration: const InputDecoration(hintText: 'Sucursal'),
                     items: suc.listaSucursales
                         .map((e) => DropdownMenuItem(
-                              child: Text(e.nombre),
                               value: e,
+                              child: Text(e.nombre),
                             ))
                         .toList(),
                     onChanged: (value) async {
-                      secYTon.cambindoSucursal(value!.id);
+                      secYTon.cambiandoSucursal(value!.id);
                       // print(secYTon.sucursal);
                       await secYTon.getSectorSegunSucursal(value.id);
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   // if (secYTon.sucursal != "")
                   DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Sector'),
+                    decoration: const InputDecoration(hintText: 'Sector'),
                     items: secYTon.sucursal != ""
                         ? secYTon.listaSectoresValue
                             .map((e) => DropdownMenuItem(
-                                  child: Text(e.nombre),
                                   value: e,
+                                  child: Text(e.nombre),
                                 ))
                             .toList()
                         : null,
@@ -58,17 +60,17 @@ class FormAgregarSolicitud extends StatelessWidget {
                       await secYTon.getImpresoraSegunSector(value.id);
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   // if (secYTon.sector != "")
                   DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Impresora'),
+                    decoration: const InputDecoration(hintText: 'Impresora'),
                     items: secYTon.sector != ""
                         ? secYTon.listaImpresorasValue
                             .map((e) => DropdownMenuItem(
-                                  child: Text("${e.marca} ${e.modelo}"),
                                   value: e,
+                                  child: Text("${e.marca} ${e.modelo}"),
                                 ))
                             .toList()
                         : null,
@@ -78,12 +80,12 @@ class FormAgregarSolicitud extends StatelessWidget {
                       // print(secYTon.impresora);
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   // if (secYTon.impresora != "")
                   DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Toner'),
+                    decoration: const InputDecoration(hintText: 'Toner'),
                     items: secYTon.impresora != ""
                         ? secYTon.listaTonerValue
                             .map((e) => DropdownMenuItem(
@@ -97,7 +99,7 @@ class FormAgregarSolicitud extends StatelessWidget {
                       secYTon.toner = value!.toner;
                     },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   // Row(
@@ -123,7 +125,7 @@ class FormAgregarSolicitud extends StatelessWidget {
                   secYTon.limpiarForm();
                   Navigator.pop(context);
                 },
-                child: Text("Cancelar"),
+                child: const Text("Cancelar"),
               ),
               TextButton(
                 onPressed: () async {
@@ -134,12 +136,12 @@ class FormAgregarSolicitud extends StatelessWidget {
 
                   Navigator.pop(context);
                 },
-                child: Text("Guardar"),
+                child: const Text("Guardar"),
               ),
             ],
           );
         } catch (e) {
-          return Text("error");
+          return const Text("error");
         }
       }),
     );

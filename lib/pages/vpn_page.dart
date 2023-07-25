@@ -1,24 +1,25 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, sized_box_for_whitespace
+// ignore_for_file: no_leading_underscores_for_local_identifiers, unused_local_variable, sized_box_for_whitespace, empty_catches
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/ups.dart';
-import 'package:soporte_app/providers/request_providers/ups_request.dart';
-import 'package:soporte_app/widgets/form_agregar_ups.dart';
+import 'package:soporte_app/providers/request_providers/vpn_request.dart';
+import 'package:soporte_app/utils/temporal_anydesk.dart';
+import 'package:soporte_app/widgets/custom_appbar.dart';
+import 'package:soporte_app/widgets/form_agregar_vpn.dart';
 
-import '../widgets/custom_appbar.dart';
+import '../models/vpn.dart';
 import '../widgets/searchbar.dart';
 
-class UpsPage extends StatelessWidget {
+class VpnPage extends StatelessWidget {
   final String nombre;
-  const UpsPage({Key? key, required this.nombre}) : super(key: key);
+  const VpnPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ups = Provider.of<UpsRequest>(context);
-    final _data = ups.inSearch == false ? ups.listaUps : ups.listaBusquedaUps;
+    final vpn = Provider.of<VpnRequest>(context);
+    final _data = vpn.inSearch == false ? vpn.listaVpn : vpn.listaBusquedaVpn;
 
-    _showDeletePopup(Ups data) {
+    _showDeletePopup(VPN data) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -26,9 +27,9 @@ class UpsPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                  "Esta intentando eliminar por completo el Ups ${data.marca} ${data.modelo} de ${data.expand!.sector.nombre} "),
+                  "Esta intentando eliminar por completo la VPN de ${data.usuario}"),
               // Text(
-              //     "Al eliminar el Equipo, tambien eliminará todas las solicitudes asociadas."),
+              //     "Al eliminar impresora, tambien eliminará todas las solicitudes asociadas."),
               const Text("Desea continuar?"),
             ],
           ),
@@ -41,7 +42,7 @@ class UpsPage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                ups.deleteUps(data.id);
+                vpn.deleteVpn(data.id);
                 Navigator.pop(context);
               },
               child: const Text(
@@ -54,11 +55,12 @@ class UpsPage extends StatelessWidget {
       );
     }
 
-    _showEditPopup(Ups data) {
+    _showEditPopup(VPN data) {
+      VPN vpnActual = data;
       showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (context) => FormAgregarUps(esEdit: true, upsActual: data),
+        builder: (context) => FormAgregarVpn(esEdit: true, vpnActual: data),
       );
     }
 
@@ -67,10 +69,10 @@ class UpsPage extends StatelessWidget {
       body: Column(
         children: [
           SearchBarCustom(
-            enBusqueda: ups.enBusqueda,
-            buscar: ups.busquedaEnLista,
-            getAll: ups.getUps,
-            controller: ups.controller,
+            enBusqueda: vpn.enBusqueda,
+            buscar: vpn.busquedaEnLista,
+            getAll: vpn.getVpn,
+            controller: vpn.controller,
           ),
           const Row(
             children: [
@@ -105,12 +107,11 @@ class UpsPage extends StatelessWidget {
               child: SingleChildScrollView(
                   child: DataTable(
                 columns: const [
-                  DataColumn(label: Text('Marca')),
-                  DataColumn(label: Text('Modelo')),
-                  DataColumn(label: Text('Sector')),
-                  DataColumn(label: Text('Sucursal')),
-                  // DataColumn(label: Text('Ultimo Mant.')),
-                  DataColumn(label: Text('Observaciones')),
+                  DataColumn(label: Text('Usuario')),
+                  DataColumn(label: Text('Password')),
+                  DataColumn(label: Text('Contacto')),
+                  DataColumn(label: Text('Telefono')),
+                  DataColumn(label: Text('Anydesk')),
                   DataColumn(label: Text('Acciones')),
                 ],
                 rows: _data
@@ -118,56 +119,35 @@ class UpsPage extends StatelessWidget {
                       (data) => DataRow(
                         cells: [
                           DataCell(
-                            Tooltip(
-                              message: data.marca,
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                    maxWidth: 100, maxHeight: 20),
-                                child: Text(
-                                  data.marca,
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ),
+                            SelectableText(data.usuario),
                           ),
                           DataCell(
-                            Tooltip(
-                              message: data.modelo,
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                    maxWidth: 100, maxHeight: 20),
-                                child: Text(
-                                  data.modelo,
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ),
+                            SelectableText(data.password),
+                          ),
+
+                          DataCell(
+                            Text(data.nombreDeContacto ?? ""),
                           ),
                           DataCell(
-                            Text(data.expand!.sector.nombre),
+                            Text(data.telefonoDeContacto ?? ""),
                           ),
                           DataCell(
-                            Text(data.expand!.sector.expand!.sucursal.nombre),
+                            SelectableText(data.anydesk ?? ""),
                           ),
                           // DataCell(
-                          //   Text(data.ultimoMantenimiento.toString()),
+                          //   Tooltip(
+                          //     message: data.observaciones,
+                          //     child: ConstrainedBox(
+                          //       constraints: BoxConstraints(
+                          //           maxWidth: 100, maxHeight: 20),
+                          //       child: Text(
+                          //         data.observaciones ?? '',
+                          //         overflow: TextOverflow.ellipsis,
+                          //         softWrap: true,
+                          //       ),
+                          //     ),
+                          //   ),
                           // ),
-                          DataCell(
-                            Tooltip(
-                              message: data.observaciones,
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                    maxWidth: 100, maxHeight: 20),
-                                child: Text(
-                                  data.observaciones ?? '',
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ),
-                          ),
                           DataCell(Row(
                             children: [
                               IconButton(
@@ -186,6 +166,18 @@ class UpsPage extends StatelessWidget {
                                   _showDeletePopup(data);
                                 },
                               ),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.airplay_rounded,
+                                  color: Colors.orange.shade300,
+                                ),
+                                onPressed: () async {
+                                  try {
+                                    TemporalAnydesk()
+                                        .generarArchivoAnydesk(data.anydesk);
+                                  } catch (e) {}
+                                },
+                              ),
                             ],
                           )),
                         ],
@@ -202,7 +194,7 @@ class UpsPage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => const FormAgregarUps(
+              builder: (context) => const FormAgregarVpn(
                 esEdit: false,
               ),
             );

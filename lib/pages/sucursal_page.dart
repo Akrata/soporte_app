@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, no_leading_underscores_for_local_identifiers, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/models/sucursal.dart';
@@ -69,7 +71,8 @@ class SucursalPage extends StatelessWidget {
               children: [
                 TextFormField(
                   initialValue: data.nombre,
-                  decoration: InputDecoration(labelText: 'Nombre de sucursal'),
+                  decoration:
+                      const InputDecoration(labelText: 'Nombre de sucursal'),
                   onChanged: (value) => sucursalActual.nombre = value,
                 ),
               ],
@@ -80,14 +83,14 @@ class SucursalPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("Cancelar")),
+                child: const Text("Cancelar")),
             ElevatedButton(
                 onPressed: () {
                   // sucursal.editRequest(sucursalActual, 'sucursal');
 
                   Navigator.pop(context);
                 },
-                child: Text("Confirmar")),
+                child: const Text("Confirmar")),
           ],
         ),
       );
@@ -103,7 +106,7 @@ class SucursalPage extends StatelessWidget {
             getAll: sucursal.getSucursales,
             controller: sucursal.controller,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
@@ -155,10 +158,10 @@ class SucursalPage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => FormAgregarSucursal(),
+              builder: (context) => const FormAgregarSucursal(),
             );
           },
-          child: Icon(Icons.add)),
+          child: const Icon(Icons.add)),
     );
   }
 }

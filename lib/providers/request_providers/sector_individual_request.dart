@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:soporte_app/models/equipo.dart';
 import 'package:soporte_app/models/impresora.dart';
@@ -13,7 +15,6 @@ import 'package:soporte_app/models/ups.dart';
 import 'package:http/http.dart' as http;
 
 import '../../DB/db.dart';
-import '../../models/sector.dart';
 
 class SectorIndividualRequest extends ChangeNotifier {
   List<Equipo> listaEquipos = [];
@@ -22,7 +23,7 @@ class SectorIndividualRequest extends ChangeNotifier {
   List<Ups> listaUps = [];
   List<Pinpad> listaPinpad = [];
 
-  SectorIndividualRequest() {}
+  SectorIndividualRequest();
   obtenerEquipos(String idSector) async {
     try {
       final response = await http.get(Uri.http(

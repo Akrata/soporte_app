@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 
 class SearchBarCustom extends StatelessWidget {
@@ -19,10 +21,10 @@ class SearchBarCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 800,
-      decoration: BoxDecoration(),
+      decoration: const BoxDecoration(),
       child: ListTile(
         title: TextField(
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Buscar',
           ),
           controller: controller,
@@ -37,7 +39,7 @@ class SearchBarCustom extends StatelessWidget {
                     // equipos.searchText = _controller.text;
                     buscar(controller.text.toLowerCase());
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.search,
                     color: Colors.blue,
                   ),
@@ -48,7 +50,7 @@ class SearchBarCustom extends StatelessWidget {
                     enBusqueda(false);
                     getAll();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.close,
                     color: Colors.red,
                   ),

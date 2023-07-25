@@ -9,5 +9,5 @@ class SideMenuItems {
       {required this.title,
       required this.onTap,
       required this.icon,
-      required this.index}) {}
+      required this.index});
 }

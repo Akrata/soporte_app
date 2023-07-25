@@ -1,17 +1,13 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, sized_box_for_whitespace, deprecated_member_use, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/equipo.dart';
-import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/telefono_request.dart';
 import 'package:soporte_app/widgets/custom_appbar.dart';
-import 'package:soporte_app/widgets/form_agregar_impresora.dart';
 import 'package:soporte_app/widgets/form_agregar_telefono.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../models/impresora.dart';
 import '../models/telefono.dart';
-import '../providers/request_providers/impresoras_request.dart';
-import '../widgets/form_agregar_equipo.dart';
 import '../widgets/searchbar.dart';
 
 class TelefonosPage extends StatelessWidget {
@@ -36,7 +32,7 @@ class TelefonosPage extends StatelessWidget {
                   "Esta intentando eliminar por completo el Telefono ${data.interno} de ${data.expand!.sector.nombre}"),
               // Text(
               //     "Al eliminar impresora, tambien eliminará todas las solicitudes asociadas."),
-              Text("Desea continuar?"),
+              const Text("Desea continuar?"),
             ],
           ),
           actions: [
@@ -44,14 +40,14 @@ class TelefonosPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Canelar"),
+              child: const Text("Canelar"),
             ),
             TextButton(
               onPressed: () {
                 telefonos.deleteTelefono(data.id);
                 Navigator.pop(context);
               },
-              child: Text(
+              child: const Text(
                 "Eliminar",
                 style: TextStyle(color: Colors.red),
               ),
@@ -80,7 +76,7 @@ class TelefonosPage extends StatelessWidget {
             getAll: telefonos.getTelefonos,
             controller: telefonos.controller,
           ),
-          Row(
+          const Row(
             children: [
               // TextButton(
               //     onPressed: () async {
@@ -193,11 +189,11 @@ class TelefonosPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => FormAgregarTelefono(
+              builder: (context) => const FormAgregarTelefono(
                 esEdit: false,
               ),
             );

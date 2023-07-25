@@ -3,26 +3,26 @@ import 'dart:convert';
 import 'equipo.dart';
 
 class Licencia {
-  String collectionId;
-  String collectionName;
-  DateTime created;
-  String equipo;
-  Expand expand;
+  String? collectionId;
+  String? collectionName;
+  DateTime? created;
+  String? equipo;
+  Expand? expand;
   String id;
   String key;
   String tipo;
-  DateTime updated;
+  DateTime? updated;
 
   Licencia({
-    required this.collectionId,
-    required this.collectionName,
-    required this.created,
-    required this.equipo,
-    required this.expand,
+    this.collectionId,
+    this.collectionName,
+    this.created,
+    this.equipo,
+    this.expand,
     required this.id,
     required this.key,
     required this.tipo,
-    required this.updated,
+    this.updated,
   });
 
   factory Licencia.fromJson(String str) => Licencia.fromMap(json.decode(str));
@@ -44,13 +44,13 @@ class Licencia {
   Map<String, dynamic> toMap() => {
         "collectionId": collectionId,
         "collectionName": collectionName,
-        "created": created.toIso8601String(),
+        "created": created?.toIso8601String(),
         "equipo": equipo,
-        "expand": expand.toMap(),
+        "expand": expand?.toMap(),
         "id": id,
         "key": key,
         "tipo": tipo,
-        "updated": updated.toIso8601String(),
+        "updated": updated?.toIso8601String(),
       };
 }
 

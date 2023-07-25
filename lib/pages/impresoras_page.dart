@@ -1,14 +1,15 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/equipo.dart';
-import 'package:soporte_app/providers/request_providers/equipos_request.dart';
+
 import 'package:soporte_app/widgets/custom_appbar.dart';
 import 'package:soporte_app/widgets/form_agregar_impresora.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/impresora.dart';
 import '../providers/request_providers/impresoras_request.dart';
-import '../widgets/form_agregar_equipo.dart';
+
 import '../widgets/searchbar.dart';
 
 class ImpresorasPage extends StatelessWidget {
@@ -18,10 +19,12 @@ class ImpresorasPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final impresoras = Provider.of<ImpresorasRequest>(context);
+    // ignore: no_leading_underscores_for_local_identifiers
     final _data = impresoras.inSearch == false
         ? impresoras.listaImpresoras
         : impresoras.listaBusquedaImpresoras;
 
+    // ignore: no_leading_underscores_for_local_identifiers
     _showDeletePopup(Impresora data) {
       showDialog(
         context: context,
@@ -31,9 +34,9 @@ class ImpresorasPage extends StatelessWidget {
             children: [
               Text(
                   "Esta intentando eliminar por completo la Impresora ${data.marca} ${data.modelo} de ${data.expand!.sector!.nombre}"),
-              Text(
+              const Text(
                   "Al eliminar impresora, tambien eliminará todas las solicitudes asociadas."),
-              Text("Desea continuar?"),
+              const Text("Desea continuar?"),
             ],
           ),
           actions: [
@@ -41,14 +44,14 @@ class ImpresorasPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Canelar"),
+              child: const Text("Canelar"),
             ),
             TextButton(
               onPressed: () {
                 impresoras.deleteImpresora(data.id);
                 Navigator.pop(context);
               },
-              child: Text(
+              child: const Text(
                 "Eliminar",
                 style: TextStyle(color: Colors.red),
               ),
@@ -58,8 +61,8 @@ class ImpresorasPage extends StatelessWidget {
       );
     }
 
+    // ignore: no_leading_underscores_for_local_identifiers
     _showEditPopup(Impresora data) {
-      Impresora impresoraActual = data;
       showDialog(
         barrierDismissible: false,
         context: context,
@@ -78,7 +81,7 @@ class ImpresorasPage extends StatelessWidget {
             getAll: impresoras.getImpresoras,
             controller: impresoras.controller,
           ),
-          Row(
+          const Row(
             children: [
               // TextButton(
               //     onPressed: () async {
@@ -106,6 +109,7 @@ class ImpresorasPage extends StatelessWidget {
             ],
           ),
           Expanded(
+            // ignore: sized_box_for_whitespace
             child: Container(
               width: double.infinity,
               child: SingleChildScrollView(
@@ -128,7 +132,7 @@ class ImpresorasPage extends StatelessWidget {
                             Tooltip(
                               message: data.marca,
                               child: ConstrainedBox(
-                                constraints: BoxConstraints(
+                                constraints: const BoxConstraints(
                                     maxWidth: 100, maxHeight: 20),
                                 child: Text(
                                   data.marca,
@@ -142,7 +146,7 @@ class ImpresorasPage extends StatelessWidget {
                             Tooltip(
                               message: data.modelo,
                               child: ConstrainedBox(
-                                constraints: BoxConstraints(
+                                constraints: const BoxConstraints(
                                     maxWidth: 100, maxHeight: 20),
                                 child: Text(
                                   data.modelo,
@@ -168,7 +172,7 @@ class ImpresorasPage extends StatelessWidget {
                             Tooltip(
                               message: data.observaciones,
                               child: ConstrainedBox(
-                                constraints: BoxConstraints(
+                                constraints: const BoxConstraints(
                                     maxWidth: 100, maxHeight: 20),
                                 child: Text(
                                   data.observaciones ?? '',
@@ -206,7 +210,7 @@ class ImpresorasPage extends StatelessWidget {
                                     try {
                                       await launch("https://${data.ip}");
                                     } catch (e) {
-                                      print('Error al abrir UltraVNC: $e');
+                                      // print('Error al abrir UltraVNC: $e');
                                     }
                                   },
                                 ),
@@ -222,12 +226,11 @@ class ImpresorasPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
             showDialog(
               context: context,
-              //TODO:
-              builder: (context) => FormAgregarImpresora(esEdit: false),
+              builder: (context) => const FormAgregarImpresora(esEdit: false),
             );
           }),
     );

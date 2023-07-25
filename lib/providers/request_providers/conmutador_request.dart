@@ -1,18 +1,13 @@
+// ignore_for_file: depend_on_referenced_packages, unused_local_variable, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:soporte_app/DB/db.dart';
 import 'package:soporte_app/models/conmutador.dart';
-import 'package:soporte_app/models/pinpad.dart';
 import 'package:soporte_app/models/responses/conmutador_response.dart';
-import 'package:soporte_app/models/responses/equipo_response.dart';
-import 'package:soporte_app/models/responses/pinpad_response.dart';
-import 'package:soporte_app/models/responses/telefono_response.dart';
-import 'package:soporte_app/models/telefono.dart';
 import 'package:http/http.dart' as http;
-import 'package:soporte_app/models/responses/ups_response.dart';
-import 'package:soporte_app/models/ups.dart';
 
 class ConmutadorRequest extends ChangeNotifier {
   late Conmutador conmutadorActual;
@@ -51,7 +46,7 @@ class ConmutadorRequest extends ChangeNotifier {
   getConmutador() async {
     final response = await http.get(
       Uri.http(DB.dbIp, '/api/collections/conmutador/records',
-          {'expand': 'sucursal'}),
+          {'expand': 'sucursal', 'sort': 'ip'}),
     );
     final data = ConmutadorResponse.fromJson(response.body);
     listaConmutadores = data.items;
@@ -87,7 +82,7 @@ class ConmutadorRequest extends ChangeNotifier {
 
   editConmutador(Conmutador conmutador) async {
     try {
-      final reponse = await http.patch(
+      final response = await http.patch(
         Uri.http(
             DB.dbIp, '/api/collections/conmutador/records/${conmutador.id}'),
         headers: {"Content-Type": "application/json"},

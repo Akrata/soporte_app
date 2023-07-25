@@ -4,7 +4,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String nombre;
   const CustomAppbar({super.key, required this.nombre});
   @override
-  Size get preferredSize => Size.fromHeight(
+  Size get preferredSize => const Size.fromHeight(
       kToolbarHeight); // Define el tamaño preferido de la barra de aplicaciones
 
   @override

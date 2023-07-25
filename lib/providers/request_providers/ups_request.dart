@@ -1,10 +1,10 @@
+// ignore_for_file: depend_on_referenced_packages, unused_local_variable, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:soporte_app/DB/db.dart';
-import 'package:soporte_app/models/responses/equipo_response.dart';
-import 'package:soporte_app/models/equipo.dart';
 import 'package:http/http.dart' as http;
 import 'package:soporte_app/models/responses/ups_response.dart';
 import 'package:soporte_app/models/ups.dart';
@@ -48,7 +48,7 @@ class UpsRequest extends ChangeNotifier {
   getUps() async {
     final response = await http.get(
       Uri.http(DB.dbIp, '/api/collections/ups/records',
-          {'expand': 'sector.sucursal'}),
+          {'expand': 'sector.sucursal', 'sort': '-sector'}),
     );
     final data = UpsResponse.fromJson(response.body);
     listaUps = data.items;
@@ -83,7 +83,7 @@ class UpsRequest extends ChangeNotifier {
 
   editUps(Ups ups) async {
     try {
-      final reponse = await http.patch(
+      final response = await http.patch(
         Uri.http(DB.dbIp, '/api/collections/ups/records/${ups.id}'),
         headers: {"Content-Type": "application/json"},
         body: ups.toJson(),

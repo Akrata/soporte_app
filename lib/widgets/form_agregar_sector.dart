@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/models/sector.dart';
@@ -30,17 +32,17 @@ class FormAgregarSector extends StatelessWidget {
                       : null,
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
-                            child: Text(e.nombre),
                             value: e,
+                            child: Text(e.nombre),
                           ))
                       .toList(),
-                  decoration: InputDecoration(labelText: 'Sucursal'),
+                  decoration: const InputDecoration(labelText: 'Sucursal'),
                   onChanged: (value) => esEdit
                       ? sectorActual!.sucursal = value!.id
                       : sector.sectorParaAgregar.sucursal = value!.id,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Sector'),
+                  decoration: const InputDecoration(labelText: 'Sector'),
                   initialValue: esEdit ? sectorActual!.nombre : null,
                   onChanged: (value) => esEdit
                       ? sectorActual!.nombre = value
@@ -55,7 +57,7 @@ class FormAgregarSector extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Cancelar")),
+              child: const Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
                 esEdit
@@ -64,7 +66,7 @@ class FormAgregarSector extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: Text("Agregar")),
+              child: const Text("Agregar")),
         ],
       ),
     );

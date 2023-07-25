@@ -1,7 +1,7 @@
+// ignore_for_file: unused_local_variable, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/sector.dart';
-import 'package:soporte_app/providers/request_providers/sector_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 
 class FormAgregarSucursal extends StatelessWidget {
@@ -20,7 +20,8 @@ class FormAgregarSucursal extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Nombre de sucursal'),
+                  decoration:
+                      const InputDecoration(labelText: 'Nombre de sucursal'),
                   // onChanged: (value) =>
                   //     sucursal.sucursalParaAgregar.nombre = value,
                 ),
@@ -33,7 +34,7 @@ class FormAgregarSucursal extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Cancelar")),
+              child: const Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
                 // sucursal.createRequest(
@@ -41,7 +42,7 @@ class FormAgregarSucursal extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: Text("Agregar")),
+              child: const Text("Agregar")),
         ],
       ),
     );

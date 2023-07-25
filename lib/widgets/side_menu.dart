@@ -12,17 +12,17 @@ class SideMenu extends StatelessWidget {
       // color: Colors.blue[100],
       width: 250,
       // color: Colors.black12,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           for (var i in items)
             Container(
               width: 200,
-              height: 50,
-              margin: EdgeInsets.only(bottom: 10),
+              height: 40,
+              margin: const EdgeInsets.only(bottom: 10),
               child: TextButton.icon(
-                style: ButtonStyle(alignment: Alignment.centerLeft),
+                style: const ButtonStyle(alignment: Alignment.centerLeft),
                 icon: i.icon,
                 label: Text(i.title),
                 onPressed: i.onTap,

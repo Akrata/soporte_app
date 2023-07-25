@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
@@ -27,7 +29,7 @@ class FormAgregarToner extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Modelo"),
+                      decoration: const InputDecoration(labelText: "Modelo"),
                       initialValue: esEdit ? tonerActual!.modelo : null,
                       onChanged: (value) => esEdit
                           ? tonerActual!.modelo = value
@@ -35,8 +37,8 @@ class FormAgregarToner extends StatelessWidget {
                     ),
                     if (userSucursal == 'Policlinico')
                       TextFormField(
-                        decoration:
-                            InputDecoration(labelText: "Stock Fijo Pol.Cent"),
+                        decoration: const InputDecoration(
+                            labelText: "Stock Fijo Pol.Cent"),
                         initialValue: esEdit
                             ? tonerActual!.stockFijoPoliclinico.toString()
                             : null,
@@ -62,8 +64,8 @@ class FormAgregarToner extends StatelessWidget {
                       ),
                     if (userSucursal == 'Policlinico')
                       TextFormField(
-                        decoration:
-                            InputDecoration(labelText: "Stock Movil Pol.Cent"),
+                        decoration: const InputDecoration(
+                            labelText: "Stock Movil Pol.Cent"),
                         initialValue: esEdit
                             ? tonerActual!.stockMovilPoliclinico.toString()
                             : null,
@@ -84,7 +86,8 @@ class FormAgregarToner extends StatelessWidget {
                       ),
                     if (userSucursal == 'Sanatorio')
                       TextFormField(
-                        decoration: InputDecoration(labelText: "Stock Fijo SC"),
+                        decoration:
+                            const InputDecoration(labelText: "Stock Fijo SC"),
                         initialValue: esEdit
                             ? tonerActual!.stockFijoSanatorio.toString()
                             : null,
@@ -105,7 +108,7 @@ class FormAgregarToner extends StatelessWidget {
                     if (userSucursal == 'Sanatorio')
                       TextFormField(
                         decoration:
-                            InputDecoration(labelText: "Stock Movil SC"),
+                            const InputDecoration(labelText: "Stock Movil SC"),
                         initialValue: esEdit
                             ? tonerActual!.stockMovilSanatorio.toString()
                             : null,
@@ -130,15 +133,15 @@ class FormAgregarToner extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Modelo"),
+                      decoration: const InputDecoration(labelText: "Modelo"),
                       initialValue: esEdit ? tonerActual!.modelo : null,
                       onChanged: (value) => esEdit
                           ? tonerActual!.modelo = value
                           : toner.tonerParaAgregar.modelo = value,
                     ),
                     TextFormField(
-                      decoration:
-                          InputDecoration(labelText: "Stock Fijo Pol.Cent"),
+                      decoration: const InputDecoration(
+                          labelText: "Stock Fijo Pol.Cent"),
                       initialValue: esEdit
                           ? tonerActual!.stockFijoPoliclinico.toString()
                           : null,
@@ -148,8 +151,8 @@ class FormAgregarToner extends StatelessWidget {
                               int.parse(value),
                     ),
                     TextFormField(
-                      decoration:
-                          InputDecoration(labelText: "Stock Movil Pol.Cent"),
+                      decoration: const InputDecoration(
+                          labelText: "Stock Movil Pol.Cent"),
                       initialValue: esEdit
                           ? tonerActual!.stockMovilPoliclinico.toString()
                           : null,
@@ -160,7 +163,8 @@ class FormAgregarToner extends StatelessWidget {
                               int.parse(value),
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Stock Fijo SC"),
+                      decoration:
+                          const InputDecoration(labelText: "Stock Fijo SC"),
                       initialValue: esEdit
                           ? tonerActual!.stockFijoSanatorio.toString()
                           : null,
@@ -170,7 +174,8 @@ class FormAgregarToner extends StatelessWidget {
                               int.parse(value),
                     ),
                     TextFormField(
-                      decoration: InputDecoration(labelText: "Stock Movil SC"),
+                      decoration:
+                          const InputDecoration(labelText: "Stock Movil SC"),
                       initialValue: esEdit
                           ? tonerActual!.stockMovilSanatorio.toString()
                           : null,
@@ -188,7 +193,7 @@ class FormAgregarToner extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Cancelar")),
+            child: const Text("Cancelar")),
         ElevatedButton(
             onPressed: () {
               esEdit
@@ -196,7 +201,7 @@ class FormAgregarToner extends StatelessWidget {
                   : toner.agregarToner(toner.tonerParaAgregar);
               Navigator.pop(context);
             },
-            child: Text("Confirmar"))
+            child: const Text("Confirmar"))
       ],
     );
   }

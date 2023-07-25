@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, unused_local_variable, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -30,8 +32,12 @@ class EquiposRequest extends ChangeNotifier {
 
   getEquipos() async {
     final response = await http.get(
-      Uri.http(DB.dbIp, '/api/collections/equipo/records',
-          {'expand': 'sector.sucursal'}),
+      Uri.http(DB.dbIp, '/api/collections/equipo/records', {
+        'expand': 'sector.sucursal',
+        'perPage': '200',
+        'filter': '',
+        'sort': 'ip,-sector'
+      }),
     );
     final data = EquipoResponse.fromJson(response.body);
     listaEquipos = data.items;
@@ -40,7 +46,7 @@ class EquiposRequest extends ChangeNotifier {
   }
 
   // buscarEquipos() async {
-  //   print('jhas');
+  //   print('a');
   //   final response = await http.get(
   //     Uri.http(DB.dbIp, '/api/collections/equipo/records', {
   //       'expand': 'sector.sucursal',
@@ -100,7 +106,7 @@ class EquiposRequest extends ChangeNotifier {
 
   editEquipo(Equipo equipo) async {
     try {
-      final reponse = await http.patch(
+      final response = await http.patch(
         Uri.http(DB.dbIp, '/api/collections/equipo/records/${equipo.id}'),
         headers: {"Content-Type": "application/json"},
         body: equipo.toJson(),

@@ -1,9 +1,10 @@
+// ignore_for_file: deprecated_member_use, avoid_function_literals_in_foreach_calls
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/request_providers/toner_request.dart';
 
-import 'package:flutter/rendering.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -34,7 +35,7 @@ class FormRealizarPedido extends StatelessWidget {
 
       return doc.save();
     });
-    SnackBar(content: Text("Exportado con exito"));
+    const SnackBar(content: Text("Exportado con exito"));
   }
 
   @override
@@ -50,12 +51,12 @@ class FormRealizarPedido extends StatelessWidget {
     });
     return Form(
       child: AlertDialog(
-        title: Text("Pedido"),
+        title: const Text("Pedido"),
         content: SingleChildScrollView(
           child: RepaintBoundary(
             key: _printKey,
             child: DataTable(
-              columns: [
+              columns: const [
                 DataColumn(
                   label: Text('Modelo'),
                 ),
@@ -85,15 +86,14 @@ class FormRealizarPedido extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Cerrar"),
+            child: const Text("Cerrar"),
           ),
           TextButton(
             onPressed: _printScreen,
-            child: Text("Exportar"),
+            child: const Text("Exportar"),
           ),
         ],
       ),
     );
-    ;
   }
 }

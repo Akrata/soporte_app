@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, unused_local_variable, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -16,7 +18,7 @@ class AuthWithPass extends ChangeNotifier {
 
   late Users usuario;
 
-  AuthWithPass() {}
+  AuthWithPass();
 
   authUser(String usernameOrEmail, String password) async {
     try {
@@ -54,7 +56,7 @@ class AuthWithPass extends ChangeNotifier {
 
   cambiarSector(String id, String sector) async {
     try {
-      final reponse = await http.patch(
+      final response = await http.patch(
         Uri.http(DB.dbIp, '/api/collections/users/records/$id'),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({"lugarTrabajo": sector}),

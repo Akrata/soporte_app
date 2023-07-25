@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:soporte_app/models/sector.dart';
-
 import 'item_expand.dart';
 
 class Equipo {

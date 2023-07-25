@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, unused_local_variable, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -6,13 +8,8 @@ import 'package:http/http.dart' as http;
 import 'package:soporte_app/models/impresora.dart';
 import 'package:soporte_app/models/responses/sector_response.dart';
 import 'package:soporte_app/models/responses/solicitud_toner_response.dart';
-import 'package:soporte_app/models/responses/toner_response.dart';
 import 'package:soporte_app/models/sector.dart';
 import 'package:soporte_app/models/solicitud_toner.dart';
-import 'package:soporte_app/models/sucursal.dart';
-import 'package:soporte_app/models/toner.dart';
-import 'package:soporte_app/models/users.dart';
-import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 import '../../models/responses/impresora_response.dart';
@@ -75,7 +72,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
     notifyListeners();
   }
 
-  cambindoSucursal(String dato) {
+  cambiandoSucursal(String dato) {
     sucursal = dato;
     notifyListeners();
   }
@@ -156,7 +153,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
     final data = solTnr.toJson();
 
     try {
-      final reponse = await http.patch(
+      final response = await http.patch(
         Uri.http(
             DB.dbIp, '/api/collections/solicitud_toner/records/${solTnr.id}'),
         headers: {"Content-Type": "application/json"},
@@ -171,7 +168,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
 
   entregaTonerSegunLugar(String id, String lugar, int cantidad) async {
     try {
-      final reponse = await http.patch(
+      final response = await http.patch(
         Uri.http(DB.dbIp, '/api/collections/toner/records/$id'),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({lugar: cantidad}),

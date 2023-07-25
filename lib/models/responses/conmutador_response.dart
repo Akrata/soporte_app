@@ -5,7 +5,6 @@
 import 'dart:convert';
 
 import 'package:soporte_app/models/conmutador.dart';
-import 'package:soporte_app/models/sector.dart';
 
 class ConmutadorResponse {
   ConmutadorResponse({

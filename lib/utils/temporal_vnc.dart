@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
@@ -21,7 +23,7 @@ class TemporalVnc {
     }
 
     // Establecer un tiempo de vida para el archivo temporal
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       archivo.deleteSync();
     });
   }

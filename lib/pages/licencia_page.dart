@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/conmutador.dart';
-import 'package:soporte_app/providers/request_providers/conmutador_request.dart';
+import 'package:soporte_app/models/licencia.dart';
+
+import 'package:soporte_app/providers/request_providers/licencia_request.dart';
 
 import 'package:soporte_app/widgets/custom_appbar.dart';
-import 'package:soporte_app/widgets/form_agregar_conmutador.dart';
 
-import 'package:url_launcher/url_launcher.dart';
+import 'package:soporte_app/widgets/form_agregar_licencia.dart';
 
 import '../widgets/searchbar.dart';
 
-class ConmutadorPage extends StatelessWidget {
+class LicenciaPage extends StatelessWidget {
   final String nombre;
-  const ConmutadorPage({Key? key, required this.nombre}) : super(key: key);
+  const LicenciaPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final conmutador = Provider.of<ConmutadorRequest>(context);
-    final data = conmutador.inSearch == false
-        ? conmutador.listaConmutadores
-        : conmutador.listaBusquedaConmutador;
+    final licencia = Provider.of<LicenciaRequest>(context);
+    final data = licencia.inSearch == false
+        ? licencia.listaLicencia
+        : licencia.listaBuscarLicencia;
 
     // ignore: no_leading_underscores_for_local_identifiers
-    _showDeletePopup(Conmutador data) {
+    _showDeletePopup(Licencia data) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -30,7 +30,7 @@ class ConmutadorPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                  "Esta intentando eliminar por completo el conmutador ${data.nombre} (${data.ip})"),
+                  "Esta intentando eliminar por completo la licencia ${data.key}, (${data.tipo})"),
               // Text(
               //     "Al eliminarlo, también eliminará todo lo asociado al sector, impresoras, equipos, etc"),
               const Text("Desea continuar?"),
@@ -45,7 +45,7 @@ class ConmutadorPage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                conmutador.deleteConmutador(data.id);
+                licencia.deleteLicencia(data.id);
                 Navigator.pop(context);
               },
               child: const Text(
@@ -59,13 +59,13 @@ class ConmutadorPage extends StatelessWidget {
     }
 
     // ignore: no_leading_underscores_for_local_identifiers
-    _showEditPopup(Conmutador data) {
+    _showEditPopup(Licencia data) {
       showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (context) => FormAgregarConmutador(
+        builder: (context) => FormAgregarLicencia(
           esEdit: true,
-          conmutadorActual: data,
+          licenciaActual: data,
         ),
       );
     }
@@ -75,10 +75,10 @@ class ConmutadorPage extends StatelessWidget {
       body: Column(
         children: [
           SearchBarCustom(
-              enBusqueda: conmutador.enBusqueda,
-              buscar: conmutador.busquedaEnLista,
-              getAll: conmutador.getConmutador,
-              controller: conmutador.controller),
+              enBusqueda: licencia.enBusqueda,
+              buscar: licencia.busquedaEnLista,
+              getAll: licencia.getLicencia,
+              controller: licencia.controller),
           const SizedBox(
             height: 20,
           ),
@@ -88,10 +88,11 @@ class ConmutadorPage extends StatelessWidget {
               child: SingleChildScrollView(
                   child: DataTable(
                 columns: const [
-                  DataColumn(label: Text('Nombre')),
-                  DataColumn(label: Text('Ip')),
+                  DataColumn(label: Text('Key')),
+                  DataColumn(label: Text('Tipo')),
+                  DataColumn(label: Text('Equipo')),
+                  DataColumn(label: Text('Sector')),
                   DataColumn(label: Text('Sucursal')),
-                  DataColumn(label: Text('Observaciones')),
                   DataColumn(label: Text('Acciones')),
                 ],
                 rows: data
@@ -100,38 +101,45 @@ class ConmutadorPage extends StatelessWidget {
                         cells: [
                           DataCell(
                             Tooltip(
-                              message: data.nombre,
+                              message: data.key,
                               child: ConstrainedBox(
                                 constraints: const BoxConstraints(
                                     maxWidth: 100, maxHeight: 20),
-                                child: Text(
-                                  data.nombre,
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
+                                child: SelectableText(
+                                  data.key,
                                 ),
                               ),
                             ),
                           ),
                           DataCell(
-                            Text(data.ip),
+                            Text(data.tipo),
                           ),
                           DataCell(
-                            Text(data.expand!.sucursal.nombre),
+                            Text(data.expand?.equipo.ip ?? ""),
                           ),
                           DataCell(
-                            Tooltip(
-                              message: data.observaciones,
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                    maxWidth: 100, maxHeight: 20),
-                                child: Text(
-                                  data.observaciones ?? '',
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ),
+                            Text(data.expand?.equipo.expand?.sector.nombre ??
+                                ""),
                           ),
+                          DataCell(
+                            Text(data.expand?.equipo.expand?.sector.expand!
+                                    .sucursal.nombre ??
+                                ""),
+                          ),
+                          // DataCell(
+                          //   Tooltip(
+                          //     message: data.observaciones,
+                          //     child: ConstrainedBox(
+                          //       constraints: const BoxConstraints(
+                          //           maxWidth: 100, maxHeight: 20),
+                          //       child: Text(
+                          //         data.observaciones ?? '',
+                          //         overflow: TextOverflow.ellipsis,
+                          //         softWrap: true,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
                           DataCell(Row(
                             children: [
                               IconButton(
@@ -150,20 +158,20 @@ class ConmutadorPage extends StatelessWidget {
                                   _showDeletePopup(data);
                                 },
                               ),
-                              IconButton(
-                                icon: Icon(
-                                  Icons.remove_red_eye_outlined,
-                                  color: Colors.green.shade300,
-                                ),
-                                onPressed: () async {
-                                  try {
-                                    // ignore: deprecated_member_use
-                                    await launch("http://${data.ip}");
-                                  } catch (e) {
-                                    // print('Error al abrir UltraVNC: $e');
-                                  }
-                                },
-                              ),
+                              // IconButton(
+                              //   icon: Icon(
+                              //     Icons.remove_red_eye_outlined,
+                              //     color: Colors.green.shade300,
+                              //   ),
+                              //   onPressed: () async {
+                              //     try {
+                              //       // ignore: deprecated_member_use
+                              //       await launch("http://${data.ip}");
+                              //     } catch (e) {
+                              //       print('Error al abrir UltraVNC: $e');
+                              //     }
+                              //   },
+                              // ),
                             ],
                           )),
                         ],
@@ -179,7 +187,7 @@ class ConmutadorPage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => const FormAgregarConmutador(esEdit: false),
+              builder: (context) => const FormAgregarLicencia(esEdit: false),
             );
           },
           child: const Icon(Icons.add)),

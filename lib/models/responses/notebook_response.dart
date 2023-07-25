@@ -1,13 +1,13 @@
 // To parse this JSON data, do
 //
-//     final solicitudTonerResponse = solicitudTonerResponseFromMap(jsonString);
+//     final pinpadResponse = pinpadResponseFromMap(jsonString);
 
 import 'dart:convert';
 
-import 'package:soporte_app/models/solicitud_toner.dart';
+import 'package:soporte_app/models/notebook.dart';
 
-class SolicitudTonerResponse {
-  SolicitudTonerResponse({
+class NotebookResponse {
+  NotebookResponse({
     required this.page,
     required this.perPage,
     required this.totalPages,
@@ -19,22 +19,21 @@ class SolicitudTonerResponse {
   int perPage;
   int totalPages;
   int totalItems;
+  List<Notebook> items;
 
-  List<SolicitudToner> items;
-
-  factory SolicitudTonerResponse.fromJson(String str) =>
-      SolicitudTonerResponse.fromMap(json.decode(str));
+  factory NotebookResponse.fromJson(String str) =>
+      NotebookResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory SolicitudTonerResponse.fromMap(Map<String, dynamic> json) =>
-      SolicitudTonerResponse(
+  factory NotebookResponse.fromMap(Map<String, dynamic> json) =>
+      NotebookResponse(
         page: json["page"],
         perPage: json["perPage"],
         totalPages: json["totalPages"],
         totalItems: json["totalItems"],
-        items: List<SolicitudToner>.from(
-            json["items"].map((x) => SolicitudToner.fromMap(x))),
+        items:
+            List<Notebook>.from(json["items"].map((x) => Notebook.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {

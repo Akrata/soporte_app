@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:soporte_app/DB/db.dart';
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'package:soporte_app/models/responses/sucursal_response.dart';
 import 'package:soporte_app/models/sucursal.dart';

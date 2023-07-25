@@ -1,24 +1,31 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, sized_box_for_whitespace
+// ignore_for_file: unused_local_variable, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/ups.dart';
-import 'package:soporte_app/providers/request_providers/ups_request.dart';
-import 'package:soporte_app/widgets/form_agregar_ups.dart';
 
-import '../widgets/custom_appbar.dart';
+import 'package:soporte_app/models/notebook.dart';
+
+import 'package:soporte_app/providers/request_providers/notebook_request.dart';
+
+import 'package:soporte_app/widgets/custom_appbar.dart';
+
+import 'package:soporte_app/widgets/form_agregar_notebook.dart';
+
 import '../widgets/searchbar.dart';
 
-class UpsPage extends StatelessWidget {
+class NotebookPage extends StatelessWidget {
   final String nombre;
-  const UpsPage({Key? key, required this.nombre}) : super(key: key);
+  const NotebookPage({Key? key, required this.nombre}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ups = Provider.of<UpsRequest>(context);
-    final _data = ups.inSearch == false ? ups.listaUps : ups.listaBusquedaUps;
+    final notebook = Provider.of<NotebookRequest>(context);
+    final data = notebook.inSearch == false
+        ? notebook.listaNotebook
+        : notebook.ListaBusquedaNotebook;
 
-    _showDeletePopup(Ups data) {
+    // ignore: no_leading_underscores_for_local_identifiers
+    _showDeletePopup(Notebook data) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -26,9 +33,9 @@ class UpsPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                  "Esta intentando eliminar por completo el Ups ${data.marca} ${data.modelo} de ${data.expand!.sector.nombre} "),
+                  "Esta intentando eliminar por completo la Notebook ${data.marca} ${data.modelo}  de ${data.usuario!}"),
               // Text(
-              //     "Al eliminar el Equipo, tambien eliminará todas las solicitudes asociadas."),
+              //     "Al eliminar impresora, tambien eliminará todas las solicitudes asociadas."),
               const Text("Desea continuar?"),
             ],
           ),
@@ -41,7 +48,7 @@ class UpsPage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                ups.deleteUps(data.id);
+                notebook.deleteNotebook(data.id);
                 Navigator.pop(context);
               },
               child: const Text(
@@ -54,11 +61,14 @@ class UpsPage extends StatelessWidget {
       );
     }
 
-    _showEditPopup(Ups data) {
+    // ignore: no_leading_underscores_for_local_identifiers
+    _showEditPopup(Notebook data) {
+      Notebook notebookActual = data;
       showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (context) => FormAgregarUps(esEdit: true, upsActual: data),
+        builder: (context) =>
+            FormAgregarNotebook(esEdit: true, notebookActual: data),
       );
     }
 
@@ -67,10 +77,10 @@ class UpsPage extends StatelessWidget {
       body: Column(
         children: [
           SearchBarCustom(
-            enBusqueda: ups.enBusqueda,
-            buscar: ups.busquedaEnLista,
-            getAll: ups.getUps,
-            controller: ups.controller,
+            enBusqueda: notebook.enBusqueda,
+            buscar: notebook.busquedaEnLista,
+            getAll: notebook.getNotebooks,
+            controller: notebook.controller,
           ),
           const Row(
             children: [
@@ -107,67 +117,44 @@ class UpsPage extends StatelessWidget {
                 columns: const [
                   DataColumn(label: Text('Marca')),
                   DataColumn(label: Text('Modelo')),
-                  DataColumn(label: Text('Sector')),
-                  DataColumn(label: Text('Sucursal')),
-                  // DataColumn(label: Text('Ultimo Mant.')),
-                  DataColumn(label: Text('Observaciones')),
+                  DataColumn(label: Text('Año')),
+                  DataColumn(label: Text('Usuario')),
+                  DataColumn(label: Text('Tel Contacto')),
                   DataColumn(label: Text('Acciones')),
                 ],
-                rows: _data
+                rows: data
                     .map(
                       (data) => DataRow(
                         cells: [
                           DataCell(
-                            Tooltip(
-                              message: data.marca,
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                    maxWidth: 100, maxHeight: 20),
-                                child: Text(
-                                  data.marca,
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ),
+                            Text(data.marca),
                           ),
                           DataCell(
-                            Tooltip(
-                              message: data.modelo,
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                    maxWidth: 100, maxHeight: 20),
-                                child: Text(
-                                  data.modelo,
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ),
+                            Text(data.modelo),
                           ),
                           DataCell(
-                            Text(data.expand!.sector.nombre),
+                            Text(data.anio),
                           ),
                           DataCell(
-                            Text(data.expand!.sector.expand!.sucursal.nombre),
+                            Text(data.usuario ?? ""),
+                          ),
+                          DataCell(
+                            Text(data.telefonoDeContacto ?? ""),
                           ),
                           // DataCell(
-                          //   Text(data.ultimoMantenimiento.toString()),
+                          //   Tooltip(
+                          //     message: data.observaciones,
+                          //     child: ConstrainedBox(
+                          //       constraints: BoxConstraints(
+                          //           maxWidth: 100, maxHeight: 20),
+                          //       child: Text(
+                          //         data.observaciones ?? '',
+                          //         overflow: TextOverflow.ellipsis,
+                          //         softWrap: true,
+                          //       ),
+                          //     ),
+                          //   ),
                           // ),
-                          DataCell(
-                            Tooltip(
-                              message: data.observaciones,
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                    maxWidth: 100, maxHeight: 20),
-                                child: Text(
-                                  data.observaciones ?? '',
-                                  overflow: TextOverflow.ellipsis,
-                                  softWrap: true,
-                                ),
-                              ),
-                            ),
-                          ),
                           DataCell(Row(
                             children: [
                               IconButton(
@@ -202,7 +189,7 @@ class UpsPage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => const FormAgregarUps(
+              builder: (context) => const FormAgregarNotebook(
                 esEdit: false,
               ),
             );

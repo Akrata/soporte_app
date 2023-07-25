@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, unused_local_variable, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:http/http.dart' as http;
@@ -37,7 +39,7 @@ class RequestTemplate extends ChangeNotifier {
 
   edit(model, String collection) async {
     try {
-      final reponse = await http.patch(
+      final response = await http.patch(
         Uri.http(DB.dbIp, '/api/collections/$collection/records/${model.id}'),
         headers: {"Content-Type": "application/json"},
         body: model.toJson(),

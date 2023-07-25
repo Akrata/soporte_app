@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, dead_code, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';

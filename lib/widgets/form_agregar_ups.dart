@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace, avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,11 +39,11 @@ class FormAgregarUps extends StatelessWidget {
                           element.id ==
                           upsActual!.expand!.sector.expand!.sucursal.id)
                       : null,
-                  decoration: InputDecoration(hintText: 'Sucursal'),
+                  decoration: const InputDecoration(hintText: 'Sucursal'),
                   items: listaSucursales
                       .map((e) => DropdownMenuItem(
-                            child: Text(e.nombre),
                             value: e,
+                            child: Text(e.nombre),
                           ))
                       .toList(),
                   onChanged: (value) async {
@@ -58,16 +60,16 @@ class FormAgregarUps extends StatelessWidget {
                     }
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 if (!esEdit)
                   DropdownButtonFormField(
-                    decoration: InputDecoration(hintText: 'Sector'),
+                    decoration: const InputDecoration(hintText: 'Sector'),
                     items: secYTon.listaSectoresValue
                         .map((e) => DropdownMenuItem(
-                              child: Text(e.nombre),
                               value: e,
+                              child: Text(e.nombre),
                             ))
                         .toList(),
                     onChanged: (value) async {
@@ -80,12 +82,12 @@ class FormAgregarUps extends StatelessWidget {
                         ? null
                         : sector.listaSectores.firstWhere((element) =>
                             element.id == upsActual!.expand!.sector.id),
-                    decoration: InputDecoration(hintText: 'Sector'),
+                    decoration: const InputDecoration(hintText: 'Sector'),
                     items: secYTon.abriendoSucursal
                         ? secYTon.listaSectoresValue
                             .map((e) => DropdownMenuItem(
-                                  child: Text(e.nombre),
                                   value: e,
+                                  child: Text(e.nombre),
                                 ))
                             .toList()
                         : sector.listaSectores
@@ -94,8 +96,8 @@ class FormAgregarUps extends StatelessWidget {
                                 upsActual!.expand!.sector.expand!.sucursal.id)
                             .toList()
                             .map((e) => DropdownMenuItem(
-                                  child: Text(e.nombre),
                                   value: e,
+                                  child: Text(e.nombre),
                                 ))
                             .toList(),
                     onChanged: (value) async {
@@ -104,40 +106,40 @@ class FormAgregarUps extends StatelessWidget {
                           : ups.upsParaAgregar.sector = value!.id;
                     },
                   ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Marca'),
+                  decoration: const InputDecoration(labelText: 'Marca'),
                   initialValue: esEdit ? upsActual!.marca : null,
                   onChanged: (value) => esEdit
                       ? upsActual!.marca = value
                       : ups.upsParaAgregar.marca = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Modelo'),
+                  decoration: const InputDecoration(labelText: 'Modelo'),
                   initialValue: esEdit ? upsActual!.modelo : null,
                   onChanged: (value) => esEdit
                       ? upsActual!.modelo = value
                       : ups.upsParaAgregar.modelo = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   keyboardType: TextInputType.multiline,
                   minLines: 3,
                   maxLines: null,
-                  decoration: InputDecoration(labelText: 'Observaciones'),
+                  decoration: const InputDecoration(labelText: 'Observaciones'),
                   initialValue: esEdit ? upsActual!.observaciones : null,
                   onChanged: (value) => esEdit
                       ? upsActual!.observaciones = value
                       : ups.upsParaAgregar.observaciones = value,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ],
@@ -150,7 +152,7 @@ class FormAgregarUps extends StatelessWidget {
                 secYTon.cambiarSucursal(false);
                 Navigator.pop(context);
               },
-              child: Text("Cancelar")),
+              child: const Text("Cancelar")),
           ElevatedButton(
               onPressed: () {
                 secYTon.cambiarSucursal(false);
@@ -160,7 +162,7 @@ class FormAgregarUps extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: Text("Confirmar")),
+              child: const Text("Confirmar")),
         ],
       ),
     );

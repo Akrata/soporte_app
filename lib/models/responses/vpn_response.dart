@@ -1,13 +1,13 @@
 // To parse this JSON data, do
 //
-//     final solicitudTonerResponse = solicitudTonerResponseFromMap(jsonString);
+//
 
 import 'dart:convert';
 
-import 'package:soporte_app/models/solicitud_toner.dart';
+import 'package:soporte_app/models/vpn.dart';
 
-class SolicitudTonerResponse {
-  SolicitudTonerResponse({
+class VpnResponse {
+  VpnResponse({
     required this.page,
     required this.perPage,
     required this.totalPages,
@@ -19,22 +19,19 @@ class SolicitudTonerResponse {
   int perPage;
   int totalPages;
   int totalItems;
+  List<VPN> items;
 
-  List<SolicitudToner> items;
-
-  factory SolicitudTonerResponse.fromJson(String str) =>
-      SolicitudTonerResponse.fromMap(json.decode(str));
+  factory VpnResponse.fromJson(String str) =>
+      VpnResponse.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory SolicitudTonerResponse.fromMap(Map<String, dynamic> json) =>
-      SolicitudTonerResponse(
+  factory VpnResponse.fromMap(Map<String, dynamic> json) => VpnResponse(
         page: json["page"],
         perPage: json["perPage"],
         totalPages: json["totalPages"],
         totalItems: json["totalItems"],
-        items: List<SolicitudToner>.from(
-            json["items"].map((x) => SolicitudToner.fromMap(x))),
+        items: List<VPN>.from(json["items"].map((x) => VPN.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {

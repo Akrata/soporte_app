@@ -1,8 +1,9 @@
+// ignore_for_file: unused_local_variable, no_leading_underscores_for_local_identifiers, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soporte_app/providers/request_providers/sector_request.dart';
 import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
-import 'package:soporte_app/screens/sector_screen.dart';
 import 'package:soporte_app/widgets/custom_appbar.dart';
 import 'package:soporte_app/widgets/form_agregar_sector.dart';
 
@@ -34,9 +35,9 @@ class SectorPage extends StatelessWidget {
             children: [
               Text(
                   "Esta intentando eliminar por completo el sector ${data.nombre}"),
-              Text(
+              const Text(
                   "Al eliminarlo, también eliminará todo lo asociado al sector, impresoras, equipos, etc"),
-              Text("Desea continuar?"),
+              const Text("Desea continuar?"),
             ],
           ),
           actions: [
@@ -44,14 +45,14 @@ class SectorPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Canelar"),
+              child: const Text("Canelar"),
             ),
             TextButton(
               onPressed: () {
                 sector.deleteSector(data.id);
                 Navigator.pop(context);
               },
-              child: Text(
+              child: const Text(
                 "Eliminar",
                 style: TextStyle(color: Colors.red),
               ),
@@ -79,7 +80,7 @@ class SectorPage extends StatelessWidget {
             getAll: sector.obtenerSectores,
             controller: sector.controller,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
@@ -99,7 +100,7 @@ class SectorPage extends StatelessWidget {
                           DataCell(
                             Text(data.nombre),
                           ),
-                          DataCell(Text('${data.expand!.sucursal.nombre}')),
+                          DataCell(Text(data.expand!.sucursal.nombre)),
                           DataCell(Row(
                             children: [
                               IconButton(
@@ -118,7 +119,7 @@ class SectorPage extends StatelessWidget {
                                   _showDeletePopup(data);
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 40,
                               ),
                               // TextButton(
@@ -152,12 +153,12 @@ class SectorPage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => FormAgregarSector(
+              builder: (context) => const FormAgregarSector(
                 esEdit: false,
               ),
             );
           },
-          child: Icon(Icons.add)),
+          child: const Icon(Icons.add)),
     );
   }
 }

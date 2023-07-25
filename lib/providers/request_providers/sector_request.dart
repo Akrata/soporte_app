@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, avoid_print, unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:soporte_app/DB/db.dart';
@@ -69,7 +71,7 @@ class SectorRequest extends ChangeNotifier {
 
   editSector(data) async {
     try {
-      final reponse = await http.patch(
+      final response = await http.patch(
         Uri.http(DB.dbIp, '/api/collections/sector/records/${data.id}'),
         headers: {"Content-Type": "application/json"},
         body: data.toJson(),

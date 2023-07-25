@@ -1,6 +1,7 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/equipo.dart';
 import 'package:soporte_app/providers/request_providers/sector_individual_request.dart';
 
 import '../widgets/custom_card_individual.dart';
@@ -32,7 +33,7 @@ class SectorScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 40.0),
           child: Column(
             children: [
-              Text(
+              const Text(
                 "Equipos",
                 style: TextStyle(
                     fontSize: 25, decoration: TextDecoration.underline),
@@ -66,12 +67,12 @@ class SectorScreen extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),
               ),
-              Text(
+              const Text(
                 "Impresoras",
                 style: TextStyle(
                     fontSize: 25, decoration: TextDecoration.underline),
@@ -109,12 +110,12 @@ class SectorScreen extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),
               ),
-              Text(
+              const Text(
                 "Telefono",
                 style: TextStyle(
                     fontSize: 25, decoration: TextDecoration.underline),
@@ -150,12 +151,12 @@ class SectorScreen extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),
               ),
-              Text(
+              const Text(
                 "Ups",
                 style: TextStyle(
                     fontSize: 25, decoration: TextDecoration.underline),
@@ -189,12 +190,12 @@ class SectorScreen extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),
               ),
-              Text(
+              const Text(
                 "Pinpad",
                 style: TextStyle(
                     fontSize: 25, decoration: TextDecoration.underline),
@@ -228,7 +229,7 @@ class SectorScreen extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),

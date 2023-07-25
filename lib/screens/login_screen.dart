@@ -1,4 +1,4 @@
-import 'dart:io';
+// ignore_for_file: unused_local_variable, sized_box_for_whitespace, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,15 +12,15 @@ class LoginScreen extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
 
     final auth = Provider.of<AuthWithPass>(context);
-//TODO:SACAR ESTO
+
     String usuario = "";
     String contrasena = "";
     return Scaffold(
       body: Form(
         child: Center(
           child: Container(
-            padding: EdgeInsets.all(20),
-            margin: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             height: 280,
             width: 400,
             decoration: BoxDecoration(
@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Usuario",
                     contentPadding: EdgeInsets.all(5),
                   ),
@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 TextFormField(
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Contraseña",
                     contentPadding: EdgeInsets.all(5),
                   ),
@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                           context: context,
                           builder: (context) => AlertDialog(
                             backgroundColor: Colors.red[100],
-                            content: Text(
+                            content: const Text(
                               "Usuario o contraseña incorrecta",
                               style: TextStyle(color: Colors.red),
                             ),
@@ -66,7 +66,7 @@ class LoginScreen extends StatelessWidget {
                         );
                       }
                     },
-                    child: Text("Ingresar"),
+                    child: const Text("Ingresar"),
                   ),
                 ),
               ],

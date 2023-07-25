@@ -1,9 +1,9 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:soporte_app/models/toner.dart';
 import 'package:soporte_app/providers/auth/auth_with_pass.dart';
 import 'package:soporte_app/providers/request_providers/solicitud_toner_request.dart';
-import 'package:soporte_app/providers/request_providers/sucursales_request.dart';
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
 import 'package:soporte_app/utils/fecha_formater.dart';
 import 'package:soporte_app/widgets/searchbar.dart';
@@ -42,7 +42,7 @@ class SolicitudTonerPage extends StatelessWidget {
             getAll: solicitudToner.getSolicitudToner,
             controller: solicitudToner.controller,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
@@ -145,10 +145,10 @@ class SolicitudTonerPage extends StatelessWidget {
             showDialog(
               barrierDismissible: false,
               context: context,
-              builder: (context) => FormAgregarSolicitud(),
+              builder: (context) => const FormAgregarSolicitud(),
             );
           } catch (e) {
-            print(e);
+            // print(e);
           }
         },
         child: const Icon(Icons.add),

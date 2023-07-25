@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, unused_local_variable, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -82,7 +84,7 @@ class TonerRequest extends ChangeNotifier {
 
   editToner(Toner toner) async {
     try {
-      final reponse = await http.patch(
+      final response = await http.patch(
         Uri.http(DB.dbIp, '/api/collections/toner/records/${toner.id}'),
         headers: {"Content-Type": "application/json"},
         body: toner.toJson(),
@@ -101,7 +103,7 @@ class TonerRequest extends ChangeNotifier {
     }
 
     try {
-      final reponse = await http.patch(
+      final response = await http.patch(
         Uri.http(DB.dbIp, '/api/collections/toner/records/${toner.id}'),
         headers: {"Content-Type": "application/json"},
         body: toner.toJson(),

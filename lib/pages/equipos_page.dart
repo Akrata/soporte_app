@@ -186,9 +186,9 @@ class EquiposPage extends StatelessWidget {
                             ),
                           ),
                           DataCell(
-                            Text(
+                            SelectableText(
                               data.ip,
-                              softWrap: true,
+                              // softWrap: true,
                             ),
                           ),
                           DataCell(
@@ -285,7 +285,7 @@ class EquiposPage extends StatelessWidget {
           onPressed: () {
             showDialog(
               context: context,
-              builder: (context) => FormAgregarEquipo(
+              builder: (context) => const FormAgregarEquipo(
                 esEdit: false,
               ),
             );

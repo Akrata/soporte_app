@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 
 class CustomCardIndividual extends StatelessWidget {
@@ -32,7 +33,8 @@ class CustomCardIndividual extends StatelessWidget {
               children: [
                 Text(
                   nombre == null ? '$modelo' : '$nombre',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Icon(
                   icono,
@@ -40,15 +42,15 @@ class CustomCardIndividual extends StatelessWidget {
                 ),
                 Text(
                   ip == null ? '' : '$ip',
-                  style: TextStyle(fontSize: 15),
+                  style: const TextStyle(fontSize: 15),
                 ),
                 Text(
                   marca == null ? '' : 'Marca:$marca',
-                  style: TextStyle(fontSize: 15),
+                  style: const TextStyle(fontSize: 15),
                 ),
                 Text(
                   toner == null ? '' : 'Toner:$toner',
-                  style: TextStyle(fontSize: 15),
+                  style: const TextStyle(fontSize: 15),
                 )
               ],
             ),

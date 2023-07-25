@@ -7,6 +7,8 @@ import 'package:soporte_app/providers/request_providers/conmutador_request.dart'
 import 'package:soporte_app/providers/app_status/app_status_request.dart';
 import 'package:soporte_app/providers/request_providers/equipos_request.dart';
 import 'package:soporte_app/providers/request_providers/impresoras_request.dart';
+import 'package:soporte_app/providers/request_providers/licencia_request.dart';
+import 'package:soporte_app/providers/request_providers/notebook_request.dart';
 import 'package:soporte_app/providers/request_providers/pinpad_request.dart';
 import 'package:soporte_app/providers/request_providers/sector_individual_request.dart';
 import 'package:soporte_app/providers/request_providers/sector_request.dart';
@@ -15,6 +17,7 @@ import 'package:soporte_app/providers/request_providers/sucursales_request.dart'
 import 'package:soporte_app/providers/request_providers/telefono_request.dart';
 import 'package:soporte_app/providers/request_providers/toner_request.dart';
 import 'package:soporte_app/providers/request_providers/ups_request.dart';
+import 'package:soporte_app/providers/request_providers/vpn_request.dart';
 import 'package:soporte_app/screens/screens.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -23,10 +26,10 @@ void main() async {
   await windowManager.ensureInitialized();
   bool status = await AppStatusRequest().fetchData();
   bool serverStatus = await AppStatusRequest().checkServerStatus();
-  print(status);
+  // print(status);
   WindowOptions windowOptions = const WindowOptions(
     center: true,
-    size: Size(1400, 800),
+    size: Size(1600, 900),
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.setResizable(false);
@@ -93,8 +96,17 @@ class StateApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AppStatusRequest(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => LicenciaRequest(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NotebookRequest(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => VpnRequest(),
+        ),
       ],
-      child: MainApp(),
+      child: const MainApp(),
     );
   }
 }
@@ -122,9 +134,9 @@ class ErrorMainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      builder: (context, child) => Scaffold(
+      builder: (context, child) => const Scaffold(
         body: Center(
-          child: Text("Aplicacion deshabilitada",
+          child: Text("Aplicación deshabilitada",
               style: TextStyle(color: Colors.red, fontSize: 30)),
         ),
       ),
@@ -139,7 +151,7 @@ class ServerErrorMainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      builder: (context, child) => Scaffold(
+      builder: (context, child) => const Scaffold(
         body: Center(
           child: Text("El servidor esta offline",
               style: TextStyle(color: Colors.red, fontSize: 30)),
