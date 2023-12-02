@@ -36,7 +36,7 @@ class EquiposRequest extends ChangeNotifier {
         'expand': 'sector.sucursal',
         'perPage': '200',
         'filter': '',
-        'sort': 'ip,-sector'
+        'sort': 'sector.nombre,ip'
       }),
     );
     final data = EquipoResponse.fromJson(response.body);

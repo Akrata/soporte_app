@@ -133,7 +133,7 @@ class SolicitudTonerRequest extends ChangeNotifier {
       final response = await http
           .get(Uri.http(DB.dbIp, '/api/collections/solicitud_toner/records', {
         'expand': 'sector.sucursal, toner,users',
-        'perPage': '50',
+        'perPage': '100',
         'filter': '',
         'sort': 'entregado,-created'
       }));
@@ -195,10 +195,13 @@ class SolicitudTonerRequest extends ChangeNotifier {
   }
 
   getSectorSegunSucursal(filtro) async {
-    final response = await http.get(Uri.http(
-        DB.dbIp,
-        '/api/collections/sector/records',
-        {'expand': 'sucursal', 'filter': "sucursal.id='$filtro'"}));
+    final response =
+        await http.get(Uri.http(DB.dbIp, '/api/collections/sector/records', {
+      'expand': 'sucursal',
+      'perPage': '100',
+      'sort': 'nombre',
+      'filter': "sucursal.id='$filtro'"
+    }));
 
     final data = SectorResponse.fromJson(response.body);
     listaSectoresValue = data.items;

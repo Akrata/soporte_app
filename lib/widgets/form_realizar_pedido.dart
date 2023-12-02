@@ -47,7 +47,9 @@ class FormRealizarPedido extends StatelessWidget {
           toner.stockFijoPoliclinico - toner.stockMovilPoliclinico;
       int faltanteSan = toner.stockFijoSanatorio - toner.stockMovilSanatorio;
       int faltanteTotal = faltantePoli + faltanteSan;
-      pedido[toner.modelo] = [faltantePoli, faltanteSan, faltanteTotal];
+      if (faltanteSan != 0 || faltantePoli != 0) {
+        pedido[toner.modelo] = [faltantePoli, faltanteSan, faltanteTotal];
+      }
     });
     return Form(
       child: AlertDialog(
@@ -60,8 +62,8 @@ class FormRealizarPedido extends StatelessWidget {
                 DataColumn(
                   label: Text('Modelo'),
                 ),
-                DataColumn(label: Text('Faltante Policlinico')),
                 DataColumn(label: Text('Faltante Sanatorio')),
+                DataColumn(label: Text('Faltante Policlinico')),
                 DataColumn(label: Text('Faltante Total')),
               ],
               rows: pedido.entries
@@ -70,10 +72,10 @@ class FormRealizarPedido extends StatelessWidget {
                           Text(e.key),
                         ),
                         DataCell(
-                          Text('${e.value[0]}'),
+                          Text('${e.value[1]}'),
                         ),
                         DataCell(
-                          Text('${e.value[1]}'),
+                          Text('${e.value[0]}'),
                         ),
                         DataCell(
                           Text('${e.value[2]}'),

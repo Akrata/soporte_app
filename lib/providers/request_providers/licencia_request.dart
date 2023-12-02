@@ -51,7 +51,7 @@ class LicenciaRequest extends ChangeNotifier {
     print(response.body);
     final data = LicenciaResponse.fromJson(response.body);
     listaLicencia = data.items;
-    print(listaLicencia[0]);
+    // print(listaLicencia[0]);
     notifyListeners();
   }
 

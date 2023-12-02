@@ -105,7 +105,7 @@ class FormAgregarConmutador extends StatelessWidget {
 
                 Navigator.pop(context);
               },
-              child: const Text("Agregar")),
+              child: const Text("Confirmar")),
         ],
       ),
     );

@@ -40,6 +40,7 @@ class TelefonoRequest extends ChangeNotifier {
         .where((element) =>
             element.interno.toLowerCase().contains(texto) ||
             element.ip.toLowerCase().contains(texto) ||
+            element.observaciones!.toLowerCase().contains(texto) ||
             element.expand!.sector.nombre.toLowerCase().contains(texto) ||
             element.expand!.sector.expand!.sucursal.nombre
                 .toLowerCase()
@@ -49,8 +50,12 @@ class TelefonoRequest extends ChangeNotifier {
 
   getTelefonos() async {
     final response = await http.get(
-      Uri.http(DB.dbIp, '/api/collections/telefono/records',
-          {'expand': 'sector.sucursal', 'sort': 'ip,-sector'}),
+      Uri.http(DB.dbIp, '/api/collections/telefono/records', {
+        'expand': 'sector.sucursal',
+        'sort': 'sector.nombre,interno',
+        'perPage': '400',
+        'filter': '',
+      }),
     );
     final data = TelefonoResponse.fromJson(response.body);
     listaTelefonos = data.items;

@@ -158,7 +158,9 @@ class ConmutadorPage extends StatelessWidget {
                                 onPressed: () async {
                                   try {
                                     // ignore: deprecated_member_use
-                                    await launch("http://${data.ip}");
+                                    // await launch("http://${data.ip}");
+                                    // ignore: deprecated_member_use
+                                    await launch("https://${data.ip}");
                                   } catch (e) {
                                     // print('Error al abrir UltraVNC: $e');
                                   }

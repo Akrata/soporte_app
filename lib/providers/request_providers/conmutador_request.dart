@@ -12,7 +12,7 @@ import 'package:http/http.dart' as http;
 class ConmutadorRequest extends ChangeNotifier {
   late Conmutador conmutadorActual;
   Conmutador conmutadorParaAgregar =
-      Conmutador(id: '', nombre: '', ip: '', sucursal: '');
+      Conmutador(id: '', nombre: '', ip: '', sucursal: '', observaciones: '');
 
   final pb = PocketBase('http://${DB.dbIp}');
 
@@ -109,6 +109,6 @@ class ConmutadorRequest extends ChangeNotifier {
   }
 
   limpiarConmutador() {
-    Conmutador(id: '', nombre: '', ip: '', sucursal: '');
+    Conmutador(id: '', nombre: '', ip: '', sucursal: '', observaciones: '');
   }
 }
